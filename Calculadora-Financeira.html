@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Calculadora Financeira</h2>
+
+    <div id="div_contInputs">
+        <div class="div_inputs">
+            Quantidade de hectares da plantação:<br>
+            <input placeholder="Ex: 10" type="number" class="input" id="input_qtdHectare"> <br><br>
+        </div>
+        <div class="div_inputs">
+            Valor atual da saca de café (R$):<br>
+            <input placeholder="Ex: 2100" type="number" class="input"  id="input_valorSaca"> <br><br>
+        </div>
+        <div class="div_inputs">
+            Produtividade média por hectare (sacas):<br>
+            <input placeholder="Ex: 50" type="number" class="input"  id="input_produtividade"> <br><br>
+        </div>
+        <div class="div_inputs">
+            Porcentagem média de perda sem monitoramento:<br>
+            <input placeholder="Ex: 20" type="number" class="input"  id="input_perda"> <br><br>
+        </div>
+        <div class="div_inputs">
+            Custo de produção por hectare (R$):<br>
+            <input placeholder="Ex: 3000" type="number" class="input"  id="input_custoProducao"> <br><br>
+        </div>
+    </div>
+
+    <button id="btn_calcular" onclick="calcular()"><b>Calcular</b></button> <br><br>
+
+    <div id="msg"></div>
+    <div id="msg2"></div>
+    <div id="msg3"></div>
+    <div id="msg4"></div>
+    <div id="msg5"></div>
+
+</body>
+
+<script>
+    function calcular() {       // Cria a função que vai ser chamada pelo button
+        var hectares = Number(input_qtdHectare.value)       // Todo esse primeiro conjunto de variáveis servem como "atalho" e como melhor referência e como formatação 
+        var valorSaca = Number(input_valorSaca.value)
+        var produtividade = Number(input_produtividade.value)
+        var perda = Number(input_perda.value) / 100     // Assa variável já é "chamada" sendo dividida por 100 pois ela é a nossa input de porcentagem
+        var custo = Number(input_custoProducao.value)
+
+        var perdaMedia = hectares * produtividade * valorSaca * perda // Aqui nós somamos todos os seus lucros e descobrimos sua perda multiplicando pelo valor do input_perda (ex: 0.20)
+        var valorSolucao = hectares * 20 * 120 // Quantidade de hectares x 20 (quantidade de sensores por hectare) x 120 (valor de cada sensor)
+        var receitaBruta = hectares * produtividade * valorSaca // Segue a mesma lógica para o calculo da perdaMedia mas sem multiplicar por "Perda"
+        var receitaLiquida = receitaBruta - perdaMedia - (custo * hectares) // Essa variável pega o que ele ganha no total e subtrai seus gastos com manutenção e com a perda média. Ex: 60.000(Bruto) - 15.000(Perdas) - (2000(manutenção) * 10 (hectares))
+        var porcentagemPerda = (valorSolucao / perdaMedia) * 100 // Nossa porcentagem mostra o custo da nossas solução com base no que ele perde, e não no total da sua plantação, achamos melhor mostrar como ele já recuperaria o vlaor investido com nossa solução em sua próxima plantação.
+        var lucroProjetado = receitaLiquida + perdaMedia // Soma do que ele já ganha com o que ele recuperaria
+        var lucroPorcentual = perdaMedia / receitaLiquida * 100 // Para a porcentagem do aumento, nós dividimos o quanto ele perde, pela sua renda pós subtação dos gastos e multiplicamos por 100.
+
+        msg.innerHTML = `Plantações de ${hectares} hectares, sem monitoramento, perdem em média R$${perdaMedia.toFixed(2)} por ano`
+        msg2.innerHTML = `Usando ${hectares * 20} sensores (20 por hectare) o custo da solução seria de R$${valorSolucao.toFixed(2)}`
+        msg3.innerHTML = `Isso representa ${porcentagemPerda.toFixed(2)}% da perda média`
+        msg4.innerHTML = `Receita líquida sem monitoramento: R$${receitaLiquida.toFixed(2)}`
+        msg5.innerHTML = `Com nossa solução, sua receita aumentaria para ${lucroProjetado}! Um aumento de ${lucroPorcentual.toFixed(2)}%`
+    }
+</script>
+
+</html>
