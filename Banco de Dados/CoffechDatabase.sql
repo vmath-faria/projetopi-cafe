@@ -1,6 +1,6 @@
-CREATE DATABASE coffec;
+CREATE DATABASE coffech;
 
-USE coffec;
+USE coffech;
 
 CREATE TABLE produtor(
 	idProdutor INT PRIMARY KEY AUTO_INCREMENT,
