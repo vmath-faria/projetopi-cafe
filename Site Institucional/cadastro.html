@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COFFECH</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="./imgs/logo-fundo-marrom.png">
+</head>
+<body>
+
+     <div class="header">
+        <div class="container">
+            <img src="./imgs/logo-fonte-branca.png" class="titulo">
+            <ul class="navbar">
+                <li class="agora">
+                    <a href="#">Quem Somos?</a> <!-- TODAS AS TAGS a DA NAVBAR TERÃO ESSE HREF, MAS PRECISAMOS PESQUISAR COMO FAZ PARA REFERENCIAR UM ELEMENTO DENTRO DA PÁGINA-->
+                </li>
+                <li>
+                    <a href="#">Solução</a> <!-- PRECISARÁ REFERENCIAR A PARTE DE SOLUÇÃO-->
+                </li>
+                <li>
+                    <a href="#">Calculadora Financeira</a> <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
+                </li>
+                <li>
+                    <a href="#">Benefícios</a> <!-- PRECISARÁ REFERENCIAR OS BENEFÍCIOS-->
+                </li>
+                <li>
+                    <a href="#">Contato</a> <!-- PRECISARÁ REFERENCIAR O CONTATO-->
+                </li>
+                <li>
+                    <a href="cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        <h1>Cadastro</h1>
+        <b>Nome Completo</b> <br>
+        <input type="text" id="input_nome"><br>
+        <b>Email</b> <br> 
+        <input type="text" id="input_email"> <br>
+        <b>Telefone</b> <br>
+        <input type="number" id="input_telefone"> <br>
+        <b>CPF</b> <br>
+        <input type="number" id="input_cpf"> <br>
+        <b>CNPJ</b> <br>
+        <input type="number" id="input_cnpj"> <br>
+        <b>Senha</b> <br>
+        <input type="password" id="input_senha"> <br>
+        <b>Confirme sua senha</b> <br>
+        <input type="password" id="input_senha_conf"> <br>
+        <button>Google</button> <button>Microssoft</button> <br>
+        <button>Continuar</button> <br>
+        <span onclick="direcionar()"> Fazer login em minha conta</span>
+
+    </div>
+
+    <div class="footer">
+            <div class="container">
+                <div class="redes-sociais">
+                    <img src="./imgs/logo-fonte-branca.png"> <!-- LOGO COFFECH!-->
+                    <p>Todos os direitos reservados a COFFECH 2025</p>
+                    <img src="./imgs/Icon-instagram.png"> <!-- ICONE INSTAGRAM-->
+                    <img src="./imgs/icon-youtube.png"> <!-- ICONE YOUTUBE-->
+                    <img src="./imgs/Icon-linkedin.png"> <!-- ICONE LINKEDIN-->
+                    <img src="./imgs/Icon-facebook.png"> <!-- ICONE FACEBOOK-->
+                </div>
+                <div class="contato">
+                    <h6>Contato</h6>
+                    <span>coffech@gmail.com</span>
+                </div>
+                <div class="nosso-time">
+                    <h5>Equipe Coffech:</h5>
+                    <p>Anderson</p>
+                    <p>Diego</p>
+                    <p>Guilherme</p>
+                    <p>João</p>
+                    <p>Luan</p>
+                    <p>Victor</p>
+                </div>
+
+            </div>
+</body>
+
+</html>
