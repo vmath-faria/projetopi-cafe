@@ -53,7 +53,6 @@
         var custo = Number(input_custoProducao.value)
 
         var perdaMedia = hectares * produtividade * valorSaca * perda // Aqui nós somamos todos os seus lucros e descobrimos sua perda multiplicando pelo valor do input_perda (ex: 0.20)
-        var valorSolucao = hectares * 20 * 120 // Quantidade de hectares x 20 (quantidade de sensores por hectare) x 120 (valor de cada sensor)
         var receitaBruta = hectares * produtividade * valorSaca // Segue a mesma lógica para o calculo da perdaMedia mas sem multiplicar por "Perda"
         var receitaLiquida = receitaBruta - perdaMedia - (custo * hectares) // Essa variável pega o que ele ganha no total e subtrai seus gastos com manutenção e com a perda média. Ex: 60.000(Bruto) - 15.000(Perdas) - (2000(manutenção) * 10 (hectares))
         var porcentagemPerda = (valorSolucao / perdaMedia) * 100 // Nossa porcentagem mostra o custo da nossas solução com base no que ele perde, e não no total da sua plantação, achamos melhor mostrar como ele já recuperaria o vlaor investido com nossa solução em sua próxima plantação.
@@ -64,7 +63,7 @@
         msg2.innerHTML = `Usando ${hectares * 20} sensores (20 por hectare) o custo da solução seria de R$${valorSolucao.toFixed(2)}`
         msg3.innerHTML = `Isso representa ${porcentagemPerda.toFixed(2)}% da perda média`
         msg4.innerHTML = `Receita líquida sem monitoramento: R$${receitaLiquida.toFixed(2)}`
-        msg5.innerHTML = `Com nossa solução, sua receita aumentaria para ${lucroProjetado}! Um aumento de ${lucroPorcentual.toFixed(2)}%`
+        msg5.innerHTML = `Com nossa solução, sua receita aumentaria para R$${lucroProjetado.toFixed(2)}! Um aumento de ${lucroPorcentual.toFixed(2)}%`
     }
 </script>
 
