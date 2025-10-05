@@ -1,29 +1,31 @@
-* {
+*{
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
 
-body {
+body{
     margin: 0;
     font-family: sans-serif;
 }
 
 
 /* ESTILIZAÇÃO DO CABEÇALHO (HEADER) */
-.header {
+.header{
     background-color: #5e3023;
-    border-bottom: 3px solid #f3e9dc;
+    margin: 0;
+    padding: 0;
 }
 
-.header .container {
+.header .container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 120px;
+    padding: 0;
+    margin: 0;
 
 }
 
-.titulo {
+.titulo{
     color: #f3e9dc;
 }
 
@@ -35,17 +37,10 @@ body {
     color: #f3e9dc;
 }
 
-.navbar a {
+.navbar a{
     color: #f3e9dc;
     outline: none;
     text-decoration: none;
-    font-weight: bold;
-    display: flex;
-    justify-content:center ;
-}
-
-.header img{
-    width: 200px;
 }
 
 /* FIM DO CABEÇALHO (HEADER) */
@@ -55,22 +50,33 @@ body {
     height: 700px;
     width: 100%;
     font-size: 35px;
-    color: white;
+    color: #f3e9dc;
     height: 900;
     margin-top: 0px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
 .banner .container h2 {
     margin-top: 0px;
 }
-
+.botao2 {
+    color: #21201f;
+    background-color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;    
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
+    width: 125px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 .botao {
     color: #f3e9dc;
     background-color: #e1ae47;
     text-decoration: none;
     border-radius: 7px;
-    font-weight: bold;
+    font-weight: bold;    
     font-size: 15px;
     cursor: pointer;
     padding: 12px;
@@ -78,149 +84,118 @@ body {
     width: 250px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
-.imglogin {
-    display: flex;
-    justify-content: right;
-
-}
-
-
-/*AQUI COMEÇA A ESTILIZAÇÃO DOS BENEFÍCIOS*/
-
-.beneficios {
-    background-color: #f3e9dc;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding: 50px 50px;
-    flex-direction: column;
-}
-
-.beneficios h2 {
-    color: #5e3023;
-    font-size: 50px;
-    margin-bottom: 70px;
-    margin-top: 0;
-}
-
-
-.beneficios .boxes {
-    display: flex;
-    color: white;
-    font-weight: bold;
-    gap: 60px;
-}
-
-.beneficios .box {
-    background-color: #856752;
-    width: 220px;
-    border-radius: 10px;
-    padding: 25px 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    transition: transform 0.5s ease;
-
-}
-
-.box:hover {
-    transform: scale(1.05);
-
-}
-
-.beneficios p {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    font-size: 23px;
-    line-height: 1.5;
-}
-
-
-
-.beneficios img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15px;
-    width: 60px;
-
-    
+.caixa{
+     text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;    
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
 }
 
 /* ESTILIZAÇÃO DO RODAPÉ (FOOTER) */
 
-.footer {
+.footer{
     height: 150px;
     width: 100%;
     background-color: #5e3023;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.footer .container {
+.footer .container{
     height: 100%;
     width: 100%;
     display: flex;
     color: #f3e9dc;
-    align-items: center;
+    align-items:center;
     justify-content: space-around;
 }
 
-.redes-sociais .logo-fonte-branca {
-    height: 200px;
+.redes-sociais .logo-fonte-branca{
+    height: 200px;    
     width: 200px;
 }
 
-.redes-sociais p {
+.redes-sociais p{
     margin-top: 0;
 }
-
-.contato {
+.contato{
     align-items: center;
     flex-direction: column;
 }
-
-.contato h6 {
+.contato h6{
     font-size: 30px;
     margin-top: 0px;
     margin-bottom: 43px;
 }
 
-.contato span {
+.contato span{
     margin-bottom: 50px;
     font-weight: bold;
 }
-
-.nosso-time1 p {
+.nosso-time1 p{
     display: flex;
     justify-content: start;
     margin-left: 10px;
 }
-
-.nosso-time2 p {
+.nosso-time2 p{
     display: flex;
     justify-content: start;
     margin-left: 10px;
 }
-
 .equipe {
     font-size: larger;
 }
-
 /* FIM DO RODAPÉ (FOOTER) */
 .login {
     display: flex;
-    justify-content: space-around;
-    flex-direction: column;
+    flex-direction: row;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.card-login{
 
+    text-align: center;
+    background-color: #5e3023;
+    flex-grow: 1;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    background-size: 100%;
+    
 }
 
-.card-login {
+.imglogin{
+    object-fit: cover;
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+
+.imglogin img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.formulario{
+    flex-grow: 1;
+    width: 100%;
     display: flex;
-    justify-content: left;
     flex-direction: column;
-    align-items: start;
+    text-align: center;
+    justify-content: center;
+}
+
+.campo {
+    flex-grow: 1;
+    width: 100%;
+}
+.criar-conta{
+    flex-grow: 1;
+    width: 100%;
+    color: white;
 }
