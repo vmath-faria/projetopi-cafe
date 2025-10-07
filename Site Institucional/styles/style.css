@@ -392,7 +392,7 @@ body {
 .card-login {
 
     text-align: center;
-    background-color: #5e3023;
+    background-color: #f3e9dc;
     flex-grow: 1;
     flex-basis: 50%;
     display: flex;
@@ -430,7 +430,7 @@ body {
 .criar-conta {
     flex-grow: 1;
     width: 100%;
-    color: white;
+    color: black;
 }
 
 /* Aqui começa o cadastro */
