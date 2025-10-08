@@ -113,6 +113,83 @@ body {
     padding: 12px;
     margin: 20px auto 0;
 }
+
+/* ESTILIZAÇÃO DA CALCULADORA */
+
+.simulador{
+    background-color: #f3e9dc;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 50px 50px;
+    flex-direction: column;
+}
+
+.simulador h2{
+    color: #5e3023;
+    font-size: 50px;
+    margin-bottom: 70px;
+    margin-top: 0;
+}
+
+.simulador button{
+    color: white;
+    background-color: #5e3023;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
+    width: 400px;
+    border: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+.simulador input{
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
+    width: 450px;
+}
+
+.simulador span{
+    color: #5e3023;
+    font-size: 20px;
+    margin-bottom: 70px;
+    margin-top: 70px;
+}
+
+.card-calculadora{
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    height: 500px;
+    margin-bottom: 50px;
+    margin-top: 40px;
+}
+
+.campo{
+    margin: 1px;
+    flex: 0 0 calc(50% - 2px);
+    height: 100px;
+    text-align: center;
+}
+
+.campo:nth-child(5) {
+    flex-basis: 100%;
+    justify-content: center;
+}
+
 /*AQUI COMEÇA A ESTILIZAÇÃO DOS BENEFÍCIOS*/
 
 .beneficios {
