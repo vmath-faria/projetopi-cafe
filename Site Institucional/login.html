@@ -34,11 +34,7 @@
             </ul>
         </div>
     </div>
-        <div class="header">
-        <div class="container">
-            <img src="./imgs/logo-fonte-branca.png" class="titulo">
-        </div>
-    </div>
+        
     <div class="login">
             <div class="card-login">
                 <h1 class="formulario" style="color: black;">Login</h1>
@@ -64,12 +60,40 @@
                 <img src='imgs\img-cafezinho.png'>
             </div>
     </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="redes-sociais">
+                <img height="50" src="./imgs/logo-fonte-branca.png"> <!-- LOGO COFFECH!-->
+                <p>Todos os direitos reservados a COFFECH 2025</p>
+                <img src="./imgs/Icon-instagram.png"> <!-- ICONE INSTAGRAM-->
+                <img src="./imgs/icon-youtube.png"> <!-- ICONE YOUTUBE-->
+                <img src="./imgs/Icon-linkedin.png"> <!-- ICONE LINKEDIN-->
+                <img src="./imgs/Icon-facebook.png"> <!-- ICONE FACEBOOK-->
+            </div>
+            <div class="contatoFooter">
+                <h6>Contato:</h6>
+                <span>coffech@gmail.com</span>
+            </div>
+            <h5 class="equipe">Equipe Coffech:</h5>
+            <div class="nosso-time1">
+                <p>Anderson</p>
+                <p>Diego</p>
+                <p>Guilherme</p>
+            </div>
+            <div class="nosso-time2">
+                <p>João Ricardo</p>
+                <p>Luan</p>
+                <p>Victor Mattheus</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 <script>
     function formulariofunction(){
-        var email=email_input.value
-        var senha=senha_input.value
+        var email = email_input.value;
+        var senha = senha_input.value;
         if(email!='julia@araripe.com'||senha!='urubu100'){
                 erroformulario.innerHTML=`<br>Verificar Email ou Senha!`
         }else{
