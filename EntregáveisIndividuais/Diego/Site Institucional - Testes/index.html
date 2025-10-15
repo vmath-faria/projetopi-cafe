@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COFFECH</title>
+
+    <link rel="stylesheet" href="styles/teste.css">
+    <link rel="icon" href="./imgs/logo-fundo-marrom.png">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <img src="./imgs/logo-fonte-branca.png" class="titulo">
+            <ul class="navbar">
+                <li class="agora">
+                    <a href="#">Quem Somos?</a>
+                    <!-- TODAS AS TAGS a DA NAVBAR TERÃO ESSE HREF, MAS PRECISAMOS PESQUISAR COMO FAZ PARA REFERENCIAR UM ELEMENTO DENTRO DA PÁGINA-->
+                </li>
+                <li>
+                    <a href="#div_solucao">Solução</a> <!-- PRECISARÁ REFERENCIAR A PARTE DE SOLUÇÃO-->
+                </li>
+                <li>
+                    <a href="#div_simulador">Calculadora Financeira</a> <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
+                </li>
+                <li>
+                    <a href="#div_beneficios">Benefícios</a> <!-- PRECISARÁ REFERENCIAR OS BENEFÍCIOS-->
+                </li>
+                <li>
+                    <a href="#div_contato">Contato</a> <!-- PRECISARÁ REFERENCIAR O CONTATO-->
+                </li>
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="container">
+            <h2>Solução <i>IoT</i> perfeita para sua <br>plantação!</h2>
+            <p>Levamos tecnologia ao campo para garantir um café mais <br> <span>sustentável</span>,
+                <span>produtivo</span> e de <span>qualidade</span>
+            </p>
+        </div>
+        <button class="botao">Conheça a Nossa Solução</button>
+    </div>
+
+    <div class="sobre-nos">
+        <div class="container">
+            <h3>A COFFECH</h3>
+            <p>A Coffech nasceu com o propósito de levar tecnologia acessível e sustentável para o campo. Nosso foco é
+                apoiar produtores de café na modernização da gestão de suas lavouras, garantindo mais produtividade,
+                qualidade e eficiência no uso da água e dos recursos naturais.</p>
+            <img src="./imgs/colheita-cafe.png">
+        </div>
+    </div>
+
+    <div class="solucao" id="div_solucao">
+        <div class="container">
+            <h3>Nossa Solução</h3>
+            <h2>Monitoramento Inteligente com Sensores de Umidade</h2>
+            <p>Desenvolvemos um sistema de monitoramento da umidade do solo integrado ao Arduino UNO R3 e sensores
+                inteligentes, que coleta dados em tempo real e os apresenta em um dashboard intuitivo. <br>
+                Com isso, o produtor sabe quando e quanto irrigar, evitando desperdícios, preservando o solo e
+                garantindo uma produção de café mais saudável, lucrativa e sustentável.</p>
+        </div>
+    </div>
+
+    <div class="simulador" id="div_simulador">
+        <div class="container">
+            <h2>Calcule seus gastos</h2>
+            <div class="card-calculadora">
+                <div class="campo">
+                    <br> <br>
+                    <span><b>Tamanho da sua plantação em hectares:</b></span> <br>
+                    <input type="number" placeholder="Insira a quantidade em hectares">
+                </div>
+                <div class="campo">
+                    <br> <br>
+                    <span><b>Sacas por hectare:</b></span> <br>
+                    <input type="number" placeholder="Insira a quantidade de sacas colhidas por hectare">
+                </div>
+                <div class="campo">
+                    <span><b>Valor atual da saca de café:</b></span> <br>
+                    <input type="number" placeholder="Insira o valor da saca em R$">
+                </div>
+                <div class="campo">
+                    <span><b>Porcentagem média de perdas:</b></span> <br>
+                    <input type="number" placeholder="Insira sua média de perdas em porcentagem (1% a 100%)">
+                </div>
+                <div class="campo">
+                    <span><b>Custo de produção por hectare:</b></span> <br>
+                    <input type="number" placeholder="Insira seu custo de produção por hectare em R$">
+                </div>
+            </div>
+            <div>
+                <button class="botao-gastos">Calcular Gastos</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="beneficios" id="div_beneficios">
+        <div class="container">
+            <h2>Benefícios</h2>
+            <div class="boxes">
+                <div class="box">
+                    <img src="./imgs/water-saving.png">
+                    <p>Até 30% de economia de água no manejo.</p>
+                </div>
+                <div class="box">
+                    <img src="./imgs/cost-decreasing.png">
+                    <p>25% de redução nos custos de energia com bombeamento.</p>
+                </div>
+                <div class="box">
+                    <img src="./imgs/quality.png">
+                    <p>Café de maior qualidade e valor de mercado.</p>
+                </div>
+                <div class="box">
+                    <img src="./imgs/light-bulb.png">
+                    <p>Decisões rápidas e assertivas com base em dados reais.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        AINDA NÃO DEFINIDO QUAIS PLANOS TEREMOS, MAS FICARÃO LOGO ABAIXO DOS BENEFÍCIOS
+        -->
+
+    <div class="contato" id="div_contato">
+        <div class="container">
+            <div class="titulo">
+                <h2>Entre em contato conosco!</h2>
+            </div>
+            <div class="boxcontato">
+                <div class="imagem-contato">
+                    <img src="./imgs/coffee-background.png"> <!-- FICARÁ DO LADO DAS INPUTS-->
+                </div>
+                <div class="forms">
+                    <div class="campo">
+                        <span>Email:</span> <br>
+                        <input type="text" placeholder="Insira seu Email">
+                    </div>
+                    <div class="campo">
+                        <span>Assunto</span> <br>
+                        <input type="text" placeholder="Assunto">
+                    </div>
+                    <div class="campo">
+                        <span>Mensagem</span> <br>
+                        <input type="text" placeholder="Mensagem">
+                    </div>
+                    <div class="telefone">
+                        Telefone: (XX) XXXXX-XXXX
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="redes-sociais">
+                <img height="50" src="./imgs/logo-fonte-branca.png"> <!-- LOGO COFFECH!-->
+                <p>Todos os direitos reservados a COFFECH 2025</p>
+                <img src="./imgs/Icon-instagram.png"> <!-- ICONE INSTAGRAM-->
+                <img src="./imgs/icon-youtube.png"> <!-- ICONE YOUTUBE-->
+                <img src="./imgs/Icon-linkedin.png"> <!-- ICONE LINKEDIN-->
+                <img src="./imgs/Icon-facebook.png"> <!-- ICONE FACEBOOK-->
+            </div>
+            <div class="contatoFooter">
+                <h6>Contato:</h6>
+                <span>coffech@gmail.com</span>
+            </div>
+            <h5 class="equipe">Equipe Coffech:</h5>
+            <div class="nosso-time1">
+                <p>Anderson</p>
+                <p>Diego</p>
+                <p>Guilherme</p>
+            </div>
+            <div class="nosso-time2">
+                <p>João Ricardo</p>
+                <p>Luan</p>
+                <p>Victor Mattheus</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
