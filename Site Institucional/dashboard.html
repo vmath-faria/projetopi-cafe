@@ -25,23 +25,62 @@
     <div class="saudacoes">
         <h1> Bom dia Usuário!</h1>
         <h2>Seus dados sobre sua plantação estão prontos</h2>
+        <span>Selecione o sensor desejado:<span> 
+        <select oninput="selecionar()" name="sensor" id="select_sensor">
+            <option value="#" selected disabled>---Selecione o Sensor---</option>
+            <option value="1">Sensor 1</option>
+            <option value="2">Sensor 2</option>
+            <option value="cadastrar">Cadastrar novo sensor</option>
+        </select> <br> <br>
+        <div id="div_sensor" style="display: none;">
+        <span>Digite o código do sensor:</span>
+        <input type="text" id="input_sensor">
+        <button>Cadastrar Sensor</button>
     </div>
-    <div class="containerGraficos">
+    </div>
+    <div id="div_grafico1" class="containerGraficos" style="display: none;">
         <div class="graficos">
-            <canvas id="myChart"></canvas>
+            <canvas id="myChart1"></canvas>
         </div>
 
         <div class="graficos">
-            <canvas id="myChartBarra"></canvas>
+            <canvas id="myChartBarra1"></canvas>
         </div>
     </div>
+    <div id="div_grafico2" class="containerGraficos" style="display: none;">
+        <div class="graficos">
+            <canvas id="myChart2"></canvas>
+        </div>
+
+        <div class="graficos">
+            <canvas id="myChartBarra2"></canvas>
+        </div>
+    </div>
+    
 </body>
 
 </html>
 
 <script>
-    const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
+
+    function selecionar(){
+        var select = select_sensor.value;
+
+        if (select == 1){
+            div_grafico1.style.display = 'flex';
+            div_grafico2.style.display = 'none';
+        } else if (select == 2) {
+            div_grafico1.style.display = 'none';
+            div_grafico2.style.display = 'flex';
+        } else {
+            div_grafico1.style.display = 'none';
+            div_grafico2.style.display = 'none';
+            div_sensor.style.display = 'flex'}
+
+    }
+
+    const ctxLinha1 = document.getElementById('myChart1');
+    new Chart(ctxLinha1, {
         type: 'line',
         data: {
             labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
@@ -67,8 +106,8 @@
     });
 
 
-    const ctxBarra = document.getElementById('myChartBarra');
-    new Chart(ctxBarra, {
+    const ctxBarra1 = document.getElementById('myChartBarra1');
+    new Chart(ctxBarra1, {
         type: 'bar',
         data: {
             labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
@@ -82,6 +121,61 @@
                 {
                     label: 'Umidade média',
                     data: [90, 89, 93, 87, 88, 82],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgb(56, 56, 236)',
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    const ctxLinha2 = document.getElementById('myChart2');
+    new Chart(ctxLinha2, {
+        type: 'line',
+        data: {
+            labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+            datasets: [
+                {
+                    label: 'Temperatura',
+                    data: [31, 31, 24, 24, 22, 21],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgb(222, 90, 90)',
+                },
+                {
+                    label: 'Umidade',
+                    data: [80, 82, 79, 75, 70, 80],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgb(56, 56, 236)',
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+
+
+    const ctxBarra2 = document.getElementById('myChartBarra2');
+    new Chart(ctxBarra2, {
+        type: 'bar',
+        data: {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+            datasets: [
+                {
+                    label: 'Temperatura média',
+                    data: [26, 24, 24, 23, 20, 25],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgb(222, 90, 90)',
+                },
+                {
+                    label: 'Umidade média',
+                    data: [90, 89, 75, 87, 80, 82],
                     borderColor: 'rgba(54, 162, 235, 1)',
                     backgroundColor: 'rgb(56, 56, 236)',
                 }
