@@ -15,9 +15,9 @@ porcentagemUmidade = 100.0 - ((ValorUmidadeSolo * 100.0) / 1023.0);
 if (porcentagemUmidade < 0) porcentagemUmidade = 0;
 if (porcentagemUmidade > 100) porcentagemUmidade = 100;
 
-Serial.print("Umidade do solo: ");
+
 Serial.print(porcentagemUmidade);
-Serial.println(";");
+// Serial.println(";");
 
 delay(1000);
 }

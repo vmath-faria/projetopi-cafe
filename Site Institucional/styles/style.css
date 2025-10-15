@@ -65,8 +65,10 @@ body {
     background-repeat: no-repeat;
 }
 
+
 .banner .container h2 {
     margin-top: 0px;
+
 }
 
 .botao2 {
@@ -116,7 +118,7 @@ body {
 
 /* ESTILIZAÇÃO DA CALCULADORA */
 
-.simulador{
+.simulador {
     background-color: #f3e9dc;
     display: flex;
     align-items: center;
@@ -125,14 +127,14 @@ body {
     flex-direction: column;
 }
 
-.simulador h2{
+.simulador h2 {
     color: #5e3023;
     font-size: 50px;
     margin-bottom: 70px;
     margin-top: 0;
 }
 
-.simulador button{
+.simulador button {
     color: white;
     background-color: #5e3023;
     text-decoration: none;
@@ -148,7 +150,7 @@ body {
 
 }
 
-.simulador input{
+.simulador input {
     text-decoration: none;
     border-radius: 7px;
     font-weight: bold;
@@ -159,14 +161,14 @@ body {
     width: 450px;
 }
 
-.simulador span{
+.simulador span {
     color: #5e3023;
     font-size: 20px;
     margin-bottom: 70px;
     margin-top: 70px;
 }
 
-.card-calculadora{
+.card-calculadora {
     background-color: white;
     border-radius: 10px;
     display: flex;
@@ -178,7 +180,7 @@ body {
     margin-top: 40px;
 }
 
-.campo{
+.campo {
     margin: 1px;
     flex: 0 0 calc(50% - 2px);
     height: 100px;
@@ -290,7 +292,7 @@ body {
 
 
 /*Estilização solução*/
-.solucao{
+.solucao {
     background-color: hsl(38, 58%, 78%);
     display: flex;
     align-items: center;
@@ -299,14 +301,14 @@ body {
     flex-direction: column;
 }
 
-.solucao h3{
+.solucao h3 {
     font-weight: bold;
     font-size: 50px;
     display: flex;
     justify-content: flex-start;
 }
 
-.solucao h2{
+.solucao h2 {
     font-size: 25px;
     display: flex;
     color: #5e3023;
@@ -314,7 +316,7 @@ body {
 }
 
 
-.solucao p{
+.solucao p {
     font-size: 25px;
     text-align: left;
     justify-content: center;
@@ -324,18 +326,18 @@ body {
 
 /*ESTILIZAÇÃO ENTRE EM CONTATO CONOSCO*/
 
-.contato{
+.contato {
     background-color: #f3e9dc;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
-    
-    
+
+
 }
 
-.contato .container{
+.contato .container {
     border: 3px solid black;
     border-radius: 10px;
     display: flex;
@@ -348,19 +350,20 @@ body {
     margin-top: 40px;
 
 }
-.contato h2{
+
+.contato h2 {
     color: black;
     font-size: 50px;
     margin-bottom: 70px;
     margin-top: 70px;
 }
 
- 
-.contato input{
+
+.contato input {
     justify-content: center;
     align-items: center;
     height: 50px;
-    width:400px;
+    width: 400px;
     border-radius: 12px;
     font-weight: bold;
     border: none;
@@ -368,14 +371,14 @@ body {
 }
 
 
-.imagem-contato{
+.imagem-contato {
     display: flex;
     padding-left: 20px;
     align-items: center;
     gap: 30px;
 }
 
-.contato .forms{
+.contato .forms {
     display: flex;
     text-align: end;
     flex-direction: column;
@@ -386,7 +389,7 @@ body {
 
 }
 
-.contato img{
+.contato img {
     display: flex;
     justify-content: flex-start;
     width: 300px;
@@ -398,8 +401,13 @@ body {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
-;
+
 }
+
+
+
+
+
 /* ESTILIZAÇÃO DO RODAPÉ (FOOTER) */
 
 .footer {
@@ -531,12 +539,12 @@ body {
 
 }
 
-.card-cadastro h1{
+.card-cadastro h1 {
     color: #5e3023;
 
 }
 
-.card-cadastro b{
+.card-cadastro b {
     color: #5e3023;
     margin: 0;
     margin-top: 10px;
@@ -544,7 +552,7 @@ body {
     font-weight: bold;
 }
 
-.card-cadastro input{
+.card-cadastro input {
     height: 35px;
     width: 400px;
     margin-top: 10px;
@@ -555,12 +563,12 @@ body {
     margin-top: 0px;
 }
 
-.card-cadastro input::placeholder{
+.card-cadastro input::placeholder {
     text-align: left;
     border-radius: 9px;
 }
 
-.card-cadastro .google{
+.card-cadastro .google {
     height: 35px;
     width: 200px;
     margin-top: 10px;
@@ -571,7 +579,7 @@ body {
 
 }
 
-.card-cadastro .microsoft{
+.card-cadastro .microsoft {
     height: 35px;
     width: 200px;
     margin-top: 10px;
@@ -581,7 +589,7 @@ body {
     background-color: white;
 }
 
-.card-cadastro .continuar{
+.card-cadastro .continuar {
     height: 52px;
     width: 400px;
     margin-top: 10px;
@@ -589,11 +597,11 @@ body {
     border: 2px solid white;
     border-radius: 20px;
     text-align: center;
-    background-color:#27140ee9;
+    background-color: #27140ee9;
     color: white;
 }
 
-.card-cadastro a{
+.card-cadastro a {
     justify-content: center;
     display: flex;
     margin-bottom: 50px;
@@ -606,4 +614,56 @@ body {
     width: 100%;
     height: 100%;
 
+}
+
+/* ESTILIZAÇÃO DA DASHBOARD*/
+
+
+.dashboard {
+
+    background-color: #f3dec2;
+}
+
+.dashboard p {
+    color: #f3dec2;
+    font-weight: bold;
+    right: 20px;
+    padding: 0 20px 0 600px;
+}
+
+
+.foto {
+    width: 60px !important;
+    height: 60px !important;
+    /* a foto estava toda bugada, aí usei esse comando ai pra arrumar, ele ignora qualquer outro comando do css e obedece aos comandos dessa classe*/
+    border-radius: 50%;
+    object-fit: cover; /* Esse aqui eu usei para não distorcer */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.saudacoes h1 {
+    font-size: 30px;
+    color: #392d1d;
+    padding: 0 20px 0 100px;
+
+
+}
+
+.saudacoes h2 {
+    font-size: 20px;
+    color: #392d1d;
+    padding: 0 20px 0 100px;
+}
+
+.containerGraficos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.graficos{
+    width: 500px; height: 400px;
 }
