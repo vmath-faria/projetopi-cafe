@@ -486,6 +486,10 @@ body {
     padding: 0;
 }
 
+.login img{
+    cursor: pointer;
+}
+
 .card-login {
 
     text-align: center;
@@ -537,6 +541,10 @@ body {
     border-left: 350px solid #f3e9dc;
     display: flex;
 
+}
+
+.cadastro img{
+    cursor: pointer;
 }
 
 .card-cadastro h1 {
