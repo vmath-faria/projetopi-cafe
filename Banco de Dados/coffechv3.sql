@@ -10,16 +10,18 @@ CREATE TABLE empresa (
 );
 
 CREATE TABLE usuario (
-	id_empresa INT PRIMARY KEY AUTO_INCREMENT,
-    nomeUsurio VARCHAR(50),
-    email VARCHAR(45),
-    senha VARCHAR(100),
-    nivel_acesso VARCHAR(45),
-    fk_empresa INT,
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome_usuario VARCHAR(100),
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(20),
+		CONSTRAINT chk_nivel_acesso 
+			CHECK (nivel_acesso IN ('Proprietario', 'Funcionario')),
+	fk_empresa INT,
 		CONSTRAINT fk_usuario_empresa
 			FOREIGN KEY (fk_empresa)
 				REFERENCES empresa (id_empresa));
-    
+
 
 CREATE TABLE propriedades (
 	id_propriedade INT PRIMARY KEY AUTO_INCREMENT,
