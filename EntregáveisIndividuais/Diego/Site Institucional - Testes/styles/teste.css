@@ -65,58 +65,39 @@ body {
     background-repeat: no-repeat;
 }
 
-.banner .container h2 {
-    margin-top: 0px;
+.containerInicio{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px 300px 0 90px;
+
 }
 
-.botao2 {
-    color: #21201f;
-    background-color: white;
-    text-decoration: none;
-    border-radius: 7px;
-    font-weight: bold;
-    font-size: 15px;
-    cursor: pointer;
-    padding: 12px;
-    margin: 20px auto 0;
-    width: 125px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.containerInicio h2{
+    font-size: 70px;
 }
+
+
 
 .botao {
+    border: 1px solid white;
     color: #f3e9dc;
     background-color: #e1ae47;
     text-decoration: none;
     border-radius: 7px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 20px;
     cursor: pointer;
-    padding: 12px;
-    margin: 20px auto 0;
-    width: 250px;
-    border: none;
+    padding: 12px 10px 10px 10px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.imglogin {
-    display: flex;
-    justify-content: right;
 
-}
 
-.caixa {
-    text-decoration: none;
-    border-radius: 7px;
-    font-weight: bold;
-    font-size: 15px;
-    cursor: pointer;
-    padding: 12px;
-    margin: 20px auto 0;
-}
 
 /* ESTILIZAÇÃO DA CALCULADORA */
 
-.simulador{
+.simulador {
     background-color: #f3e9dc;
     display: flex;
     align-items: center;
@@ -125,14 +106,14 @@ body {
     flex-direction: column;
 }
 
-.simulador h2{
+.simulador h2 {
     color: #5e3023;
     font-size: 50px;
     margin-bottom: 70px;
     margin-top: 0;
 }
 
-.simulador button{
+.simulador button {
     color: white;
     background-color: #5e3023;
     text-decoration: none;
@@ -148,7 +129,7 @@ body {
 
 }
 
-.simulador input{
+.simulador input {
     text-decoration: none;
     border-radius: 7px;
     font-weight: bold;
@@ -159,14 +140,14 @@ body {
     width: 450px;
 }
 
-.simulador span{
+.simulador span {
     color: #5e3023;
     font-size: 20px;
     margin-bottom: 70px;
     margin-top: 70px;
 }
 
-.card-calculadora{
+.card-calculadora {
     background-color: white;
     border-radius: 10px;
     display: flex;
@@ -176,9 +157,10 @@ body {
     height: 500px;
     margin-bottom: 50px;
     margin-top: 40px;
+    transition: opacity 2s ease;
 }
 
-.campo{
+.campo {
     margin: 1px;
     flex: 0 0 calc(50% - 2px);
     height: 100px;
@@ -290,7 +272,7 @@ body {
 
 
 /*Estilização solução*/
-.solucao{
+.solucao {
     background-color: hsl(38, 58%, 78%);
     display: flex;
     align-items: center;
@@ -299,14 +281,14 @@ body {
     flex-direction: column;
 }
 
-.solucao h3{
+.solucao h3 {
     font-weight: bold;
     font-size: 50px;
     display: flex;
     justify-content: flex-start;
 }
 
-.solucao h2{
+.solucao h2 {
     font-size: 25px;
     display: flex;
     color: #5e3023;
@@ -314,7 +296,7 @@ body {
 }
 
 
-.solucao p{
+.solucao p {
     font-size: 25px;
     text-align: left;
     justify-content: center;
@@ -324,82 +306,86 @@ body {
 
 /*ESTILIZAÇÃO ENTRE EM CONTATO CONOSCO*/
 
-.contato{
+.contato {
     background-color: #f3e9dc;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
-    
-    
 }
 
-.contato .container{
+.contato .container {
     border: 3px solid black;
     border-radius: 10px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
-    width: 70%;
-    height: 700px;
-    margin-bottom: 50px;
-    margin-top: 40px;
-
+    width: 90%;
+    padding: 50px 0;
+    margin: 40px 0 50px 0;
 }
-.contato h2{
+
+.contato .titulo h2 {
     color: black;
     font-size: 50px;
-    margin-bottom: 70px;
-    margin-top: 70px;
-}
-
- 
-.contato input{
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width:400px;
-    border-radius: 12px;
-    font-weight: bold;
-    border: none;
-    gap: 30px;
-}
-
-
-.imagem-contato{
-    display: flex;
-    padding-left: 20px;
-    align-items: center;
-    gap: 30px;
-}
-
-.contato .forms{
-    display: flex;
-    text-align: end;
-    flex-direction: column;
-    position: relative;
-    top: -250px;
-    padding: 50px;
-    font-size: 20px;
-
-}
-
-.contato img{
-    display: flex;
-    justify-content: flex-start;
-    width: 300px;
-    height: 300px;
-    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .boxcontato {
     display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-;
+    justify-content: center;
+    align-items: center;
+    gap: 90px; /* espaçamento entre imagem e formulário */
+   
 }
+
+.imagem-contato img {
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 20px;
+}
+
+.forms .campo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;            /* distância entre label e input */
+  margin-bottom: 45px; /* distância entre blocos */
+}
+
+.forms .campo span {
+  margin: 0; 
+}
+
+.forms .campo input {
+  height: 45px;
+  width: 350px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-weight: bold;
+}
+
+
+.telefone {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+
+
+
+
 /* ESTILIZAÇÃO DO RODAPÉ (FOOTER) */
 
 .footer {
@@ -478,6 +464,10 @@ body {
     padding: 0;
 }
 
+.login img {
+    cursor: pointer;
+}
+
 .card-login {
 
     text-align: center;
@@ -522,6 +512,19 @@ body {
     color: black;
 }
 
+.caixa {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
+    border: 2px solid white;
+    border-radius: 20px;
+    outline: none;
+    color: rgb(50, 50, 50);
+}
+
 /* Aqui começa o cadastro */
 
 .cadastro {
@@ -531,12 +534,16 @@ body {
 
 }
 
-.card-cadastro h1{
+.cadastro img {
+    cursor: pointer;
+}
+
+.card-cadastro h1 {
     color: #5e3023;
 
 }
 
-.card-cadastro b{
+.card-cadastro b {
     color: #5e3023;
     margin: 0;
     margin-top: 10px;
@@ -544,23 +551,23 @@ body {
     font-weight: bold;
 }
 
-.card-cadastro input{
+.card-cadastro input {
     height: 35px;
     width: 400px;
     margin-top: 10px;
     display: flex;
     border: 2px solid white;
     border-radius: 20px;
-    text-align: center;
+    outline: none;
     margin-top: 0px;
 }
 
-.card-cadastro input::placeholder{
+.card-cadastro input::placeholder {
     text-align: left;
     border-radius: 9px;
 }
 
-.card-cadastro .google{
+.card-cadastro .google {
     height: 35px;
     width: 200px;
     margin-top: 10px;
@@ -571,7 +578,7 @@ body {
 
 }
 
-.card-cadastro .microsoft{
+.card-cadastro .microsoft {
     height: 35px;
     width: 200px;
     margin-top: 10px;
@@ -581,7 +588,7 @@ body {
     background-color: white;
 }
 
-.card-cadastro .continuar{
+.card-cadastro .continuar {
     height: 52px;
     width: 400px;
     margin-top: 10px;
@@ -589,11 +596,11 @@ body {
     border: 2px solid white;
     border-radius: 20px;
     text-align: center;
-    background-color:#27140ee9;
+    background-color: #27140ee9;
     color: white;
 }
 
-.card-cadastro a{
+.card-cadastro a {
     justify-content: center;
     display: flex;
     margin-bottom: 50px;
@@ -608,3 +615,85 @@ body {
 
 }
 
+/* ESTILIZAÇÃO DA DASHBOARD*/
+
+
+.dashboard {
+
+    background-color: #f3dec2;
+}
+
+.dashboard p {
+    color: #f3dec2;
+    font-weight: bold;
+    right: 20px;
+    padding: 0 20px 0 600px;
+}
+
+
+.foto {
+    width: 60px !important;
+    height: 60px !important;
+    /* a foto estava toda bugada, aí usei esse comando ai pra arrumar, ele ignora qualquer outro comando do css e obedece aos comandos dessa classe*/
+    border-radius: 50%;
+    object-fit: cover;
+    /* Esse aqui eu usei para não distorcer */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.saudacoes h1 {
+    font-size: 30px;
+    color: #392d1d;
+    padding: 0 20px 0 100px;
+
+
+}
+
+.saudacoes h2 {
+    font-size: 20px;
+    color: #392d1d;
+    padding: 0 20px 0 100px;
+}
+
+.saudacoes span {
+    font-size: 20px;
+    color: #392d1d;
+    padding: 0 20px 0 100px;
+}
+
+.kpi_sensores {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.containerGraficos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+
+}
+
+.graficos {
+    width: 500px;
+    height: 400px;
+}
+
+#div_resultado {
+ background-color: white;
+    border-radius: 10px;
+    display: none; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    width: 100%;
+    height: 100%; 
+    padding: 20px;
+    box-sizing: border-box; 
+    transition: opacity 2s ease;
+}
