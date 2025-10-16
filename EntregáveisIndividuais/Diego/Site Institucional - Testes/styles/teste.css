@@ -1,0 +1,610 @@
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+/* ESTILIZAÇÃO DO CABEÇALHO (HEADER) */
+.header {
+    background-color: #5e3023;
+    margin: 0;
+    padding: 0;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 120px;
+
+}
+
+.titulo {
+    color: #f3e9dc;
+}
+
+.navbar {
+    display: flex;
+    list-style: none;
+    width: 650px;
+    justify-content: space-between;
+    color: #f3e9dc;
+}
+
+.navbar a {
+    color: #f3e9dc;
+    outline: none;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+
+}
+
+.header img {
+    width: 200px;
+}
+
+/* FIM DO CABEÇALHO (HEADER) */
+
+.banner {
+    background-image: url('../imgs/coffee-background.png');
+    height: 700px;
+    width: 100%;
+    font-size: 35px;
+    color: white;
+    margin-top: 0px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.banner .container h2 {
+    margin-top: 0px;
+}
+
+.botao2 {
+    color: #21201f;
+    background-color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
+    width: 125px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.botao {
+    color: #f3e9dc;
+    background-color: #e1ae47;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
+    width: 250px;
+    border: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.imglogin {
+    display: flex;
+    justify-content: right;
+
+}
+
+.caixa {
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
+}
+
+/* ESTILIZAÇÃO DA CALCULADORA */
+
+.simulador{
+    background-color: #f3e9dc;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 50px 50px;
+    flex-direction: column;
+}
+
+.simulador h2{
+    color: #5e3023;
+    font-size: 50px;
+    margin-bottom: 70px;
+    margin-top: 0;
+}
+
+.simulador button{
+    color: white;
+    background-color: #5e3023;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
+    width: 400px;
+    border: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+.simulador input{
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 20px auto 0;
+    width: 450px;
+}
+
+.simulador span{
+    color: #5e3023;
+    font-size: 20px;
+    margin-bottom: 70px;
+    margin-top: 70px;
+}
+
+.card-calculadora{
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    height: 500px;
+    margin-bottom: 50px;
+    margin-top: 40px;
+}
+
+.campo{
+    margin: 1px;
+    flex: 0 0 calc(50% - 2px);
+    height: 100px;
+    text-align: center;
+}
+
+.campo:nth-child(5) {
+    flex-basis: 100%;
+    justify-content: center;
+}
+
+/*AQUI COMEÇA A ESTILIZAÇÃO DOS BENEFÍCIOS*/
+
+.beneficios {
+    background-color: #f3e9dc;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 50px 50px;
+    flex-direction: column;
+}
+
+.beneficios h2 {
+    color: #5e3023;
+    font-size: 50px;
+    margin-bottom: 70px;
+    margin-top: 0;
+}
+
+
+.beneficios .boxes {
+    display: flex;
+    color: white;
+    font-weight: bold;
+    gap: 60px;
+}
+
+.beneficios .box {
+    background-color: #856752;
+    width: 220px;
+    border-radius: 10px;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    transition: transform 0.5s ease;
+
+}
+
+.beneficios .box:hover {
+    transform: scale(1.05);
+
+}
+
+.beneficios p {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 23px;
+    line-height: 1.5;
+}
+
+
+
+.beneficios img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    width: 60px;
+
+
+}
+
+
+/*Sobre nós*/
+
+.sobre-nos {
+    background-color: #f3e9dc;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 50px 50px;
+    flex-direction: column;
+}
+
+.sobre-nos .container h3 {
+    font-weight: bold;
+    color: #5e3023;
+    font-size: 50px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.sobre-nos .container p {
+    font-size: 25px;
+    text-align: left;
+    justify-content: center;
+    color: rgb(59, 59, 59);
+    margin: 20px;
+    line-height: 1.5;
+}
+
+.sobre-nos img {
+    width: 90%;
+}
+
+
+/*Estilização solução*/
+.solucao{
+    background-color: hsl(38, 58%, 78%);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 50px 50px;
+    flex-direction: column;
+}
+
+.solucao h3{
+    font-weight: bold;
+    font-size: 50px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.solucao h2{
+    font-size: 25px;
+    display: flex;
+    color: #5e3023;
+    padding: 0px 5px;
+}
+
+
+.solucao p{
+    font-size: 25px;
+    text-align: left;
+    justify-content: center;
+    margin: 20px;
+    line-height: 1.5;
+}
+
+/*ESTILIZAÇÃO ENTRE EM CONTATO CONOSCO*/
+
+.contato{
+    background-color: #f3e9dc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    
+    
+}
+
+.contato .container{
+    border: 3px solid black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    height: 700px;
+    margin-bottom: 50px;
+    margin-top: 40px;
+
+}
+.contato h2{
+    color: black;
+    font-size: 50px;
+    margin-bottom: 70px;
+    margin-top: 70px;
+}
+
+ 
+.contato input{
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width:400px;
+    border-radius: 12px;
+    font-weight: bold;
+    border: none;
+    gap: 30px;
+}
+
+
+.imagem-contato{
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    gap: 30px;
+}
+
+.contato .forms{
+    display: flex;
+    text-align: end;
+    flex-direction: column;
+    position: relative;
+    top: -250px;
+    padding: 50px;
+    font-size: 20px;
+
+}
+
+.contato img{
+    display: flex;
+    justify-content: flex-start;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.boxcontato {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+;
+}
+/* ESTILIZAÇÃO DO RODAPÉ (FOOTER) */
+
+.footer {
+    height: 150px;
+    width: 100%;
+    background-color: #5e3023;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.footer .container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    color: #f3e9dc;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.redes-sociais .logo-fonte-branca {
+    height: 200px;
+    width: 200px;
+}
+
+.redes-sociais p {
+    margin-top: 0;
+}
+
+.contatoFooter {
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 4%;
+}
+
+.contatoFooter h6 {
+    font-size: larger;
+}
+
+.contato h6 {
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 43px;
+}
+
+.contato span {
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.nosso-time1 p {
+    display: flex;
+    justify-content: start;
+    margin-left: 10px;
+}
+
+.nosso-time2 p {
+    display: flex;
+    justify-content: start;
+    margin-left: 10px;
+}
+
+.equipe {
+    font-size: larger;
+}
+
+/* FIM DO RODAPÉ (FOOTER) */
+
+
+/*Aqui inicía a estilização da página login*/
+.login {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.card-login {
+
+    text-align: center;
+    background-color: #f3e9dc;
+    flex-grow: 1;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    background-size: 100%;
+
+}
+
+.imglogin {
+    object-fit: cover;
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+
+.imglogin img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.formulario {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.campo {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.criar-conta {
+    flex-grow: 1;
+    width: 100%;
+    color: black;
+}
+
+/* Aqui começa o cadastro */
+
+.cadastro {
+    background-color: #f3e9dc;
+    border-left: 350px solid #f3e9dc;
+    display: flex;
+
+}
+
+.card-cadastro h1{
+    color: #5e3023;
+
+}
+
+.card-cadastro b{
+    color: #5e3023;
+    margin: 0;
+    margin-top: 10px;
+    font-size: small;
+    font-weight: bold;
+}
+
+.card-cadastro input{
+    height: 35px;
+    width: 400px;
+    margin-top: 10px;
+    display: flex;
+    border: 2px solid white;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.card-cadastro input::placeholder{
+    text-align: left;
+    border-radius: 9px;
+}
+
+.card-cadastro .google{
+    height: 35px;
+    width: 200px;
+    margin-top: 10px;
+    border: 2px solid white;
+    border-radius: 20px;
+    text-align: center;
+    background-color: white;
+
+}
+
+.card-cadastro .microsoft{
+    height: 35px;
+    width: 200px;
+    margin-top: 10px;
+    border: 2px solid white;
+    border-radius: 20px;
+    text-align: center;
+    background-color: white;
+}
+
+.card-cadastro .continuar{
+    height: 52px;
+    width: 400px;
+    margin-top: 10px;
+    font-size: 18px;
+    border: 2px solid white;
+    border-radius: 20px;
+    text-align: center;
+    background-color:#27140ee9;
+    color: white;
+}
+
+.card-cadastro a{
+    justify-content: center;
+    display: flex;
+    margin-bottom: 50px;
+    margin-top: 15px;
+}
+
+.imgcadastro {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    height: 100%;
+
+}
+
