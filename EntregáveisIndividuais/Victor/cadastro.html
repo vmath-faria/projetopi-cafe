@@ -1,95 +1,289 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COFFECH</title>
-
+    <title>Coffech Dashboard</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" href="./imgs/logo-fundo-marrom.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
 
-     <div class="header">
+<body class="dashboard">
+
+    <div class="header">
         <div class="container">
-            <img src="./imgs/logo-fonte-branca.png" class="titulo">
-            <ul class="navbar">
-                <li class="agora">
-                    <a href="index.html">Quem Somos?</a> <!-- TODAS AS TAGS a DA NAVBAR TERÃO ESSE HREF, MAS PRECISAMOS PESQUISAR COMO FAZ PARA REFERENCIAR UM ELEMENTO DENTRO DA PÁGINA-->
-                </li>
-                <li>
-                    <a href="index.html#div_solucao">Solução</a> <!-- PRECISARÁ REFERENCIAR A PARTE DE SOLUÇÃO-->
-                </li>
-                <li>
-                    <a href="index.html#div_simulador">Calculadora Financeira</a> <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
-                </li>
-                <li>
-                    <a href="index.html#div_beneficios">Benefícios</a> <!-- PRECISARÁ REFERENCIAR OS BENEFÍCIOS-->
-                </li>
-                <li>
-                    <a href="index.html#div_contato">Contato</a> <!-- PRECISARÁ REFERENCIAR O CONTATO-->
-                </li>
-                <li>
-                    <a href="login.html">Login</a>
-                </li>
-            </ul>
+            <a href="index.html"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
+            <p>Olá, usuário</p>
+            <img src="./imgs/fotoperfil.png" class="foto">
         </div>
     </div>
 
-    <div class = "cadastro">
-        <div class = "card-cadastro">
-            <h1>Cadastro</h1>
-            <b>Nome Completo</b> <br>
-            <input type="text" id="input_nome" placeholder="Insira aqui seu nome"><br>
-            <b>Email</b> <br> 
-            <input type="text" id="input_email" placeholder="Insira aqui seu e-mail"> <br>
-            <b>Telefone</b> <br>
-            <input type="text" id="input_telefone" placeholder="Insira aqui seu telefone"> <br>
-            <b>CPF</b> <br>
-            <input type="text" id="input_cpf" placeholder="Insira aqui seu CPF"> <br>
-            <b>CNPJ</b> <br>
-            <input type="text" id="input_cnpj" placeholder="Insira seu CNPJ"> <br>
-            <b>Senha</b> <br>
-            <input type="password" id="input_senha" placeholder="****************"> <br>
-            <b>Confirme sua senha</b> <br>
-            <input type="password" id="input_senha_conf" placeholder="****************"> <br>
-            <img onclick="googlar()" src="imgs\google_button.png" style="width: 150px;"> 
-            <img onclick="microsoftar()" src="imgs\microsoft_button.png" style="width: 150px;"> <br>
-            <button class="continuar">Continuar</button> <br>
-            <a href="login.html">Já possui uma conta? Entrar</a>
-        </div>
-          <div class="imgcadastro">
-                <img src='imgs/café-for-all.webp'>
+    <div class="saudacoes">
+        <h1>Bom dia, Usuário!</h1>
+        <h2>Visualize abaixo os dados sobre sua plantação de café arábica</h2>
+
+        <!-- KPIs -->
+        <div class="kpis">
+            <div class="kpi">
+                <h3>Umidade Média</h3>
+                <span id="kpi_umidade">72%</span>
             </div>
+            <div class="kpi">
+                <h3>Período de Seca</h3>
+                <span id="kpi_temp">12~16h</span>
+            </div>
+            <div class="kpi">
+                <h3>Sensores Ativos</h3>
+                <span id="kpi_ativos">2</span>
+            </div>
+            <div class="kpi">
+                <h3>Alertas de Secura</h3>
+                <span id="kpi_alertas">2</span>
+            </div>
+            <div class="kpi">
+                <h3>Saúde da Plantação</h3>
+                <span id="kpi_saude">Ótima</span>
+            </div>
+        </div>
+
+        <div class="containerGraficos">
+            <div class="graficos">
+                <canvas id="graficoGeral"></canvas>
+            </div>
+        </div>
+
+        <span>Selecione o sensor desejado:</span>
+        <select oninput="selecionar()" name="sensor" id="select_sensor">
+            <option value="#" selected disabled>---Selecione o Sensor---</option>
+            <option value="1">Sensor 1</option>
+            <option value="2">Sensor 2</option>
+            <option value="novo">Cadastrar novo sensor</option>
+        </select>
+
+        <div id="div_NovoSensor" style="display: none; margin-top: 15px;">
+            <span>Digite o código do sensor:</span>
+            <input type="text" id="input_sensor">
+            <button onclick="adicionarSensor()">Adicionar Sensor</button>
+        </div>
     </div>
 
-    <div class="footer">
-        <div class="container">
-            <div class="redes-sociais">
-                <img height="50" src="./imgs/logo-fonte-branca.png"> <!-- LOGO COFFECH!-->
-                <p>Todos os direitos reservados a COFFECH 2025</p>
-                <img src="./imgs/Icon-instagram.png"> <!-- ICONE INSTAGRAM-->
-                <img src="./imgs/icon-youtube.png"> <!-- ICONE YOUTUBE-->
-                <img src="./imgs/Icon-linkedin.png"> <!-- ICONE LINKEDIN-->
-                <img src="./imgs/Icon-facebook.png"> <!-- ICONE FACEBOOK-->
-            </div>
-            <div class="contatoFooter">
-                <h6>Contato:</h6>
-                <span>coffech@gmail.com</span>
-            </div>
-            <h5 class="equipe">Equipe Coffech:</h5>
-            <div class="nosso-time1">
-                <p>Anderson</p>
-                <p>Diego</p>
-                <p>Guilherme</p>
-            </div>
-            <div class="nosso-time2">
-                <p>João Ricardo</p>
-                <p>Luan</p>
-                <p>Victor Mattheus</p>
-            </div>
+    <!-- Gráficos Sensor 1 -->
+    <div id="div_grafico1" class="containerGraficos" style="display: none;">
+        <div class="graficos">
+            <canvas id="graficoLinha1"></canvas>
+        </div>
+        <div class="graficos">
+            <canvas id="graficoBarra1"></canvas>
         </div>
     </div>
+
+    <!-- Gráficos Sensor 2 -->
+    <div id="div_grafico2" class="containerGraficos" style="display: none;">
+        <div class="graficos">
+            <canvas id="graficoLinha2"></canvas>
+        </div>
+        <div class="graficos">
+            <canvas id="graficoBarra2"></canvas>
+        </div>
+    </div>
+
 </body>
 
 </html>
+
+<script>
+    function selecionar() {
+        var select = select_sensor.value;
+
+        if (select == "1") {
+            div_grafico1.style.display = 'flex';
+            div_grafico2.style.display = 'none';
+            div_NovoSensor.style.display = 'none';
+        } else if (select == "2") {
+            div_grafico1.style.display = 'none';
+            div_grafico2.style.display = 'flex';
+            div_NovoSensor.style.display = 'none';
+        } else if (select == "novo") {
+            div_grafico1.style.display = 'none';
+            div_grafico2.style.display = 'none';
+            div_NovoSensor.style.display = 'block';
+        }
+    }
+
+    function adicionarSensor() {
+        var novo = input_sensor.value;
+        if (novo != "") {
+            alert("Sensor " + novo + " cadastrado com sucesso!");
+            input_sensor.value = "";
+        } else {
+            alert("Por favor, insira um código de sensor válido.");
+        }
+    }
+
+    // Gráfico Fixo Semanal
+    const ctxGeral = document.getElementById('graficoGeral');
+    new Chart(ctxGeral, {
+        type: 'line',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            datasets: [
+                {
+                    label: 'Umidade média da plantação',
+                    data: [72, 74, 73, 70, 68, 71, 75],
+                    borderColor: 'rgb(192, 133, 88)',
+                    backgroundColor: 'rgba(225, 174, 71, 0.3)',
+                    tension: 0.3,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Visão Geral da Plantação - Semana Atual',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            }
+          
+        }
+    });
+
+
+    // SENSOR 1
+    const ctxLinha1 = document.getElementById('graficoLinha1').getContext('2d');
+    new Chart(ctxLinha1, {
+        type: 'line',
+        data: {
+            labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+            datasets: [
+                {
+                    label: 'Umidade (%)',
+                    data: [80, 82, 80, 85, 80, 83],
+                    borderColor: 'rgb(192, 133, 88)',
+                    backgroundColor: 'rgba(192, 133, 88, 0.3)',
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } },
+             plugins: {
+                title: {
+                    display: true,
+                    text: 'Sensor 1 - Visão Diária',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            },
+        }
+    });
+
+    const ctxBarra1 = document.getElementById('graficoBarra1').getContext('2d');
+    new Chart(ctxBarra1, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+            datasets: [
+                {
+                    label: 'Umidade Média (%)',
+                    data: [70, 80, 73, 56, 84, 68],
+                    backgroundColor: 'rgb(225, 174, 71)',
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Sensor 1 - Visão Semestral',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            }
+        }
+    });
+
+    // SENSOR 2 
+    const ctxLinha2 = document.getElementById('graficoLinha2').getContext('2d');
+    new Chart(ctxLinha2, {
+        type: 'line',
+        data: {
+            labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+            datasets: [
+                {
+                    label: 'Umidade (%)',
+                    data: [75, 78, 80, 76, 73, 70],
+                    borderColor: 'rgb(192, 133, 88)',
+                    backgroundColor: 'rgba(192, 133, 88, 0.3)',
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Sensor 2 - Visão Diária',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            }
+        }
+    });
+
+    const ctxBarra2 = document.getElementById('graficoBarra2').getContext('2d');
+    new Chart(ctxBarra2, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+            datasets: [
+                {
+                    label: 'Umidade Média (%)',
+                    data: [85, 84, 80, 55, 77, 75],
+                    backgroundColor: 'rgb(225, 174, 71)',
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Sensor 2 - Visão Semestral',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            }
+        }
+    });
+</script>
