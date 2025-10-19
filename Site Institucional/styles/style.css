@@ -617,9 +617,11 @@ body {
 /* ESTILIZAÇÃO DA DASHBOARD*/
 
 
-.dashboard {
-
-    background-color: #f3dec2;
+body.dashboard {
+  background-color: #f3dec2;
+  font-family: 'Poppins', sans-serif;
+  color: #392d1d;
+  margin: 0;
 }
 
 .dashboard p {
@@ -628,7 +630,6 @@ body {
     right: 20px;
     padding: 0 20px 0 600px;
 }
-
 
 .foto {
     width: 60px !important;
@@ -641,43 +642,60 @@ body {
     margin-bottom: 10px;
 }
 
-
-.saudacoes h1 {
-    font-size: 30px;
-    color: #392d1d;
-    padding: 0 20px 0 100px;
-
-
+.saudacao {
+  text-align: center;
+  margin: 30px 0;
 }
 
-.saudacoes h2 {
-    font-size: 20px;
-    color: #392d1d;
-    padding: 0 20px 0 100px;
+.kpis {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 30px 60px;
 }
 
-.saudacoes span {
-    font-size: 20px;
-    color: #392d1d;
-    padding: 0 20px 0 100px;
+.kpi {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
 }
 
-.kpi_sensores {
-    display: flex;
-    align-items: center;
-    text-align: center;
+.kpi h3 {
+  font-size: 16px;
+  color: #4d2c19;
+}
+.kpi span {
+  font-size: 24px;
+  font-weight: bold;
+  color: #80592d;
+  margin: 8px 0 0 0;
 }
 
 .containerGraficos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-
-
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 30px;
+  margin-top: 20px;
 }
 
 .graficos {
-    width: 500px;
-    height: 400px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 45%; /* ocupa metade da tela em desktops */
+  min-width: 300px; /* evita ficar muito pequeno */
 }
+
+canvas {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3; /* mantém proporção visual */
+  border-radius: 8px;
+}
+
