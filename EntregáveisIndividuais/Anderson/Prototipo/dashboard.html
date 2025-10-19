@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffech Dashboard</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="./imgs/logo-fundo-marrom.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -44,6 +45,12 @@
             <div class="kpi">
                 <h3>Saúde da Plantação</h3>
                 <span id="kpi_saude">Ótima</span>
+            </div>
+        </div>
+
+        <div class="containerGraficos">
+            <div class="graficos">
+                <canvas id="graficoGeral"></canvas>
             </div>
         </div>
 
@@ -108,12 +115,57 @@
     function adicionarSensor() {
         var novo = input_sensor.value;
         if (novo != "") {
-            alert("Sensor " + novo + " cadastrado com sucesso! (Mockado)");
+            alert("Sensor " + novo + " cadastrado com sucesso!");
             input_sensor.value = "";
         } else {
             alert("Por favor, insira um código de sensor válido.");
         }
     }
+
+    // Gráfico Fixo Semanal
+    const ctxGeral = document.getElementById('graficoGeral');
+    new Chart(ctxGeral, {
+        type: 'line',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            datasets: [
+                {
+                    label: 'Umidade média da plantação',
+                    data: [72, 74, 73, 70, 68, 71, 75],
+                    borderColor: 'rgb(192, 133, 88)',
+                    backgroundColor: 'rgba(225, 174, 71, 0.3)',
+                    tension: 0.3,
+                    fill: true
+                },
+                {
+                    label: 'Temperatura média do solo',
+                    data: [22, 23, 24, 25, 26, 25, 23],
+                    borderColor: 'rgb(94, 48, 35)',
+                    backgroundColor: 'rgba(94, 48, 35, 0.3)',
+                    tension: 0.3,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Visão Geral da Plantação - Semana Atual',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            }
+          
+        }
+    });
+
 
     // SENSOR 1
     const ctxLinha1 = document.getElementById('graficoLinha1').getContext('2d');
@@ -139,7 +191,18 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true } }
+            scales: { y: { beginAtZero: true } },
+             plugins: {
+                title: {
+                    display: true,
+                    text: 'Sensor 1 - Visão Diária',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            },
         }
     });
 
@@ -161,10 +224,21 @@
                 }
             ]
         },
-        options: { 
+        options: {
             responsive: true,
-            maintainAspectRatio: false, 
-            scales: { y: { beginAtZero: true } } 
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Sensor 1 - Visão Semestral',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            }
         }
     });
 
@@ -192,7 +266,18 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true } }
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Sensor 2 - Visão Diária',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            }
         }
     });
 
@@ -214,10 +299,21 @@
                 }
             ]
         },
-        options: { 
+        options: {
             responsive: true,
-            maintainAspectRatio: false, 
-            scales: { y: { beginAtZero: true } } 
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Sensor 2 - Visão Semestral',
+                    color: '#392d1d',
+                    font: { size: 18 }
+                },
+                legend: {
+                    labels: { color: '#392d1d' }
+                }
+            }
         }
     });
 </script>
