@@ -86,6 +86,11 @@
                     <span><b>Consumo anual de água na irrigação (em m³ por hectare):</b></span> <br>
                     <input type="number" placeholder="Insira o consumo anual de água em m³/ha/ano" id="input_consumo_agua">
                 </div>
+                <div class="campo">
+                    <br> <br>
+                    <span><b>Preço por unidade de saca:</b></span> <br>
+                    <input type="number" placeholder="Insira o preço unitário da saca de café" id="input_preco_saca">
+                </div>
             </div>
             <div id="div_resultado" style="display: none; width: 100%; height: 100%;"></div>
             <div>
@@ -190,6 +195,7 @@
 </script>
 
 <script>
+
     function calcular() {
       var area = Number(input_area.value);
       var produtividade_atual = Number(input_produtividade.value);
@@ -218,7 +224,7 @@
         var produtividade_ideal = 30;
         var consumo_ideal_agua = 4410; // usando como base 6300 com 30% aplicado
         var preco_m3_agua = 0.2713;
-        var preco_saca_cafe = 2000;
+        var preco_saca_cafe = Number(input_preco_saca.value);
         var custo_produto = 3500;
 
         var ganho_financeiro = 0;
@@ -312,5 +318,4 @@
         botao.innerText = `Fazer uma nova simulação!`
     }
 }
-</script>
 </script>
