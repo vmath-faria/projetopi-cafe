@@ -1,0 +1,2 @@
+Fazer index do site do projeto
+ajustar as classes, baseado no protótipo do figma

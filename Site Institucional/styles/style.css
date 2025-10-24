@@ -96,6 +96,21 @@ body {
 
 
 /* ESTILIZAÇÃO DA CALCULADORA */
+#div_resultado {
+ background-color: white;
+    border-radius: 10px;
+    display: none; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    width: 100%;
+    height: 100%; 
+    padding: 20px;
+    box-sizing: border-box; 
+    transition: opacity 2s ease;
+}
+/* FIM DA ESTILIZAÇÃO DA CALCULADORA */
 
 .simulador {
     background-color: #f3e9dc;
@@ -302,6 +317,9 @@ body {
     margin: 20px;
     line-height: 1.5;
 }
+
+/* ESTILIZAÇÃO DA CALCULADORA */
+
 
 /*ESTILIZAÇÃO ENTRE EM CONTATO CONOSCO*/
 
