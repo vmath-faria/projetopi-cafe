@@ -18,10 +18,19 @@ body {
 
 .header .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 0 120px;
 
+}
+
+.select {
+    color:#5e3023;
+    background-color: #f3e9dc;
+    margin-left: 5%;
+    border: #80592d;
+    border-style: solid;
+    border-radius: 5px;
 }
 
 .titulo {
