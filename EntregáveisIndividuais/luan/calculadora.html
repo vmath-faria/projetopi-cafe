@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador Coffech</title>
+  </head>
+  <body>
+    <h1>Simulador Consultivo Coffech</h1>
+
+    <p><b>Qual a área da sua plantação de café (em hectares)?</b></p>
+    <input type="text" id="input_area" placeholder="Ex: 10" />
+
+    <p><b>Qual a sua produtividade atual (sacas por hectare)?</b></p>
+    <input type="text" id="input_produtividade" placeholder="Ex: 25" />
+
+    <p>
+      <b>Qual seu consumo anual de água na irrigação (em m³ por hectare)?</b>
+    </p>
+    <input type="text" id="input_consumo_agua" placeholder="Ex: 5000" />
+    <br><br>
+
+    <button onclick="calcular()">Analisar Potencial</button>
+
+    <div id="div_resultado"></div>
+    <br><br>
+
+    <script>
+      function calcular() {
+        var area = Number(input_area.value);
+        var produtividade_atual = Number(input_produtividade.value);
+        var consumo_agua_atual = Number(input_consumo_agua.value);
+
+        if (area == 0 || produtividade_atual == 0 || consumo_agua_atual == 0) {
+          div_resultado.innerHTML =
+            "<b>Por favor, preencha todos os campos com valores válidos.</b>";
+        } else {
+          var produtividade_ideal = 30;
+          var consumo_ideal_agua = 4410; // usando como base 6300 com 30% aplicado
+          var preco_m3_agua = 0.2713;
+          var preco_saca_cafe = 2000;
+          var custo_produto = 3500;
+
+          var ganho_financeiro = 0;
+          var economia_financeira = 0;
+          var mensagem_produtividade = "";
+          var mensagem_irrigacao = "";
+
+          if (produtividade_atual < produtividade_ideal) {
+            var sacas_perdidas_por_ha = produtividade_ideal - produtividade_atual; // preco informado no input
+            var sacas_perdidas_total = sacas_perdidas_por_ha * area;  
+            ganho_financeiro = sacas_perdidas_total * preco_saca_cafe;
+            mensagem_produtividade = `Sua produtividade atual está abaixo do potencial</b>. 
+            Ao otimizar a irrigação, você pode ganhar até ${sacas_perdidas_total.toFixed(1)} sacas a mais por ano, 
+            representando um aumento de receita de R$ ${ganho_financeiro.toFixed(2)}.`;
+          } else {
+            mensagem_produtividade = `Sua produtividade está acima ou dentro da meta!`; // não sei bem como colocar essa mensagem, ela pode ser bem generica
+          }
+
+          if (consumo_agua_atual < consumo_ideal_agua) {
+            mensagem_irrigacao = `Seu consumo de água está abaixo do recomendado. Você pode estar perdendo produtividade`; 
+          } else {
+            var excesso_agua = (consumo_agua_atual - consumo_ideal_agua) * area;
+            economia_financeira = excesso_agua * preco_m3_agua;
+            mensagem_irrigacao = `Você está usando ${excesso_agua} m³ de água a mais que o necessário. 
+            Você pode ter uma economia de R$ ${economia_financeira.toFixed(2)}</b> por ano.`;
+          }
+
+          var beneficio = ganho_financeiro + economia_financeira;
+
+          div_resultado.innerHTML = `
+
+                <h2>Diagnóstico da sua Plantação:</h2>
+                <h3>1. Análise de Produtividade:</h3>
+                <p>${mensagem_produtividade}</p>
+                <h3>2. Análise de Irrigação:</h3>
+                <p>${mensagem_irrigacao}</p>
+        
+                <h2>Balanço Financeiro Final:</h2>
+                Considerando o aumento de receita e a economia de custos, seu <b>Benefício Financeiro Total pode chegar a 
+                R$ ${beneficio.toFixed(2)} por ano. <br>
+                
+                Este resultado é alcançado com um investimento inicial de R$ ${custo_produto.toFixed(2)} no nosso kit.
+            `;
+        }
+      }
+    </script>
+  </body>
+</html>
