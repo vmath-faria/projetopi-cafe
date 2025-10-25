@@ -17,6 +17,12 @@
             <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
             <p>Olá, usuário</p>
             <img src="./imgs/fotoperfil.png" class="foto">
+            <select oninput="select_function()" class="select" id="header_select">
+                <option selected disabled value="#">Opções</option>
+                <option value="login">Login</option>
+                <option value="cadastro">Cadastro</option>
+                <option value="index">Home</option>
+            </select>
         </div>
     </div>
 
@@ -94,6 +100,18 @@
 </html>
 
 <script>
+
+    function select_function(){
+        var select=header_select.value
+        if(select=="index"){
+            window.location.href="index.html"
+        }else if(select=="login"){
+            window.location.href="login.html"
+        }else{
+            window.location.href="cadastro.html"
+        }
+    }
+
     function selecionar() {
         var select = select_sensor.value;
 
