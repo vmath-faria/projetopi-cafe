@@ -11,9 +11,11 @@ body {
 
 /* ESTILIZAÇÃO DO CABEÇALHO (HEADER) */
 .header {
-    background-color: #5e3023;
+    background-color: #6f4e37;
     margin: 0;
     padding: 0;
+    top: 0;
+    position: sticky;
 }
 
 .header .container {
@@ -297,7 +299,7 @@ body {
 
 /*Estilização solução*/
 .solucao {
-    background-color: hsl(38, 58%, 78%);
+    background-color: #f3e9dc;
     display: flex;
     align-items: center;
     text-align: center;
