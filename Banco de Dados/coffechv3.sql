@@ -20,9 +20,22 @@ CREATE TABLE usuario (
 	fk_empresa INT,
 		CONSTRAINT fk_usuario_empresa
 			FOREIGN KEY (fk_empresa)
-				REFERENCES empresa (id_empresa));
-
-
+				REFERENCES empresa (id_empresa)
+);
+                
+CREATE TABLE mensagemContato (
+    id_mensagem INT PRIMARY KEY AUTO_INCREMENT,
+    email_remetente VARCHAR(100) NOT NULL,
+    assunto VARCHAR(100),
+    mensagem TEXT,
+    data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(20),
+    fk_usuario INT,
+    CONSTRAINT fk_Mensagem_Usuario
+        FOREIGN KEY (fk_usuario)
+        REFERENCES usuario(id_usuario)
+);
+                
 CREATE TABLE propriedades (
 	id_propriedade INT PRIMARY KEY AUTO_INCREMENT,
     nome_propriedade VARCHAR(100),
