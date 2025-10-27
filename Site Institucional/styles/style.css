@@ -510,9 +510,9 @@ body {
 
 }
 
-.imglogin {
-    width: 400px;
-    height: 800px;
+.login .imglogin {
+    width: 1000px;
+    height: 75%;
     object-fit: cover;
     flex-grow: 1;
     flex-basis: 50%;

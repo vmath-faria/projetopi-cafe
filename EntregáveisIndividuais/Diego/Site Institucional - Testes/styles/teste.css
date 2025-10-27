@@ -483,6 +483,14 @@ body {
 
 .login img {
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    flex-grow: 1;
+    flex-basis: 50%;
+    display: flex;
+    width: 50%;
+    height: 100%;
 }
 
 .card-login {
@@ -494,19 +502,12 @@ body {
     display: flex;
     flex-direction: column;
     background-size: 100%;
-
-}
-
-.imglogin {
-    object-fit: cover;
-    flex-grow: 1;
-    flex-basis: 50%;
-}
-
-.imglogin img {
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 50%;
     height: 100%;
-    object-fit: cover;
+
 }
 
 .formulario {
@@ -548,8 +549,36 @@ body {
     background-color: #f3e9dc;
     border-left: 350px solid #f3e9dc;
     display: flex;
-
 }
+
+.cadastro .container{
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-cadastro, .imgcadastro{
+    flex-grow: 1; 
+    min-width: 300px
+}
+
+.cadastro .card-cadastro{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    padding: 80px;
+    margin-top: 0;
+}
+
+.imgcadastro {
+    width: 50%;
+    height: 100%;
+}
+
 
 .cadastro img {
     cursor: pointer;
@@ -624,13 +653,6 @@ body {
     margin-top: 15px;
 }
 
-.imgcadastro {
-    display: flex;
-    justify-content: right;
-    width: 100%;
-    height: 100%;
-
-}
 
 /* ESTILIZAÇÃO DA DASHBOARD*/
 
