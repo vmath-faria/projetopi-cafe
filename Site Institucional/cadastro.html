@@ -39,7 +39,7 @@
             </ul>
         </div>
     </div>
-
+    
     <div class = "cadastro">
         <div class = "card-cadastro">
             <h1>Cadastro</h1>
@@ -57,12 +57,12 @@
             <input type="password" id="input_senha" placeholder="****************"> <br>
             <b>Confirme sua senha</b> <br>
             <input type="password" id="input_senha_conf" placeholder="****************"> <br>
-            <button class="continuar">Continuar</button> <br>
+            <button class="continuar" onclick="cadastrar()">Continuar</button> <br>
             <a href="login.html">Já possui uma conta? Entrar</a>
         </div>
-          <div class="imgcadastro">
-                <img src='imgs/café-for-all.webp'>
-            </div>
+        <div class="imgcadastro">
+            <img src='imgs/café-for-all.webp'>
+        </div>
     </div>
 
     <div class="footer">
@@ -98,11 +98,22 @@
 
 
 <script>
-       function googlar(){
-        alert('Você será direcionado para o cadastro via Google.')
-    }
 
-    function microsoftar(){
-        alert('Você será direcionado para o cadastro via Microsoft.')
-    }
+   function cadastrar(){
+    var nome = input_nome.value;
+    var email = input_email.value;
+    var telefone = input_telefone.value;
+    var cpf = input_cpf.value;
+    var cnpj = input_cnpj.value;
+    var senha = input_senha.value;
+    var senhaConf = input_senha_conf.value;
+
+    if (nome == '' || email == '' || telefone == '' || cpf == '' || cnpj == '' || senha == '' || senhaConf == ''){
+        alert('Preencha as informações corretamente.')
+    } else if (senha != senhaConf) {
+        alert('As senhas não são correspondentes!')
+    } else alert('Cadastro realizado com sucesso.')
+
+   }
+
 </script>
