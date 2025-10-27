@@ -574,7 +574,7 @@ body {
 
 
 .card-cadastro{
-    margin-top: 10%;
+    margin-top: 2%;
     width: 50%;
     border-left: 100px solid #f3e9dc;
     border-right: 100px solid #f3e9dc;
@@ -742,4 +742,5 @@ canvas {
   aspect-ratio: 4 / 3; /* mantém proporção visual */
   border-radius: 8px;
 }
+
 
