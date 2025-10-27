@@ -23,14 +23,13 @@ body {
     justify-content: space-around;
     align-items: center;
     padding: 0 120px;
-
 }
-
+/* estilização do select na dashboard */
 .select {
-    color:#5e3023;
+    color:#6f4e37;
     background-color: #f3e9dc;
     margin-left: 5%;
-    border: #80592d;
+    border: #4d2c19;
     border-style: solid;
     border-radius: 5px;
 }
@@ -42,7 +41,7 @@ body {
 .navbar {
     display: flex;
     list-style: none;
-    width: 650px;
+    width: 750px;
     justify-content: space-between;
     color: #f3e9dc;
 }
@@ -54,7 +53,6 @@ body {
     font-weight: bold;
     display: flex;
     justify-content: center;
-
 }
 
 .header img {
@@ -206,6 +204,7 @@ body {
     text-align: center;
     padding: 50px 50px;
     flex-direction: column;
+
 }
 
 .beneficios h2 {
@@ -301,7 +300,7 @@ body {
 
 /*Estilização solução*/
 .solucao {
-    background-color: #f3e9dc;
+    background-color: hsl(38, 58%, 78%);
     display: flex;
     align-items: center;
     text-align: center;
@@ -567,7 +566,6 @@ body {
     background-color: #f3e9dc;
     border-left: 350px solid #f3e9dc;
     display: flex;
-
 }
 
 .cadastro img {
@@ -739,5 +737,4 @@ canvas {
   aspect-ratio: 4 / 3; /* mantém proporção visual */
   border-radius: 8px;
 }
-
 
