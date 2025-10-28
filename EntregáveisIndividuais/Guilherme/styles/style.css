@@ -24,9 +24,10 @@ body {
     align-items: center;
     padding: 0 120px;
 }
+
 /* estilização do select na dashboard */
 .select {
-    color:#6f4e37;
+    color: #6f4e37;
     background-color: #f3e9dc;
     margin-left: 5%;
     border: #4d2c19;
@@ -74,7 +75,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.containerInicio{
+.containerInicio {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -82,7 +83,7 @@ body {
 
 }
 
-.containerInicio h2{
+.containerInicio h2 {
     font-size: 70px;
 }
 
@@ -106,19 +107,20 @@ body {
 
 /* ESTILIZAÇÃO DA CALCULADORA */
 #div_resultado {
- background-color: white;
+    background-color: white;
     border-radius: 10px;
-    display: none; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    text-align: center; 
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     width: 100%;
-    height: 100%; 
+    height: 100%;
     padding: 20px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     transition: opacity 2s ease;
 }
+
 /* FIM DA ESTILIZAÇÃO DA CALCULADORA */
 
 .simulador {
@@ -366,8 +368,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 90px; /* espaçamento entre imagem e formulário */
-   
+    gap: 90px;
+    /* espaçamento entre imagem e formulário */
+
 }
 
 .imagem-contato img {
@@ -385,24 +388,26 @@ body {
 }
 
 .forms .campo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;            /* distância entre label e input */
-  margin-bottom: 45px; /* distância entre blocos */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    /* distância entre label e input */
+    margin-bottom: 45px;
+    /* distância entre blocos */
 }
 
 .forms .campo span {
-  margin: 0; 
+    margin: 0;
 }
 
 .forms .campo input {
-  height: 45px;
-  width: 350px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  font-weight: bold;
+    height: 45px;
+    width: 350px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-weight: bold;
 }
 
 
@@ -583,7 +588,7 @@ body {
     justify-content: center;
 }
 
-.card-cadastro .campo{
+.card-cadastro .campo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -599,14 +604,15 @@ body {
     color: #5e3023;
     margin: 100;
 
-    
+
     font-weight: bold;
 }
 
 .card-cadastro input {
     height: 35px;
-    width: 60%;             /* ← antes era 400px */
-     /* ← mantém limite no desktop */
+    width: 0%;
+    /* ← antes era 400px */
+    /* ← mantém limite no desktop */
     display: flex;
     border: 2px solid white;
     border-radius: 20px;
@@ -621,8 +627,10 @@ body {
 
 .card-cadastro .continuar {
     height: 52px;
-    width: 80%;             /* ← antes era 400px */
-    max-width: 400px;       /* ← limite */
+    width: 80%;
+    /* ← antes era 400px */
+    max-width: 400px;
+    /* ← limite */
     margin-top: 10px;
     font-size: 18px;
     border: 2px solid white;
@@ -648,7 +656,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.imgcadastro{
+.imgcadastro {
     object-fit: cover;
     flex-grow: 1;
     flex-basis: 50%;
@@ -658,10 +666,10 @@ body {
 
 
 body.dashboard {
-  background-color: #f3dec2;
-  font-family: 'Poppins', sans-serif;
-  color: #392d1d;
-  margin: 0;
+    background-color: #f3dec2;
+    font-family: 'Poppins', sans-serif;
+    color: #392d1d;
+    margin: 0;
 }
 
 .dashboard p {
@@ -683,60 +691,80 @@ body.dashboard {
 }
 
 .saudacoes {
-  text-align: center;
-  margin: 30px 0;
+    text-align: center;
+    margin: 30px 0;
 }
 
 .kpis {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 30px 60px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 30px 60px;
 }
 
 .kpi {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  width: 200px;
-  text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
 }
 
 .kpi h3 {
-  font-size: 16px;
-  color: #4d2c19;
+    font-size: 16px;
+    color: #4d2c19;
 }
+
 .kpi span {
-  font-size: 24px;
-  font-weight: bold;
-  color: #80592d;
-  margin: 8px 0 0 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #80592d;
+    margin: 8px 0 0 0;
 }
 
 .containerGraficos {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  flex-wrap: wrap;
-  padding: 30px;
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 30px;
+    margin-top: 20px;
 }
 
-.graficos {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  width: 45%; /* ocupa metade da tela em desktops */
-  min-width: 300px; /* evita ficar muito pequeno */
+.containerSub {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
+.graficos1{
+    background-color: #fff;
+    border-radius: 12px;
+    width: 87%;
+    height: 87%;
+}
+
+.graficos2{
+    background-color: #fff;
+    border-radius: 12px;
+    width: 87%;
+    height: 87%;
+}
+.graficos {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 50%;
+    height: 50%;
+    margin-top: 20px;
+}
+
 
 canvas {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3; /* mantém proporção visual */
-  border-radius: 8px;
+    width: 95%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    /* mantém proporção visual */
+    border-radius: 8px;
 }
-
-
