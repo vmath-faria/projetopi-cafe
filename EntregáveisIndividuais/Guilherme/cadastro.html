@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COFFECH</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="./imgs/logo-fundo-marrom.png">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="container">
+            <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
+            <ul class="navbar">
+                <li class="agora">
+                    <a href="#div_sobrenos">Quem Somos?</a>
+                    <!-- TODAS AS TAGS a DA NAVBAR TERÃO ESSE HREF, MAS PRECISAMOS PESQUISAR COMO FAZ PARA REFERENCIAR UM ELEMENTO DENTRO DA PÁGINA-->
+                </li>
+                <li>
+                    <a href="#div_solucao">Solução</a> <!-- PRECISARÁ REFERENCIAR A PARTE DE SOLUÇÃO-->
+                </li>
+                <li>
+                    <a href="#div_simulador">Calculadora Financeira</a> <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
+                </li>
+                <li>
+                    <a href="#div_beneficios">Benefícios</a> <!-- PRECISARÁ REFERENCIAR OS BENEFÍCIOS-->
+                </li>
+                <li>
+                    <a href="#div_contato">Contato</a> <!-- PRECISARÁ REFERENCIAR O CONTATO-->
+                </li>
+                <li>
+                    <a href="login.html" style="color: #c08558">Login</a>
+                </li>
+                <li>
+                    <a href="cadastro.html" style="color: #c08558">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="cadastro">
+        <div class="card-cadastro">
+            <h1>Cadastro</h1>
+            <div class="campo">
+                <b>Nome Completo</b> <br>
+                <input type="text" id="input_nome" placeholder="Insira aqui seu nome"><br>
+                <b>Email</b> <br>
+                <input type="text" id="input_email" placeholder="Insira aqui seu e-mail"> <br>
+                <b>Telefone</b> <br>
+                <input type="text" id="input_telefone" placeholder="Insira aqui seu telefone"> <br>
+                <b>CPF</b> <br>
+                <input type="text" id="input_cpf" placeholder="Insira aqui seu CPF"> <br>
+                <b>CNPJ</b> <br>
+                <input type="text" id="input_cnpj" placeholder="Insira seu CNPJ"> <br>
+                <b>Senha</b> <br>
+                <input type="password" id="input_senha" placeholder="****************"> <br>
+                <b>Confirme sua senha</b> <br>
+                <input type="password" id="input_senha_conf" placeholder="****************"> <br>
+                <button class="continuar" onclick="cadastrar()">Continuar</button> <br>
+                <a href="login.html">Já possui uma conta? Entrar</a>
+            </div>
+        </div>
+        <div class="imgcadastro">
+            <img src='imgs/café-for-all.webp'>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="redes-sociais">
+                <img height="50" src="./imgs/logo-fonte-branca.png"> <!-- LOGO COFFECH!-->
+                <p>Todos os direitos reservados a COFFECH 2025</p>
+                <img src="./imgs/Icon-instagram.png"> <!-- ICONE INSTAGRAM-->
+                <img src="./imgs/icon-youtube.png"> <!-- ICONE YOUTUBE-->
+                <img src="./imgs/Icon-linkedin.png"> <!-- ICONE LINKEDIN-->
+                <img src="./imgs/Icon-facebook.png"> <!-- ICONE FACEBOOK-->
+            </div>
+            <div class="contatoFooter">
+                <h6>Contato:</h6>
+                <span>coffech@gmail.com</span>
+            </div>
+            <h5 class="equipe">Equipe Coffech:</h5>
+            <div class="nosso-time1">
+                <p>Anderson</p>
+                <p>Diego</p>
+                <p>Guilherme</p>
+            </div>
+            <div class="nosso-time2">
+                <p>João Ricardo</p>
+                <p>Luan</p>
+                <p>Victor Mattheus</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+
+    function cadastrar() {
+        var nome = input_nome.value;
+        var email = input_email.value;
+        var telefone = input_telefone.value;
+        var cpf = input_cpf.value;
+        var cnpj = input_cnpj.value;
+        var senha = input_senha.value;
+        var senhaConf = input_senha_conf.value;
+
+        if (nome == '' || email == '' || telefone == '' || cpf == '' || cnpj == '' || senha == '' || senhaConf == '') {
+            alert('Preencha as informações corretamente.')
+        } else if (senha != senhaConf) {
+            alert('As senhas não são correspondentes!')
+        } else alert('Cadastro realizado com sucesso.')
+
+    }
+
+</script>
