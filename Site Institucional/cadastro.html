@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" href="./imgs/logo-fundo-marrom.png">
 </head>
+
 <body>
 
-     <div class="header">
+    <div class="header">
         <div class="container">
             <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
             <ul class="navbar">
@@ -31,34 +33,36 @@
                     <a href="#div_contato">Contato</a> <!-- PRECISARÁ REFERENCIAR O CONTATO-->
                 </li>
                 <li>
-                    <a href="login.html" style="color: #c08558">Login</a>
+                    <a href="login.html" style="color: #5e3023">Login</a>
                 </li>
                 <li>
-                    <a href="cadastro.html" style="color: #c08558">Cadastro</a>
+                    <a href="cadastro.html" style="color: #5e3023">Cadastro</a>
                 </li>
             </ul>
         </div>
     </div>
-    
-    <div class = "cadastro">
-        <div class = "card-cadastro">
+
+    <div class="cadastro">
+        <div class="card-cadastro">
             <h1>Cadastro</h1>
-            <b>Nome Completo</b> <br>
-            <input type="text" id="input_nome" placeholder="Insira aqui seu nome"><br>
-            <b>Email</b> <br> 
-            <input type="text" id="input_email" placeholder="Insira aqui seu e-mail"> <br>
-            <b>Telefone</b> <br>
-            <input type="text" id="input_telefone" placeholder="Insira aqui seu telefone"> <br>
-            <b>CPF</b> <br>
-            <input type="text" id="input_cpf" placeholder="Insira aqui seu CPF"> <br>
-            <b>CNPJ</b> <br>
-            <input type="text" id="input_cnpj" placeholder="Insira seu CNPJ"> <br>
-            <b>Senha</b> <br>
-            <input type="password" id="input_senha" placeholder="****************"> <br>
-            <b>Confirme sua senha</b> <br>
-            <input type="password" id="input_senha_conf" placeholder="****************"> <br>
-            <button class="continuar" onclick="cadastrar()">Continuar</button> <br>
-            <a href="login.html">Já possui uma conta? Entrar</a>
+            <div class="campo">
+                <b>Nome Completo</b> <br>
+                <input type="text" id="input_nome" placeholder="Insira aqui seu nome"><br>
+                <b>Email</b> <br>
+                <input type="text" id="input_email" placeholder="Insira aqui seu e-mail"> <br>
+                <b>Telefone</b> <br>
+                <input type="text" id="input_telefone" placeholder="Insira aqui seu telefone"> <br>
+                <b>CPF</b> <br>
+                <input type="text" id="input_cpf" placeholder="Insira aqui seu CPF"> <br>
+                <b>CNPJ</b> <br>
+                <input type="text" id="input_cnpj" placeholder="Insira seu CNPJ"> <br>
+                <b>Senha</b> <br>
+                <input type="password" id="input_senha" placeholder="****************"> <br>
+                <b>Confirme sua senha</b> <br>
+                <input type="password" id="input_senha_conf" placeholder="****************"> <br>
+                <button class="continuar" onclick="cadastrar()">Continuar</button> <br>
+                <a href="login.html">Já possui uma conta? Entrar</a>
+            </div>
         </div>
         <div class="imgcadastro">
             <img src='imgs/café-for-all.webp'>
@@ -99,21 +103,21 @@
 
 <script>
 
-   function cadastrar(){
-    var nome = input_nome.value;
-    var email = input_email.value;
-    var telefone = input_telefone.value;
-    var cpf = input_cpf.value;
-    var cnpj = input_cnpj.value;
-    var senha = input_senha.value;
-    var senhaConf = input_senha_conf.value;
+    function cadastrar() {
+        var nome = input_nome.value;
+        var email = input_email.value;
+        var telefone = input_telefone.value;
+        var cpf = input_cpf.value;
+        var cnpj = input_cnpj.value;
+        var senha = input_senha.value;
+        var senhaConf = input_senha_conf.value;
 
-    if (nome == '' || email == '' || telefone == '' || cpf == '' || cnpj == '' || senha == '' || senhaConf == ''){
-        alert('Preencha as informações corretamente.')
-    } else if (senha != senhaConf) {
-        alert('As senhas não são correspondentes!')
-    } else alert('Cadastro realizado com sucesso.')
+        if (nome == '' || email == '' || telefone == '' || cpf == '' || cnpj == '' || senha == '' || senhaConf == '') {
+            alert('Preencha as informações corretamente.')
+        } else if (senha != senhaConf) {
+            alert('As senhas não são correspondentes!')
+        } else alert('Cadastro realizado com sucesso.')
 
-   }
+    }
 
 </script>
