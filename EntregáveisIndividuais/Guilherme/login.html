@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COFFECH</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="./imgs/logo-fundo-marrom.png">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
+            <ul class="navbar">
+                <li class="agora">
+                    <a href="#div_sobrenos">Quem Somos?</a>
+                    <!-- TODAS AS TAGS a DA NAVBAR TERÃO ESSE HREF, MAS PRECISAMOS PESQUISAR COMO FAZ PARA REFERENCIAR UM ELEMENTO DENTRO DA PÁGINA-->
+                </li>
+                <li>
+                    <a href="#div_solucao">Solução</a> <!-- PRECISARÁ REFERENCIAR A PARTE DE SOLUÇÃO-->
+                </li>
+                <li>
+                    <a href="#div_simulador">Calculadora Financeira</a> <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
+                </li>
+                <li>
+                    <a href="#div_beneficios">Benefícios</a> <!-- PRECISARÁ REFERENCIAR OS BENEFÍCIOS-->
+                </li>
+                <li>
+                    <a href="#div_contato">Contato</a> <!-- PRECISARÁ REFERENCIAR O CONTATO-->
+                </li>
+                <li>
+                    <a href="login.html" style="color: #c08558">Login</a>
+                </li>
+                <li>
+                    <a href="cadastro.html" style="color: #c08558">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="login">
+        <div class="card-login">
+            <h1 class="formulario" style="color: black;">Login</h1>
+            <div class="formulario">
+
+                <div class="campo">
+                    <span style="color: black;">E-mail:</span> <br>
+                    <input class="caixa" id="email_input" type="text" placeholder="Login"> <br>
+                    <div class="campo"> <br>
+                        <span style="color: black;">Senha:</span> <br>
+                        <input class="caixa" id="senha_input" type="password" placeholder="******">
+                    </div>
+                    <div class="campo erro" id="erroformulario"></div> <br>
+                    <button class="botao" onclick="formulariofunction()">Entrar</button>
+                </div>
+                <br>
+                <div class="criar-conta"><a href="cadastro.html">Não possui uma conta? Criar</a></div>
+
+            </div>
+        </div>
+        <div class="imglogin">
+            <img src='imgs/imagemLogin.jpg'>
+        </div>
+    </div> 
+
+    <div class="footer">
+        <div class="container">
+            <div class="redes-sociais">
+                <img height="50" src="./imgs/logo-fonte-branca.png"> <!-- LOGO COFFECH!-->
+                <p>Todos os direitos reservados a COFFECH 2025</p>
+                <img src="./imgs/Icon-instagram.png"> <!-- ICONE INSTAGRAM-->
+                <img src="./imgs/icon-youtube.png"> <!-- ICONE YOUTUBE-->
+                <img src="./imgs/Icon-linkedin.png"> <!-- ICONE LINKEDIN-->
+                <img src="./imgs/Icon-facebook.png"> <!-- ICONE FACEBOOK-->
+            </div>
+            <div class="contatoFooter">
+                <h6>Contato:</h6>
+                <span>coffech@gmail.com</span>
+            </div>
+            <h5 class="equipe">Equipe Coffech:</h5>
+            <div class="nosso-time1">
+                <p>Anderson</p>
+                <p>Diego</p>
+                <p>Guilherme</p>
+            </div>
+            <div class="nosso-time2">
+                <p>João Ricardo</p>
+                <p>Luan</p>
+                <p>Victor Mattheus</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function formulariofunction() {
+        var email = email_input.value;
+        var senha = senha_input.value;
+        if (email != 'julia@araripe.com' || senha != 'urubu100') {
+            erroformulario.innerHTML = `<br>Verificar Email ou Senha!`
+        } else {
+            window.location.href = 'dashboard.html';
+        }
+    }
+
+    function googlar(){
+        alert('Você será direcionado para o login via Google.')
+    }
+
+    function microsoftar(){
+        alert('Você será direcionado para o login via Microsoft.')
+    }
+</script>
