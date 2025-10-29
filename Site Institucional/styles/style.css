@@ -11,7 +11,8 @@ body {
 
 /* ESTILIZAÇÃO DO CABEÇALHO (HEADER) */
 .header {
-    background-color: #c08558;
+    background-color:#6f4e37;
+;
     margin: 0;
     padding: 0;
     top: 0;
@@ -675,12 +676,16 @@ body.dashboard {
     margin: 0;
 }
 
+
+
 .dashboard p {
     color: #f3dec2;
     font-weight: bold;
     right: 20px;
     padding: 0 20px 0 600px;
 }
+
+
 
 .foto {
     width: 60px !important;
@@ -693,9 +698,11 @@ body.dashboard {
     margin-bottom: 10px;
 }
 
+
 .saudacoes {
     text-align: center;
     margin: 30px 0;
+  
 }
 
 .kpis {
@@ -704,6 +711,7 @@ body.dashboard {
     flex-wrap: wrap;
     gap: 20px;
     margin: 30px 60px;
+    
 }
 
 .kpi {
@@ -712,6 +720,7 @@ body.dashboard {
     padding: 20px;
     width: 200px;
     text-align: center;
+    box-shadow: 4px 4px 10px 0px black;
 }
 
 .kpi h3 {
@@ -732,8 +741,6 @@ body.dashboard {
     gap: 40px;
     padding: 30px;
     margin-top: 20px;
-    margin-left: 5%;
-    margin-right: 5%;
 }
 
 .containerSub {
@@ -748,7 +755,6 @@ body.dashboard {
     border-radius: 12px;
     width: 87%;
     height: 87%;
-    padding: 2%;
 }
 
 .graficos2{
@@ -756,15 +762,14 @@ body.dashboard {
     border-radius: 12px;
     width: 87%;
     height: 87%;
-    padding: 2%;
 }
 .graficos {
     background: #fff;
     border-radius: 12px;
-    padding: 2%;
+    padding: 20px;
     width: 50%;
     height: 50%;
-    margin-top: 3%;
+    margin-top: 20px;
 }
 
 

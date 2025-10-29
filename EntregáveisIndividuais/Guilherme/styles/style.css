@@ -672,11 +672,43 @@ body.dashboard {
     margin: 0;
 }
 
-.dashboard p {
+
+.header-dash{ 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100vh;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-right: 3px solid #fff;
+  background-color: #392d1d;
+}
+
+.header-dash .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo{
+    width: 60%;
+    height: 60%;
+    text-align: center;
+    align-items: center;
+    display: flex;
+}
+
+
+.header-dash .container p {
     color: #f3dec2;
     font-weight: bold;
     right: 20px;
-    padding: 0 20px 0 600px;
+    padding: 0 20px 0 0px;
+    
 }
 
 .foto {
@@ -690,9 +722,15 @@ body.dashboard {
     margin-bottom: 10px;
 }
 
+.header-dash .container .select{
+    margin-top: 100%;
+}
+
 .saudacoes {
     text-align: center;
     margin: 30px 0;
+    margin-left: 20%; /* esse é o truque */
+  
 }
 
 .kpis {
@@ -701,6 +739,7 @@ body.dashboard {
     flex-wrap: wrap;
     gap: 20px;
     margin: 30px 60px;
+    
 }
 
 .kpi {
@@ -709,6 +748,7 @@ body.dashboard {
     padding: 20px;
     width: 200px;
     text-align: center;
+    box-shadow: 4px 4px 10px 0px black;
 }
 
 .kpi h3 {

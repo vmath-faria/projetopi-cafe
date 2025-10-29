@@ -9,21 +9,20 @@ void setup() {
 }
 
 void loop() {
-  ValorUmidadeSolo = analogRead(A5);
+ValorUmidadeSolo = analogRead(A5);
 
-  int faixa = ValorAr - ValorAgua;
+int faixa = ValorAr - ValorAgua;
 
-  int distancia = ValorAr - ValorUmidadeSolo;
+int distancia = ValorAr - ValorUmidadeSolo;
 
-  porcentagemUmidade = (float)distancia / faixa * 100.0;
+porcentagemUmidade = 100.0 - ((ValorUmidadeSolo * 100.0) / 1023.0);
 
-  if (porcentagemUmidade < 0) porcentagemUmidade = 0;
-  if (porcentagemUmidade > 100) porcentagemUmidade = 100;
-
-
- Serial.println(porcentagemUmidade);
+if (porcentagemUmidade < 0) porcentagemUmidade = 0;
+if (porcentagemUmidade > 100) porcentagemUmidade = 100;
 
 
+Serial.println(porcentagemUmidade);
  
 
-  delay(1000);
+delay(1000); 
+}

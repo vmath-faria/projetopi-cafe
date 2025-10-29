@@ -19,9 +19,8 @@
             <img src="./imgs/fotoperfil.png" class="foto">
             <select oninput="select_function()" class="select" id="header_select">
                 <option selected disabled value="#">Opções</option>
+                <option value="login">Entrar com outra conta</option>
                 <option value="index">Sair</option>
-                <option value="login">Entrar em outra conta</option>
-
             </select>
         </div>
     </div>
@@ -54,13 +53,19 @@
             </div>
         </div>
 
-        <span>Selecione o sensor desejado:</span>
-        <select class="select" style="margin-left: 0%;" 
-        oninput="selecionar()" name="sensor" id="select_sensor">
-            <option value="#" selected disabled>---Selecione o Sensor---</option>
-            <option value="1">Sensor 1</option>
-            <option value="2">Sensor 2</option>
+        <span>Selecione o Talhão desejado:</span>
+        <select oninput="selecionar()" name="sensor" id="select_sensor">
+            <option value="#" selected disabled>---Selecione o Talhão---</option>
+            <option value="1">Talhão <object data="" type=""></object> 1</option>
+            <option value="2">Talhão 2</option>
+            <option value="novo">Cadastrar novo Talhão</option>
         </select>
+
+        <div id="div_NovoSensor" style="display: none; margin-top: 15px;">
+            <span>Digite o código do Talhão:</span>
+            <input type="text" id="input_sensor">
+            <button onclick="adicionarSensor()">Adicionar Talhão</button>
+        </div>
 
 
         <div class="containerGraficos">
@@ -92,8 +97,6 @@
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>
@@ -101,7 +104,7 @@
 <script>
 
     function select_function() {
-        var select = header_select.value
+        var select = header_select.value;
         if (select == "index") {
             window.location.href = "index.html"
         } else if (select == "login") {
@@ -118,10 +121,22 @@
             div_grafico1.style.display = 'flex';
             div_grafico2.style.display = 'none';
             div_NovoSensor.style.display = 'none';
+
+            kpi_umidade.innerHTML = '68%';
+            kpi_temp.innerHTML = "11~18h";
+            kpi_ativos.innerHTML = "12"
+            kpi_alertas.innerHTML = "4"
+            kpi_saude.innerHTML = `<span style="color: red;">Alerta</span>`
         } else if (select == "2") {
             div_grafico1.style.display = 'none';
             div_grafico2.style.display = 'flex';
             div_NovoSensor.style.display = 'none';
+
+            kpi_umidade.innerHTML = '80%';
+            kpi_temp.innerHTML = "13~16h";
+            kpi_ativos.innerHTML = "18"
+            kpi_alertas.innerHTML = "4"
+            kpi_saude.innerHTML = "Ótima"
         } else if (select == "novo") {
             div_grafico1.style.display = 'none';
             div_grafico2.style.display = 'none';
