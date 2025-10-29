@@ -22,7 +22,28 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0 120px;
+}
+
+.logincadastro a {
+    color: #5e3023;
+    font-size: 22px;
+    background-color: #c08558;
+    border-radius: 7px;
+    border-width: 4px;
+    padding-bottom: 2.3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-style: solid;
+    margin-right: 40px;
+    text-decoration: none;
+}
+
+.logincadastro {
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    font-weight: bold;
+    justify-content: center;
 }
 
 /* estilização do select na dashboard */
@@ -57,6 +78,8 @@ body {
 
 .header img {
     width: 200px;
+    margin-right: 70px;
+    margin-left: 150px;
 }
 
 /* FIM DO CABEÇALHO (HEADER) */
