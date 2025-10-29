@@ -716,6 +716,7 @@ body.dashboard {
     /* Esse aqui eu usei para não distorcer */
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 0px !important;
 }
 
 
@@ -800,3 +801,4 @@ canvas {
     /* mantém proporção visual */
     border-radius: 8px;
 }
+
