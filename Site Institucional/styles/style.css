@@ -2,6 +2,7 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
 }
 
 body {
@@ -11,11 +12,12 @@ body {
 
 /* ESTILIZAÇÃO DO CABEÇALHO (HEADER) */
 .header {
-    background-color:#c08558;
+    background-color:#6f4e37;
     margin: 0;
     padding: 0;
     top: 0;
     position: sticky;
+    z-index: 999;
 }
 
 .header .container {
@@ -80,7 +82,7 @@ body {
 .header img {
     width: 200px;
     margin-right: 70px;
-    margin-left: 125px;
+    margin-left: 50px;
 }
 
 /* FIM DO CABEÇALHO (HEADER) */
@@ -244,15 +246,15 @@ body {
     display: flex;
     color: white;
     font-weight: bold;
-    gap: 60px;
+    gap: 40px;
     margin-left: 7%;
     margin-right: 7%;
 }
 
 .beneficios .box {
     background-color: #856752;
-    width: 320px;
-    height: 500px;
+    width: 280px;
+    height: 450px;
     border-radius: 10px;
     padding: 25px 15px;
     display: flex;
@@ -273,7 +275,7 @@ body {
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    font-size: 33px;
+    font-size: 28px;
     line-height: 1.5;
 }
 
@@ -449,7 +451,7 @@ body {
 .footer {
     height: 150px;
     width: 100%;
-    background-color: #c08558;
+    background-color: #6f4e37;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
