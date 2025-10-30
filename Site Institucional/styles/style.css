@@ -12,7 +12,7 @@ body {
 
 /* ESTILIZAÇÃO DO CABEÇALHO (HEADER) */
 .header {
-    background-color:#6f4e37;
+    background-color: #6f4e37;
     margin: 0;
     padding: 0;
     top: 0;
@@ -27,7 +27,7 @@ body {
 }
 
 .logincadastro a {
-    color:#f3e9dc;
+    color: #f3e9dc;
     font-size: 19px;
     background-color: #c08558;
     border-radius: 7px;
@@ -48,7 +48,7 @@ body {
 }
 
 
-.logincadastro :hover{
+.logincadastro :hover {
     color: #5e3023;
 }
 
@@ -74,7 +74,7 @@ body {
     justify-content: center;
 }
 
-.navbar :hover{
+.navbar :hover {
     color: #5e3023;
 }
 
@@ -104,7 +104,7 @@ body {
     justify-content: center;
     flex-direction: column;
     padding: 50px 300px 0 90px;
-    
+
 }
 
 .containerInicio h2 {
@@ -176,7 +176,7 @@ body {
     width: 400px;
     border: none;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    
+
 }
 
 .simulador input {
@@ -230,7 +230,7 @@ body {
     text-align: center;
     padding: 50px 50px;
     flex-direction: column;
-    
+
 }
 
 .beneficios h2 {
@@ -261,7 +261,7 @@ body {
     align-items: center;
     gap: 30px;
     transition: transform 0.5s ease;
-    
+
 }
 
 .beneficios .box:hover {
@@ -286,8 +286,8 @@ body {
     align-items: center;
     margin-top: 15px;
     width: 60px;
-    
-    
+
+
 }
 
 
@@ -394,7 +394,7 @@ body {
     align-items: center;
     gap: 90px;
     /* espaçamento entre imagem e formulário */
-    
+
 }
 
 .imagem-contato img {
@@ -523,6 +523,10 @@ body {
     padding: 0;
 }
 
+.login h1{
+    font-size: 50px;
+}
+
 .login img {
     cursor: pointer;
 }
@@ -536,7 +540,7 @@ body {
     display: flex;
     flex-direction: column;
     background-size: 100%;
-    
+
 }
 
 .login .imglogin {
@@ -563,9 +567,21 @@ body {
     justify-content: center;
 }
 
-.campo {
-    flex-grow: 1;
+.campo-login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+}
+
+.botao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .criar-conta {
@@ -611,15 +627,19 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
 }
 
-.card-cadastro .campo {
+.formCadastro {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 20px;
     justify-content: center;
-    text-align: left;
+}
+
+
+.campo {
+  display: flex;
+  flex-direction: column;
 }
 
 .card-cadastro h1 {
@@ -629,8 +649,6 @@ body {
 .card-cadastro b {
     color: #5e3023;
     margin: 100;
-    
-    
     font-weight: bold;
 }
 
@@ -641,6 +659,7 @@ body {
     border: 2px solid white;
     border-radius: 10px;
     outline: none;
+    padding: 8px;
     margin-top: 0px;
 }
 
@@ -652,9 +671,7 @@ body {
 .card-cadastro .continuar {
     height: 52px;
     width: 80%;
-    /* ← antes era 400px */
-    max-width: 400px;
-    /* ← limite */
+    max-width: 400px; /* ← limite */
     margin-top: 10px;
     font-size: 18px;
     border: 2px solid white;
@@ -662,7 +679,9 @@ body {
     text-align: center;
     background-color: #27140ee9;
     color: white;
+    cursor: pointer;
 }
+
 
 .card-cadastro a {
     justify-content: center;
@@ -708,7 +727,7 @@ body.dashboard {
 
 .select-dash {
     color: #f3e9dc;
-    background-color:#6f4e37;
+    background-color: #6f4e37;
     border: none;
     outline: none;
     width: 40px;
@@ -720,7 +739,7 @@ body.dashboard {
     appearance: none;
 }
 
-.foto-select{
+.foto-select {
     display: flex;
     justify-content: center;
     padding: 0px 0px 0px 0px;
@@ -731,7 +750,8 @@ body.dashboard {
     height: 60px !important;
     /* a foto estava toda bugada, aí usei esse comando ai pra arrumar, ele ignora qualquer outro comando do css e obedece aos comandos dessa classe*/
     border-radius: 50%;
-    object-fit: cover;  /* Esse aqui eu usei para não distorcer */
+    object-fit: cover;
+    /* Esse aqui eu usei para não distorcer */
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 0px !important;
@@ -741,7 +761,7 @@ body.dashboard {
 .saudacoes {
     text-align: center;
     margin: 30px 0;
-    
+
 }
 
 .kpis {
@@ -750,7 +770,7 @@ body.dashboard {
     flex-wrap: wrap;
     gap: 20px;
     margin: 30px 60px;
-    
+
 }
 
 .kpi {
@@ -789,19 +809,21 @@ body.dashboard {
     width: 100%;
     height: 100%;
 }
-.graficos1{
+
+.graficos1 {
     background-color: #fff;
     border-radius: 12px;
     width: 87%;
     height: 87%;
 }
 
-.graficos2{
+.graficos2 {
     background-color: #fff;
     border-radius: 12px;
     width: 87%;
     height: 87%;
 }
+
 .graficos {
     background: #fff;
     border-radius: 12px;
@@ -815,7 +837,7 @@ body.dashboard {
 canvas {
     width: 95%;
     height: auto;
-    aspect-ratio: 4 / 3; /* mantém proporção visual */
+    aspect-ratio: 4 / 3;
+    /* mantém proporção visual */
     border-radius: 8px;
 }
-

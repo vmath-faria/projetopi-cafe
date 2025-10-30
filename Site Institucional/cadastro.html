@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" href="./imgs/logo-fundo-marrom.png">
 </head>
+
 <body>
     <div class="header">
         <div class="container">
@@ -40,52 +42,104 @@
             </ul>
         </div>
     </div>
-    <div class = "cadastro">
-        <div id="div_cadastro_usuario"  class= "card-cadastro" style="display: flex;">
+    <div class="cadastro">
+        <div id="div_cadastro_usuario" class="card-cadastro" style="display: flex;">
             <h1>Cadastro</h1>
-            <b>Nome Completo</b> <br>
-            <input type="text" id="input_nome" placeholder="Insira aqui seu nome"><br>
-            <b>Email</b> <br> 
-            <input type="text" id="input_email" placeholder="Insira aqui seu e-mail"> <br>
-            <b>Telefone</b> <br>
-            <input type="text" id="input_telefone" placeholder="Insira aqui seu telefone"> <br>
-            <b>CPF</b> <br>
-            <input type="text" id="input_cpf" placeholder="Insira aqui seu CPF"> <br>
-            <!--
-                <b>Empresa</b> <br> <br>
-            <select name="" id="select_empresa" onchange="exibir()" class="select">
-                <option value="#">--Selecione--</option>
-                <option value="token">Cadastrar Token de Empresa</option>
-                <option value="cadastrar">Cadastrar Empresa</option>
-            </select> <br> <br>
-            <input type="text" id="input_token_usuario" placeholder="Insira seu o TOKEN da sua empresa" style="display: none;"> <br> -->
-            <b>Senha</b> <br>
-            <input type="password" id="input_senha" placeholder="****************"> <br>
-            <b>Confirme sua senha</b> <br>
-            <input type="password" id="input_senha_conf" placeholder="****************"> <br>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Nome Completo</b> <br>
+                    <input type="text" id="input_nome" placeholder="Insira aqui seu nome"><br>
+                </div>
+                <div class="campo">
+                    <b>Nome de usuario</b> <br>
+                    <input type="text" id="input_nome_usuario" placeholder="Insira o nome de usuario"> <br>
+                </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Telefone</b> <br>
+                    <input type="text" id="input_telefone" placeholder="Insira aqui seu telefone"> <br>
+                </div>
+                <div class="campo">
+                    <b>CPF</b> <br>
+                    <input type="text" id="input_cpf" placeholder="Insira aqui seu CPF"> <br>
+                </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Nome da Empresa</b> <br>
+                    <input type="text" id="input_nome_empresa" placeholder="Insira aqui o nome da empresa"><br>
+                </div>
+                <div class="campo">
+                    <b>CNPJ</b> <br>
+                    <input type="text" id="input_cnpj" placeholder="Insira aqui o CNPJ da empresa"> <br>
+                </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Data de nascimento</b> <br>
+                    <input type="date" id="input_data" placeholder="Insira a data de nascimento"><br>
+                </div>
+                <div class="campo">
+                    <b>Email</b> <br>
+                    <input type="text" id="input_email" placeholder="Insira aqui seu e-mail"> <br>
+                </div>
+            </div>
             <button class="continuar" onclick="cadastrar()">Continuar</button> <br>
             <a href="login.html">Já possui uma conta? Entrar</a>
         </div>
-        <div id ='div_cadastro_empresa' class = "card-cadastro" style="display: none;">
-            <h1>Cadastro</h1>
-            <b>Nome da Empresa</b> <br>
-            <input type="text" id="input_nome_empresa" placeholder="Insira aqui o nome da empresa"><br>
-            <b>Telefone</b> <br>
-            <input type="text" id="input_telefone_empresa" placeholder="Insira o telefone de contato"> <br>
-            <b>CNPJ</b> <br>
-            <input type="text" id="input_cnpj" placeholder="Insira aqui o CNPJ da empresa"> <br>
-            <b>Token do Administrador</b> <br>
-            <input type="password" id="input_token" placeholder="****************"> <br>
-            <b>Confirme o Token</b> <br>
-            <input type="password" id="input_token_conf" placeholder="****************"> <br>
-            <button class="continuar" onclick="cadastrar_empresa()">Continuar</button> <br>
-            <a>Sua empresa já está cadastrada?</a>
-            <a href="login.html">Entrar</a> <a href="cadastro.html">Cadastre-se</a>
-        </div>
+
+            <div id='div_cadastro_empresa' class="card-cadastro" style="display: none;">
+                <h1>Cadastro</h1>
+                <div class="formCadastro">
+                    <div class="campo">
+                        <b>Tamanho da propriedade</b> <br>
+                        <input type="text" id="input_tamanhoPropriedade"
+                            placeholder="Tamanho de sua propriedade em hectar"><br>
+                    </div>
+                    <div class="campo">
+                        <b>Estado</b> <br>
+                        <input type="text" id="input_estado" placeholder="Insira aqui a cidade em que mora"> <br>
+                    </div>
+                </div>
+                <div class="formCadastro">
+                    <div class="campo">
+                        <b>Cidade</b> <br>
+                        <input type="password" id="input_cidade" placeholder="Cidade em que mora"> <br>
+                    </div>
+                    <div class="campo">
+                        <b>Logradouro</b> <br>
+                        <input type="text" id="input_logradouro" placeholder="Escreva o nome da rua"><br>
+                    </div>
+                </div>
+                <div class="formCadastro">
+                    <div class="campo">
+                        <b>Número</b> <br>
+                        <input type="text" id="input_numero" placeholder="Insira aqui o número da propriedade"> <br>
+                    </div>
+                    <div class="campo">
+                        <b>Bairro</b> <br>
+                        <input type="password" id="input_bairro" placeholder="Insira alguma referencia"> <br>
+                    </div>
+                </div>
+                <div class="formCadastro">
+                    <div class="campo">
+                        <b>Senha</b> <br>
+                        <input type="password" id="input_senha" placeholder="****************"> <br>
+                    </div>
+                    <div class="campo">
+                        <b>Confirme sua senha</b> <br>
+                        <input type="password" id="input_senha_conf" placeholder="****************"> <br>
+                    </div>
+                </div>
+                <button class="continuar" onclick="finalizar()">Finalizar</button> <br>
+            </div>
+
         <div class="imgcadastro">
             <img src='imgs/café-for-all.webp'>
         </div>
     </div>
+
 
     <div class="footer">
         <div class="container">
@@ -121,33 +175,49 @@
 
 <script>
 
-   function cadastrar(){
-    var nome = input_nome.value;
-    var email = input_email.value;
-    var telefone = input_telefone.value;
-    var cpf = input_cpf.value;
-    var token = input_token.value;
-    var senha = input_senha.value;
-    var senhaConf = input_senha_conf.value;
+    function cadastrar() {
+        var nome = input_nome.value;
+        var email = input_email.value;
+        var telefone = input_telefone.value;
+        var cpf = input_cpf.value;
+        var nomeEmp = input_nome_empresa.value;
+        var cnpj = input_cnpj.value;
+        var nomeUsuario = input_nome_usuario.value;
+        var dataNascimento = input_data.value;
 
-    if (nome == '' || email == '' || telefone == '' || token == '' || cnpj == '' || senha == '' || senhaConf == ''){
-        alert('Preencha as informações corretamente.')
-    } else if (senha != senhaConf) {
-        alert('As senhas não são correspondentes!')
-    } else alert('Cadastro realizado com sucesso.')
-
-   }
-
-   function exibir(){
-    var exibicao = select_empresa.value;
-
-        if (exibicao == 'token'){
-            input_token_usuario.style.display = 'block';
-        } else if (exibicao == 'cadastrar') {
-            div_cadastro_empresa.style.display = 'block';
-            div_cadastro_usuario.style.display = 'none';
-        }
         
-   }
+        if (nome == '' || email == '' || telefone == '' || cpf == '' || nomeEmp == '' || cnpj == '' || nomeUsuario == '' || dataNascimento == '') {
+            alert('Preencha as informações corretamente.')
+        } else {
+            div_cadastro_usuario.style.display = `none`;
+            div_cadastro_empresa.style.display = `flex`;
+        }
+
+    }
+
+    function finalizar() {
+        var senha = input_senha.value;
+        var senhaConf = input_senha_conf.value;
+        var tamanhoPropriedade = input_tamanhoPropriedade.value;
+        var cidade = input_cidade.value;
+        var logradouro = input_logradouro.value;
+        var numero = input_numero.value;
+        var estado = input_estado.value;
+        var bairro = input_bairro.value;
+
+
+        if (tamanhoPropriedade == '' || tamanhoPropriedade <= 0 || cidade == '' || logradouro == '' || numero == '' || bairro == '' || estado == '') {
+            alert('Preencha as informações corretamente.')
+        }else if(senha != senhaConf){
+            alert('Confirmação de senha incorreta')
+        }
+        else{
+            alert('Cadastro realizado com sucesso!')
+            window.location.href = 'login.html'
+        }
+
+        
+
+    }
 
 </script>
