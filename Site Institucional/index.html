@@ -231,7 +231,7 @@
         return;
       } else {
         var produtividade_ideal = 30;
-        var consumo_ideal_agua = 4410; // usando como base 6300 com 30% aplicado
+        var consumo_ideal_agua = 6300; // Retirado do Embrapa http://www.sapc.embrapa.br/arquivos/consorcio/spcb_anais/simposio8/20.pdf
         var preco_m3_agua = 0.2713;
         var preco_saca_cafe = Number(input_preco_saca.value);
         var custo_produto = 3500;
@@ -247,7 +247,7 @@
           ganho_financeiro = sacas_perdidas_total * preco_saca_cafe;
           mensagem_produtividade = `<b>Sua produtividade está abaixo do potencial ideal.</b><br>
               Com uma irrigação mais eficiente, sua lavoura pode render até <b>${sacas_perdidas_total.toFixed(1)} sacas</b> extras por ano,
-              gerando um aumento estimado de <b>R$ ${ganho_financeiro.toFixed(2)}</b> na sua receita anual.`;
+              gerando um aumento estimado de <b>${ganho_financeiro.toLocaleString('pt-br', {style: 'currency', 'currency': 'BRL'})}</b> na sua receita anual.`;
         } else if (produtividade_atual > produtividade_ideal) {
           mensagem_produtividade = `<b>Excelente!</b> Sua produtividade está dentro ou acima do nível ideal.<br>
               Através do monitoramento, essa assertividade pode ser mantida por mais tempo`; // não sei bem como colocar essa mensagem, ela pode ser bem generica
@@ -264,31 +264,14 @@
         } else if (consumo_agua_atual > consumo_ideal_agua) {
           var excesso_agua = (consumo_agua_atual - consumo_ideal_agua) * area;
           economia_financeira = excesso_agua * preco_m3_agua;
-          mensagem_irrigacao = `Você está utilizando cerca de <b>${excesso_agua.toFixed(0)} m³</b> de água a mais por ano.  
-              Ao ajustar o uso hídrico, pode economizar aproximadamente <b>R$ ${economia_financeira.toFixed(2)}</b> anuais.`;
+          mensagem_irrigacao = `Você está utilizando cerca de <b>${excesso_agua.toLocaleString('pt-br', {style: 'currency', 'currency': 'BRL'})} m³</b> de água a mais por ano.  
+              Ao ajustar o uso hídrico, pode economizar aproximadamente <b>${economia_financeira.toLocaleString('pt-br', {style: 'currency', 'currency': 'BRL'})}</b> anuais.`;
         } else {
           mensagem_irrigacao = `<b>Irrigação perfeitamente equilibrada!</b><br>
               Seu consumo de água está dentro do padrão ideal, promovendo eficiência hídrica e produtividade sustentável.<br>
               O monitoramento contínuo da Coffech ajuda a manter esse equilíbrio, evitando desperdícios e estresse hídrico nas plantas.`
         }
 
-        //   var beneficio = ganho_financeiro + economia_financeira;
-
-        //   div_resultado.innerHTML = `
-
-        //         <h2>Diagnóstico da sua Plantação:</h2>
-        //         <h3>1. Análise de Produtividade:</h3>
-        //         <p>${mensagem_produtividade}</p>
-        //         <h3>2. Análise de Irrigação:</h3>
-        //         <p>${mensagem_irrigacao}</p>
-
-        //         <h2>Balanço Financeiro Final:</h2>
-        //         Considerando o aumento de receita e a economia de custos, seu <b>Benefício Financeiro Total pode chegar a 
-        //         R$ ${beneficio.toFixed(2)} por ano. <br>
-
-        //         Este resultado é alcançado com um investimento inicial de R$ ${custo_produto.toFixed(2)} no nosso kit.
-        //     `;
-        // }
         var beneficio = ganho_financeiro + economia_financeira;
 
         if (produtividade_atual == produtividade_ideal && consumo_agua_atual == consumo_ideal_agua) {
@@ -318,8 +301,8 @@
 
           <h2>Balanço Financeiro Final:</h2>
           Considerando o aumento de receita e a economia de custos, seu <b>Benefício Financeiro Total pode chegar a 
-          R$ ${beneficio.toFixed(2)} por ano.</b><br><br>
-          Este resultado é alcançado com um investimento inicial de <b>R$ ${custo_produto.toFixed(2)}</b> no nosso kit.
+          ${beneficio.toLocaleString('pt-br', {style: 'currency', 'currency': 'BRL'})} por ano.</b><br><br>
+          Este resultado é alcançado com um investimento inicial de <b>${custo_produto.toLocaleString('pt-br', {style: 'currency', 'currency': 'BRL'})}</b> no nosso kit.
           `;
         }
         calculadora.style.display = "none";
