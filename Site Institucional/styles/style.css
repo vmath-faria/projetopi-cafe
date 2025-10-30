@@ -27,16 +27,14 @@ body {
 }
 
 .logincadastro a {
-    color: #5e3023;
+    color:#f3e9dc;
     font-size: 19px;
     background-color: #c08558;
     border-radius: 7px;
-    border-width: 4px;
-    padding-bottom: 2.3px;
-    padding-left: 3px;
-    padding-right: 3px;
+    border-width: 3px;
+    padding: 5px 20px 10px 20px;
     border-style: solid;
-    margin-right: 40px;
+    margin-right: 20px;
     text-decoration: none;
 }
 
@@ -49,14 +47,11 @@ body {
     margin-right: 50px;
 }
 
-/* estilização do select na dashboard */
-.select {
-    color: #f3e9dc;
-    background-color: #c08558;
-    border: #4d2c19;
-    border-style: solid;
-    border-radius: 5px;
+
+.logincadastro :hover{
+    color: #5e3023;
 }
+
 
 .titulo {
     color: #f3e9dc;
@@ -77,6 +72,10 @@ body {
     font-weight: bold;
     display: flex;
     justify-content: center;
+}
+
+.navbar :hover{
+    color: #5e3023;
 }
 
 .header img {
@@ -105,7 +104,7 @@ body {
     justify-content: center;
     flex-direction: column;
     padding: 50px 300px 0 90px;
-
+    
 }
 
 .containerInicio h2 {
@@ -177,7 +176,7 @@ body {
     width: 400px;
     border: none;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+    
 }
 
 .simulador input {
@@ -231,7 +230,7 @@ body {
     text-align: center;
     padding: 50px 50px;
     flex-direction: column;
-
+    
 }
 
 .beneficios h2 {
@@ -262,7 +261,7 @@ body {
     align-items: center;
     gap: 30px;
     transition: transform 0.5s ease;
-
+    
 }
 
 .beneficios .box:hover {
@@ -287,8 +286,8 @@ body {
     align-items: center;
     margin-top: 15px;
     width: 60px;
-
-
+    
+    
 }
 
 
@@ -327,7 +326,7 @@ body {
 
 /*Estilização solução*/
 .solucao {
-    background-color: hsl(38, 58%, 78%);
+    background-color: #efd1a3;
     display: flex;
     align-items: center;
     text-align: center;
@@ -395,7 +394,7 @@ body {
     align-items: center;
     gap: 90px;
     /* espaçamento entre imagem e formulário */
-
+    
 }
 
 .imagem-contato img {
@@ -537,7 +536,7 @@ body {
     display: flex;
     flex-direction: column;
     background-size: 100%;
-
+    
 }
 
 .login .imglogin {
@@ -584,7 +583,7 @@ body {
     padding: 12px;
     margin: 20px auto 0;
     border: 2px solid white;
-    border-radius: 20px;
+    border-radius: 10px;
     outline: none;
     color: rgb(50, 50, 50);
 }
@@ -612,6 +611,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 
 .card-cadastro .campo {
@@ -629,20 +629,17 @@ body {
 .card-cadastro b {
     color: #5e3023;
     margin: 100;
-
-
+    
+    
     font-weight: bold;
 }
 
 .card-cadastro input {
-    height: 35px;
-    width: 190px;
-    /* ← antes era 400px */
-    /* ← mantém limite no desktop */
-    /* ← agora mantém o tamanho independente do zoom */
+    height: 50px;
+    width: 200px;
     display: flex;
     border: 2px solid white;
-    border-radius: 20px;
+    border-radius: 10px;
     outline: none;
     margin-top: 0px;
 }
@@ -700,7 +697,6 @@ body.dashboard {
 }
 
 
-
 .dashboard p {
     color: #f3dec2;
     font-weight: bold;
@@ -710,13 +706,32 @@ body.dashboard {
 
 
 
+.select-dash {
+    color: #f3e9dc;
+    background-color:#6f4e37;
+    border: none;
+    outline: none;
+    width: 40px;
+    height: 40px;
+    background-image: url(../imgs/tresBarrinhas.png);
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    appearance: none;
+}
+
+.foto-select{
+    display: flex;
+    justify-content: center;
+    padding: 0px 0px 0px 0px;
+}
+
 .foto {
     width: 60px !important;
     height: 60px !important;
     /* a foto estava toda bugada, aí usei esse comando ai pra arrumar, ele ignora qualquer outro comando do css e obedece aos comandos dessa classe*/
     border-radius: 50%;
-    object-fit: cover;
-    /* Esse aqui eu usei para não distorcer */
+    object-fit: cover;  /* Esse aqui eu usei para não distorcer */
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 0px !important;
@@ -726,7 +741,7 @@ body.dashboard {
 .saudacoes {
     text-align: center;
     margin: 30px 0;
-  
+    
 }
 
 .kpis {
@@ -744,7 +759,7 @@ body.dashboard {
     padding: 20px;
     width: 200px;
     text-align: center;
-    box-shadow: 4px 4px 10px 0px black;
+    box-shadow: 4px 4px 10px 0px rgb(148, 147, 147);
 }
 
 .kpi h3 {
@@ -800,8 +815,7 @@ body.dashboard {
 canvas {
     width: 95%;
     height: auto;
-    aspect-ratio: 4 / 3;
-    /* mantém proporção visual */
+    aspect-ratio: 4 / 3; /* mantém proporção visual */
     border-radius: 8px;
 }
 
