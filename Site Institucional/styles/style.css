@@ -1,11 +1,12 @@
 * {
     box-sizing: border-box;
     scroll-behavior: smooth;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
 }
 
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 
@@ -16,23 +17,41 @@ body {
     padding: 0;
     top: 0;
     position: sticky;
+    z-index: 999;
 }
 
 .header .container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0 120px;
 }
-/* estilização do select na dashboard */
-.select {
-    color:#6f4e37;
-    background-color: #f3e9dc;
-    margin-left: 5%;
-    border: #4d2c19;
+
+.logincadastro a {
+    color: #f3e9dc;
+    font-size: 19px;
+    background-color: #c08558;
+    border-radius: 7px;
+    border-width: 3px;
+    padding: 5px 20px 10px 20px;
     border-style: solid;
-    border-radius: 5px;
+    margin-right: 20px;
+    text-decoration: none;
 }
+
+.logincadastro {
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    font-weight: bold;
+    justify-content: center;
+    margin-right: 50px;
+}
+
+
+.logincadastro :hover {
+    color: #5e3023;
+}
+
 
 .titulo {
     color: #f3e9dc;
@@ -55,8 +74,14 @@ body {
     justify-content: center;
 }
 
+.navbar :hover {
+    color: #5e3023;
+}
+
 .header img {
     width: 200px;
+    margin-right: 70px;
+    margin-left: 50px;
 }
 
 /* FIM DO CABEÇALHO (HEADER) */
@@ -74,7 +99,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.containerInicio{
+.containerInicio {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -82,7 +107,7 @@ body {
 
 }
 
-.containerInicio h2{
+.containerInicio h2 {
     font-size: 70px;
 }
 
@@ -106,19 +131,20 @@ body {
 
 /* ESTILIZAÇÃO DA CALCULADORA */
 #div_resultado {
- background-color: white;
+    background-color: white;
     border-radius: 10px;
-    display: none; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    text-align: center; 
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     width: 100%;
-    height: 100%; 
+    height: 100%;
     padding: 20px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     transition: opacity 2s ease;
 }
+
 /* FIM DA ESTILIZAÇÃO DA CALCULADORA */
 
 .simulador {
@@ -219,15 +245,15 @@ body {
     display: flex;
     color: white;
     font-weight: bold;
-    gap: 60px;
+    gap: 40px;
     margin-left: 7%;
     margin-right: 7%;
 }
 
 .beneficios .box {
     background-color: #856752;
-    width: 320px;
-    height: 500px;
+    width: 280px;
+    height: 450px;
     border-radius: 10px;
     padding: 25px 15px;
     display: flex;
@@ -248,7 +274,7 @@ body {
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    font-size: 33px;
+    font-size: 28px;
     line-height: 1.5;
 }
 
@@ -300,7 +326,7 @@ body {
 
 /*Estilização solução*/
 .solucao {
-    background-color: hsl(38, 58%, 78%);
+    background-color: #efd1a3;
     display: flex;
     align-items: center;
     text-align: center;
@@ -366,8 +392,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 90px; /* espaçamento entre imagem e formulário */
-   
+    gap: 90px;
+    /* espaçamento entre imagem e formulário */
+
 }
 
 .imagem-contato img {
@@ -385,24 +412,26 @@ body {
 }
 
 .forms .campo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;            /* distância entre label e input */
-  margin-bottom: 45px; /* distância entre blocos */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    /* distância entre label e input */
+    margin-bottom: 45px;
+    /* distância entre blocos */
 }
 
 .forms .campo span {
-  margin: 0; 
+    margin: 0;
 }
 
 .forms .campo input {
-  height: 45px;
-  width: 350px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  font-weight: bold;
+    height: 45px;
+    width: 350px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-weight: bold;
 }
 
 
@@ -494,6 +523,10 @@ body {
     padding: 0;
 }
 
+.login h1{
+    font-size: 50px;
+}
+
 .login img {
     cursor: pointer;
 }
@@ -511,8 +544,6 @@ body {
 }
 
 .login .imglogin {
-    width: 1000px;
-    height: 75%;
     object-fit: cover;
     flex-grow: 1;
     flex-basis: 50%;
@@ -536,15 +567,28 @@ body {
     justify-content: center;
 }
 
-.campo {
-    flex-grow: 1;
+.campo-login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+}
+
+.botao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .criar-conta {
     flex-grow: 1;
     width: 100%;
     color: black;
+    padding-bottom: 6%;
 }
 
 .caixa {
@@ -555,7 +599,7 @@ body {
     padding: 12px;
     margin: 20px auto 0;
     border: 2px solid white;
-    border-radius: 20px;
+    border-radius: 10px;
     outline: none;
     color: rgb(50, 50, 50);
 }
@@ -563,44 +607,59 @@ body {
 /* Aqui começa o cadastro */
 
 .cadastro {
-    background-color: #f3e9dc;
     display: flex;
-    align-content: flex-start;
+    flex-direction: row;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .cadastro img {
     cursor: pointer;
 }
 
+.card-cadastro {
+    background-color: #f3e9dc;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-.card-cadastro{
-    margin-top: 2%;
-    width: 50%;
-    border-left: 100px solid #f3e9dc;
-    border-right: 100px solid #f3e9dc;
-    
 }
+
+.formCadastro {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
 .card-cadastro h1 {
     color: #5e3023;
-
 }
 
 .card-cadastro b {
     color: #5e3023;
-    margin: 0;
-    margin-top: 10px;
-    font-size: small;
+    margin: 100;
     font-weight: bold;
 }
 
 .card-cadastro input {
-    height: 35px;
-    width: 400px;
-    margin-top: 10px;
+    height: 50px;
+    width: 200px;
     display: flex;
     border: 2px solid white;
-    border-radius: 20px;
+    border-radius: 10px;
     outline: none;
+    padding: 8px;
     margin-top: 0px;
 }
 
@@ -609,30 +668,10 @@ body {
     border-radius: 9px;
 }
 
-/* .card-cadastro .google {
-    height: 35px;
-    width: 200px;
-    margin-top: 10px;
-    border: 2px solid white;
-    border-radius: 20px;
-    text-align: center;
-    background-color: white;
-
-}
-
-.card-cadastro .microsoft {
-    height: 35px;
-    width: 200px;
-    margin-top: 10px;
-    border: 2px solid white;
-    border-radius: 20px;
-    text-align: center;
-    background-color: white;
-}*/
-
 .card-cadastro .continuar {
     height: 52px;
-    width: 400px;
+    width: 80%;
+    max-width: 400px; /* ← limite */
     margin-top: 10px;
     font-size: 18px;
     border: 2px solid white;
@@ -640,7 +679,9 @@ body {
     text-align: center;
     background-color: #27140ee9;
     color: white;
+    cursor: pointer;
 }
+
 
 .card-cadastro a {
     justify-content: center;
@@ -649,30 +690,59 @@ body {
     margin-top: 15px;
 }
 
-.imgcadastro {
-    display: flex;
-    justify-content: right;
-    align-content: flex-end;
+.imgcadastro img {
     width: 100%;
-    height: 50%;
+    height: 100%;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
+.imgcadastro {
+    object-fit: cover;
+    flex-grow: 1;
+    flex-basis: 50%;
 }
 
 /* ESTILIZAÇÃO DA DASHBOARD*/
 
 
 body.dashboard {
-  background-color: #f3dec2;
-  font-family: 'Poppins', sans-serif;
-  color: #392d1d;
-  margin: 0;
+    background-color: #f3dec2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #392d1d;
+    margin: 0;
 }
+
 
 .dashboard p {
     color: #f3dec2;
     font-weight: bold;
     right: 20px;
     padding: 0 20px 0 600px;
+}
+
+
+
+.select-dash {
+    color: #f3e9dc;
+    background-color: #6f4e37;
+    border: none;
+    outline: none;
+    width: 40px;
+    height: 40px;
+    background-image: url(../imgs/tresBarrinhas.png);
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    appearance: none;
+}
+
+.foto-select {
+    display: flex;
+    justify-content: center;
+    padding: 0px 0px 0px 0px;
 }
 
 .foto {
@@ -684,63 +754,90 @@ body.dashboard {
     /* Esse aqui eu usei para não distorcer */
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 0px !important;
 }
 
+
 .saudacoes {
-  text-align: center;
-  margin: 30px 0;
+    text-align: center;
+    margin: 30px 0;
+
 }
 
 .kpis {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 30px 60px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 30px 60px;
+
 }
 
 .kpi {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  width: 200px;
-  text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 4px 4px 10px 0px rgb(148, 147, 147);
 }
 
 .kpi h3 {
-  font-size: 16px;
-  color: #4d2c19;
+    font-size: 16px;
+    color: #4d2c19;
 }
+
 .kpi span {
-  font-size: 24px;
-  font-weight: bold;
-  color: #80592d;
-  margin: 8px 0 0 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #80592d;
+    margin: 8px 0 0 0;
 }
 
 .containerGraficos {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  flex-wrap: wrap;
-  padding: 30px;
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.containerSub {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.graficos1 {
+    background-color: #fff;
+    border-radius: 12px;
+    width: 87%;
+    height: 87%;
+}
+
+.graficos2 {
+    background-color: #fff;
+    border-radius: 12px;
+    width: 87%;
+    height: 87%;
 }
 
 .graficos {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  width: 45%; /* ocupa metade da tela em desktops */
-  min-width: 300px; /* evita ficar muito pequeno */
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 50%;
+    height: 50%;
+    margin-top: 20px;
 }
+
 
 canvas {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3; /* mantém proporção visual */
-  border-radius: 8px;
+    width: 95%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    /* mantém proporção visual */
+    border-radius: 8px;
 }
-
-
