@@ -22,8 +22,35 @@ body {
 
 .header .container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+}
+
+.navbar {
+    display: flex;
+    list-style: none;
+    width: 101%;
+    justify-content: space-between;
+    color: #f3e9dc;
+}
+
+.navbar a {
+    color: #f3e9dc;
+    outline: none;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar :hover {
+    color: #5e3023;
+}
+
+.header img {
+    width: 200px;
+    margin-right: 70px;
+    margin-left: 150px;
 }
 
 .logincadastro a {
@@ -57,32 +84,6 @@ body {
     color: #f3e9dc;
 }
 
-.navbar {
-    display: flex;
-    list-style: none;
-    width: 750px;
-    justify-content: space-between;
-    color: #f3e9dc;
-}
-
-.navbar a {
-    color: #f3e9dc;
-    outline: none;
-    text-decoration: none;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-}
-
-.navbar :hover {
-    color: #5e3023;
-}
-
-.header img {
-    width: 200px;
-    margin-right: 70px;
-    margin-left: 150px;
-}
 
 /* FIM DO CABEÇALHO (HEADER) */
 
@@ -450,7 +451,7 @@ body {
 .footer {
     height: 150px;
     width: 100%;
-    background-color: #c08558;
+    background-color:#6f4e37;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -653,11 +654,8 @@ body {
 }
 
 .card-cadastro input {
-    height: 35px;
-    width: fit-content;
-    /* ← antes era 400px */
-    /* ← mantém limite no desktop */
-    /* ← agora mantém o tamanho independente do zoom */
+    width: 100%;
+    height: 50px;
     display: flex;
     border: 2px solid white;
     border-radius: 10px;
