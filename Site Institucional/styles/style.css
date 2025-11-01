@@ -639,7 +639,7 @@ body {
 .campo {
   display: flex;
   flex-direction: column;
-   min-width: 220px;
+   min-width: 20px;
 }
 
 .card-cadastro h1 {
@@ -715,12 +715,19 @@ body.dashboard {
     margin: 0;
 }
 
+.sla{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1px;
+
+}
+
 
 .dashboard p {
     color: #f3dec2;
     font-weight: bold;
-    right: 20px;
-    padding: 0 20px 0 600px;
+    padding: 0 30px 0 200px;
 }
 
 
@@ -739,11 +746,7 @@ body.dashboard {
     appearance: none;
 }
 
-.foto-select {
-    display: flex;
-    justify-content: center;
-    padding: 0px 0px 0px 0px;
-}
+
 
 .foto {
     width: 60px !important;
@@ -752,9 +755,11 @@ body.dashboard {
     border-radius: 50%;
     object-fit: cover;
     /* Esse aqui eu usei para não distorcer */
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 0px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    margin: 0 ;
+    
 }
 
 
