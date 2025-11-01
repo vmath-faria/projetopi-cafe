@@ -23,7 +23,8 @@
                     <a href="index.html#div_solucao">Solução</a> <!-- PRECISARÁ REFERENCIAR A PARTE DE SOLUÇÃO-->
                 </li>
                 <li>
-                    <a href="index.html#div_simulador">Calculadora Financeira</a> <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
+                    <a href="index.html#div_simulador">Calculadora Financeira</a>
+                    <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
                 </li>
                 <li>
                     <a href="index.html#div_beneficios">Benefícios</a> <!-- PRECISARÁ REFERENCIAR OS BENEFÍCIOS-->
@@ -89,51 +90,51 @@
             <a href="login.html">Já possui uma conta? Entrar</a>
         </div>
 
-            <div id='div_cadastro_empresa' class="card-cadastro" style="display: none;">
-                <h1>Cadastro</h1>
-                <div class="formCadastro">
-                    <div class="campo">
-                        <b>Tamanho da propriedade</b> <br>
-                        <input type="text" id="input_tamanhoPropriedade"
-                            placeholder="Tamanho de sua propriedade em hectar"><br>
-                    </div>
-                    <div class="campo">
-                        <b>Estado</b> <br>
-                        <input type="text" id="input_estado" placeholder="Insira aqui a cidade em que mora"> <br>
-                    </div>
+        <div id='div_cadastro_empresa' class="card-cadastro" style="display: none;">
+            <h1>Cadastro</h1>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Tamanho da propriedade</b> <br>
+                    <input type="text" id="input_tamanhoPropriedade"
+                        placeholder="Tamanho de sua propriedade em hectar"><br>
                 </div>
-                <div class="formCadastro">
-                    <div class="campo">
-                        <b>Cidade</b> <br>
-                        <input type="text" id="input_cidade" placeholder="Cidade em que mora"> <br>
-                    </div>
-                    <div class="campo">
-                        <b>Logradouro</b> <br>
-                        <input type="text" id="input_logradouro" placeholder="Escreva o nome da rua"><br>
-                    </div>
+                <div class="campo">
+                    <b>Estado</b> <br>
+                    <input type="text" id="input_estado" placeholder="Insira aqui a cidade em que mora"> <br>
                 </div>
-                <div class="formCadastro">
-                    <div class="campo">
-                        <b>Número</b> <br>
-                        <input type="text" id="input_numero" placeholder="Insira aqui o número da propriedade"> <br>
-                    </div>
-                    <div class="campo">
-                        <b>Bairro</b> <br>
-                        <input type="text" id="input_bairro" placeholder="Insira alguma referencia"> <br>
-                    </div>
-                </div>
-                <div class="formCadastro">
-                    <div class="campo">
-                        <b>Senha</b> <br>
-                        <input type="password" id="input_senha" placeholder="****************"> <br>
-                    </div>
-                    <div class="campo">
-                        <b>Confirme sua senha</b> <br>
-                        <input type="password" id="input_senha_conf" placeholder="****************"> <br>
-                    </div>
-                </div>
-                <button class="continuar" onclick="finalizar()">Finalizar</button> <br>
             </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Cidade</b> <br>
+                    <input type="text" id="input_cidade" placeholder="Cidade em que mora"> <br>
+                </div>
+                <div class="campo">
+                    <b>Logradouro</b> <br>
+                    <input type="text" id="input_logradouro" placeholder="Escreva o nome da rua"><br>
+                </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Número</b> <br>
+                    <input type="text" id="input_numero" placeholder="Insira aqui o número da propriedade"> <br>
+                </div>
+                <div class="campo">
+                    <b>Bairro</b> <br>
+                    <input type="text" id="input_bairro" placeholder="Insira alguma referencia"> <br>
+                </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Senha</b> <br>
+                    <input type="password" id="input_senha" placeholder="****************"> <br>
+                </div>
+                <div class="campo">
+                    <b>Confirme sua senha</b> <br>
+                    <input type="password" id="input_senha_conf" placeholder="****************"> <br>
+                </div>
+            </div>
+            <button class="continuar" onclick="finalizar()">Finalizar</button> <br>
+        </div>
 
         <div class="imgcadastro">
             <img src='imgs/café-for-all.webp'>
@@ -185,7 +186,7 @@
         var nomeUsuario = input_nome_usuario.value;
         var dataNascimento = input_data.value;
 
-        
+
         if (nome == '' || email == '' || telefone == '' || cpf == '' || nomeEmp == '' || cnpj == '' || nomeUsuario == '' || dataNascimento == '') {
             alert('Preencha as informações corretamente.')
         } else {
@@ -208,15 +209,15 @@
 
         if (tamanhoPropriedade == '' || tamanhoPropriedade <= 0 || cidade == '' || logradouro == '' || numero == '' || bairro == '' || estado == '') {
             alert('Preencha as informações corretamente.')
-        }else if(senha != senhaConf){
+        } else if (senha != senhaConf) {
             alert('Confirmação de senha incorreta')
         }
-        else{
+        else {
             alert('Cadastro realizado com sucesso!')
             window.location.href = 'login.html'
         }
 
-        
+
 
     }
 
