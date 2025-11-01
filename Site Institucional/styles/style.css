@@ -639,7 +639,7 @@ body {
 .campo {
   display: flex;
   flex-direction: column;
-   min-width: 20px;
+   min-width: 200px;
 }
 
 .card-cadastro h1 {
