@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COFFECH</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="./imgs/logo-fundo-marrom.png">
+</head>
+
+<body>
+   
+    <div class="header">
+        <div class="container">
+            <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
+            <ul class="navbar">
+                <li>
+                    <a href="#div_sobrenos">Quem Somos?</a>
+                    <!-- TODAS AS TAGS a DA NAVBAR TERÃO ESSE HREF, MAS PRECISAMOS PESQUISAR COMO FAZ PARA REFERENCIAR UM ELEMENTO DENTRO DA PÁGINA-->
+                </li>
+                <li>
+                    <a href="#div_solucao">Solução</a> <!-- PRECISARÁ REFERENCIAR A PARTE DE SOLUÇÃO-->
+                </li>
+                <li>
+                    <a href="#div_simulador">Calculadora Financeira</a> <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
+                </li>
+                <li>
+                    <a href="#div_beneficios">Benefícios</a> <!-- PRECISARÁ REFERENCIAR OS BENEFÍCIOS-->
+                </li>
+                <li>
+                    <a href="#div_contato">Contato</a> <!-- PRECISARÁ REFERENCIAR O CONTATO-->
+                </li>
+            </ul>
+            <ul class="logincadastro">
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+                <li>
+                    <a href="cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="banner">
+        <div class="containerInicio">
+            <h2>Solução <i>IoT</i> perfeita para sua plantação!</h2>
+            <p>Levamos tecnologia ao campo para garantir um café mais sustentável, produtivo e de qualidade</p>
+            <a href="#div_simulador" class="botao">Faça sua simulação!</a>
+        </div>
+    </div>
+
+    <div class="sobre-nos" id="div_sobrenos">
+        <div class="container">
+            <h3>A COFFECH</h3>
+            <p>A Coffech nasceu com o propósito de levar tecnologia acessível e sustentável para o campo. Nosso foco é
+                apoiar produtores de café na modernização da gestão de suas lavouras, garantindo mais produtividade,
+                qualidade e eficiência no uso da água e dos recursos naturais.</p>
+            <img src="./imgs/colheita-cafe.png">
+        </div>
+    </div>
+
+    <div class="solucao" id="div_solucao">
+        <div class="container">
+            <h3>Nossa Solução</h3>
+            <h2>Monitoramento Inteligente com Sensores de Umidade</h2>
+            <p>Desenvolvemos um sistema de monitoramento da umidade do solo integrado ao Arduino UNO R3 e sensores
+                inteligentes, que coleta dados em tempo real e os apresenta em um dashboard intuitivo. <br>
+                Com isso, o produtor sabe quando e quanto irrigar, evitando desperdícios, preservando o solo e
+                garantindo uma produção de café mais saudável, lucrativa e sustentável.</p>
+        </div>
+        <img src="./imgs/DiagramaCoffech.png" alt="" style="width: 65%;">
+    </div>
+
+    <div class="simulador" id="div_simulador">
+        <div class="container">
+            <h2>Calcule seus gastos</h2>
+            <div class="card-calculadora" id="div_calculadora">
+                <div class="campo">
+                    <br> 
+                    <span><b>Área da sua plantação em hectares:</b></span> <br>
+                    <input type="number" placeholder="Insira a quantidade em hectares" id="input_area">
+                </div>
+                <div class="campo">
+                    <br> 
+                    <span><b>Produção atual de sacas por hectare:</b></span> <br>
+                    <input type="number" placeholder="Insira a quantidade de sacas colhidas por hectare"
+                        id="input_produtividade">
+                </div>
+                <div class="campo">
+                    <span><b>Consumo anual de água na irrigação(m³/ha):</b></span> 
+                    <input type="number" placeholder="Insira o consumo anual de água em m³/ha/ano"
+                        id="input_consumo_agua">
+                </div>
+                <div class="campo">
+                    <span><b>Preço por unidade de saca:</b></span> 
+                    <input type="number" placeholder="Insira o preço unitário da saca de café" id="input_preco_saca">
+                </div>
+            </div>
+            <div id="div_resultado" style="display: none; width: 100%; height: 100%;"></div>
+            <div>
+                <button class="botao-gastos" onclick="calcular()" id="button_calcular">Calcular Gastos</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="beneficios" id="div_beneficios">
+        <div class="container">
+            <h2>Benefícios</h2>
+            <div class="boxes">
+                <div class="box">
+                    <img src="./imgs/water-saving.png">
+                    <p>Até 30% de economia de água no manejo.</p>
+                </div>
+                <div class="box">
+                    <img src="./imgs/cost-decreasing.png">
+                    <p>25% de redução nos custos de energia com bombeamento.</p>
+                </div>
+                <div class="box">
+                    <img src="./imgs/quality.png">
+                    <p>Café de maior qualidade e valor de mercado.</p>
+                </div>
+                <div class="box">
+                    <img src="./imgs/light-bulb.png">
+                    <p>Decisões rápidas e assertivas com base em dados reais.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        AINDA NÃO DEFINIDO QUAIS PLANOS TEREMOS, MAS FICARÃO LOGO ABAIXO DOS BENEFÍCIOS
+        -->
+
+    <div class="contato" id="div_contato">
+        <div class="container">
+            <div class="titulo">
+                <h2>Entre em contato conosco!</h2>
+            </div>
+            <div class="boxcontato">
+                <div class="imagem-contato">
+                    <img src="./imgs/coffee-background.png"> <!-- FICARÁ DO LADO DAS INPUTS-->
+                </div>
+                <div class="forms">
+                    <div class="campo">
+                        <span>Email:</span>
+                        <input type="text" id="emailform_input" placeholder="Insira seu Email">
+                    </div>
+                    <div class="campo">
+                        <span>Assunto:</span>
+                        <input type="text" id="assuntoform_input" placeholder="Assunto">
+                    </div>
+                    <div class="campo">
+                        <span>Mensagem</span>
+                        <input type="text" id="mensagemform_input" class="input-grande" placeholder="Mensagem">
+                    </div>
+                    <button class="botao" onclick="mensagem_function()">Enviar Mensagem!
+                    </button>
+                    <div class="telefone">
+                        Telefone: (XX) XXXXX-XXXX
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="redes-sociais">
+                <img height="50" src="./imgs/logo-fonte-branca.png"> <!-- LOGO COFFECH!-->
+                <p>Todos os direitos reservados a COFFECH 2025</p>
+                <img src="./imgs/Icon-instagram.png"> <!-- ICONE INSTAGRAM-->
+                <img src="./imgs/icon-youtube.png"> <!-- ICONE YOUTUBE-->
+                <img src="./imgs/Icon-linkedin.png"> <!-- ICONE LINKEDIN-->
+                <img src="./imgs/Icon-facebook.png"> <!-- ICONE FACEBOOK-->
+            </div>
+            <div class="contatoFooter">
+                <h6>Contato:</h6>
+                <span>coffech@gmail.com</span>
+            </div>
+            <h5 class="equipe">Equipe Coffech:</h5>
+            <div class="nosso-time1">
+                <p>Anderson</p>
+                <p>Diego</p>
+                <p>Guilherme</p>
+            </div>
+            <div class="nosso-time2">
+                <p>João Ricardo</p>
+                <p>Luan</p>
+                <p>Victor Mattheus</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    function mensagem_function() {
+        if (emailform_input.value == "" || assuntoform_input.value == "" || mensagemform_input.value == "") {
+            alert("Preencha todos os campos!")
+        } else {
+            alert("Recebemos a sua solicitação!")
+        }
+    }
+
+    function calcular() {
+        var area = Number(input_area.value);
+        var produtividade_atual = Number(input_produtividade.value);
+        var consumo_agua_atual = Number(input_consumo_agua.value);
+        var botao = document.getElementById("button_calcular");
+        var calculadora = document.getElementById("div_calculadora");
+
+        if (div_resultado.style.display == "block") {
+            div_resultado.style.display = "none";
+            calculadora.style.display = "flex";
+            botao.innerText = "Calcular Gastos";
+            input_area.value = "";
+            input_produtividade.value = "";
+            input_consumo_agua.value = "";
+            return;
+        }
+
+        if (area <= 0 || produtividade_atual <= 0 || consumo_agua_atual <= 0) {
+            calculadora.style.display = "none";
+            div_resultado.style.display = "block";
+            div_resultado.innerHTML =
+                "<b>⚠️ Preencha todos os campos corretamente para gerar a análise.</b>";
+            botao.innerText = `Fazer uma nova simulação!`;
+            return;
+        } else {
+            var produtividade_ideal = 30;
+            var consumo_ideal_agua = 6300; // Retirado do Embrapa http://www.sapc.embrapa.br/arquivos/consorcio/spcb_anais/simposio8/20.pdf
+            var preco_m3_agua = 0.2713;
+            var preco_saca_cafe = Number(input_preco_saca.value);
+            var custo_produto = 3500;
+
+            var ganho_financeiro = 0;
+            var economia_financeira = 0;
+            var mensagem_produtividade = "";
+            var mensagem_irrigacao = "";
+
+            if (produtividade_atual < produtividade_ideal) {
+                var sacas_perdidas_por_ha = produtividade_ideal - produtividade_atual; // preco informado no input
+                var sacas_perdidas_total = sacas_perdidas_por_ha * area;
+                ganho_financeiro = sacas_perdidas_total * preco_saca_cafe;
+                mensagem_produtividade = `<b>Sua produtividade está abaixo do potencial ideal.</b><br>
+              Com uma irrigação mais eficiente, sua lavoura pode render até <b>${sacas_perdidas_total.toFixed(1)} sacas</b> extras por ano,
+              gerando um aumento estimado de <b>${ganho_financeiro.toLocaleString('pt-br', { style: 'currency', 'currency': 'BRL' })}</b> na sua receita anual.`;
+            } else if (produtividade_atual > produtividade_ideal) {
+                mensagem_produtividade = `<b>Excelente!</b> Sua produtividade está dentro ou acima do nível ideal.<br>
+              Através do monitoramento, essa assertividade pode ser mantida por mais tempo`; // não sei bem como colocar essa mensagem, ela pode ser bem generica
+            } else {
+                mensagem_produtividade = `<b>Produtividade ideal alcançada!</b><br>
+              Sua plantação está produzindo no nível máximo recomendado para o café arábica.<br>
+              Com o monitoramento Coffech, você garante que esse excelente desempenho se mantenha estável mesmo diante de variações climáticas.`
+            }
+
+            if (consumo_agua_atual < consumo_ideal_agua) {
+                mensagem_irrigacao = `Seu consumo hídrico está <b>abaixo do ideal</b>.<br> 
+              Isso pode estar limitando o desenvolvimento das plantas e reduzindo sua produtividade.<br>
+              Recomendamos revisar o sistema de irrigação e a frequência de uso.`;
+            } else if (consumo_agua_atual > consumo_ideal_agua) {
+                var excesso_agua = (consumo_agua_atual - consumo_ideal_agua) * area;
+                economia_financeira = excesso_agua * preco_m3_agua;
+                mensagem_irrigacao = `Você está utilizando cerca de <b>${excesso_agua.toLocaleString('pt-br', { style: 'currency', 'currency': 'BRL' })} m³</b> de água a mais por ano.  
+              Ao ajustar o uso hídrico, pode economizar aproximadamente <b>${economia_financeira.toLocaleString('pt-br', { style: 'currency', 'currency': 'BRL' })}</b> anuais.`;
+            } else {
+                mensagem_irrigacao = `<b>Irrigação perfeitamente equilibrada!</b><br>
+              Seu consumo de água está dentro do padrão ideal, promovendo eficiência hídrica e produtividade sustentável.<br>
+              O monitoramento contínuo da Coffech ajuda a manter esse equilíbrio, evitando desperdícios e estresse hídrico nas plantas.`
+            }
+
+            var beneficio = ganho_financeiro + economia_financeira;
+
+            if (produtividade_atual == produtividade_ideal && consumo_agua_atual == consumo_ideal_agua) {
+                div_resultado.innerHTML = `
+          <h2>Diagnóstico da sua Plantação:</h2>
+          <h3>1. Análise de Produtividade:</h3>
+          <p><b>Produtividade ideal alcançada!</b><br>
+          Sua plantação está produzindo no nível máximo recomendado para o café arábica.<br>
+          Com o monitoramento Coffech, você garante que esse excelente desempenho se mantenha estável mesmo diante de variações climáticas.</p>
+
+          <h3>2. Análise de Irrigação:</h3>
+          <p><b>Irrigação perfeitamente equilibrada!</b><br>
+          Seu consumo de água está dentro do padrão ideal, promovendo eficiência hídrica e produtividade sustentável.<br>
+          O monitoramento contínuo da Coffech ajuda a manter esse equilíbrio, evitando desperdícios e estresse hídrico nas plantas.</p>
+
+          <h3>Resumo:</h3>
+          <p>Você já opera no cenário ideal de produtividade e uso de recursos.<br>
+          Com a solução Coffech, poderá acompanhar em tempo real as condições do solo e do clima, garantindo que continue colhendo o máximo com o mínimo de desperdício.</p>
+          `;
+            } else {
+                div_resultado.innerHTML = `
+          <h2>Diagnóstico da sua Plantação:</h2>
+          <h3>1. Análise de Produtividade:</h3>
+          <p>${mensagem_produtividade}</p>
+          <h3>2. Análise de Irrigação:</h3>
+          <p>${mensagem_irrigacao}</p>
+
+          <h2>Balanço Financeiro Final:</h2>
+          Considerando o aumento de receita e a economia de custos, seu <b>Benefício Financeiro Total pode chegar a 
+          ${beneficio.toLocaleString('pt-br', { style: 'currency', 'currency': 'BRL' })} por ano.</b><br><br>
+          Este resultado é alcançado com um investimento inicial de <b>${custo_produto.toLocaleString('pt-br', { style: 'currency', 'currency': 'BRL' })}</b> no nosso kit.
+          `;
+            }
+            calculadora.style.display = "none";
+            div_resultado.style.display = "block";
+            botao.innerText = `Fazer uma nova simulação!`
+        }
+    }
+</script>
