@@ -68,16 +68,6 @@
             </div>
             <div class="formCadastro">
                 <div class="campo">
-                    <b>Nome da Empresa</b> <br>
-                    <input type="text" id="input_nome_empresa" placeholder="Insira o nome da empresa"><br>
-                </div>
-                <div class="campo">
-                    <b>CNPJ</b> <br>
-                    <input type="text" id="input_cnpj" placeholder="Insira o CNPJ da empresa"> <br>
-                </div>
-            </div>
-            <div class="formCadastro">
-                <div class="campo">
                     <b>Data de nascimento</b> <br>
                     <input type="date" id="input_data" placeholder="Insira a data de nascimento"><br>
                 </div>
@@ -86,11 +76,24 @@
                     <input type="text" id="input_email" placeholder="Insira seu e-mail"> <br>
                 </div>
             </div>
-            <button class="continuar" onclick="cadastrar()">Continuar</button> <br>
-            
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Código verificação</b> <br>
+                    <input type="text" id="input_verificacao" placeholder="Ex: #123abcDE"> <br>
+                </div>
+            </div>
+            <div class="botoes">
+                <div class="botaozin">
+                    <button class="continuar" onclick="continuar()">Continuar</button>
+                </div>
+                <div class="botaozin">
+                    <button class="continuar" onclick="cadastrar()">Cadastrar empresa</button> <br> <br> <br> <br>
+                </div>
+            </div>
+
             <div class="possuiConta">
-               <p><b>Já possui uma conta? </b> </p>
-                 <a href="login.html"> Entrar</a>
+                <p><b>Já possui uma conta? </b> </p>
+                <a href="login.html"> Entrar</a>
             </div>
         </div>
 
@@ -129,17 +132,31 @@
             </div>
             <div class="formCadastro">
                 <div class="campo">
-                    <b>Senha</b> <br>
-                    <input type="password" id="input_senha" placeholder="****************"> <br>
+                    <b>Nome da Empresa</b> <br>
+                    <input type="text" id="input_nome_empresa" placeholder="Insira o nome da empresa"><br>
                 </div>
                 <div class="campo">
+                    <b>CNPJ</b> <br>
+                    <input type="text" id="input_cnpj" placeholder="Insira o CNPJ da empresa"> <br>
+                </div>
+            </div>
+            <button class="continuar" onclick="cadastrarEmp()">Continuar</button> <br> <br> <br> <br>
+
+        </div>
+        <div id="div_cadastro_senha" class="card-cadastro" style="display: none;">
+            <div class="formCadastro1">
+            <h1 style="font-size: 50px;">Quase lá!</h1>
+                <div class="campo1">
+                    <b>Senha</b> <br>
+                    <input type="password" id="input_senha" placeholder="Insira a sua senha"><br>
+                </div>
+                <div class="campo1">
                     <b>Confirme sua senha</b> <br>
-                    <input type="password" id="input_senha_conf" placeholder="****************"> <br>
+                    <input type="password" id="input_senhaConf" placeholder="Reescreva a sua senha"> <br>
                 </div>
             </div>
             <button class="continuar" onclick="finalizar()">Finalizar</button> <br>
         </div>
-
         <div class="imgcadastro">
             <img src='imgs/café-for-all.webp'>
         </div>
@@ -180,18 +197,36 @@
 
 <script>
 
+    function continuar() {
+        var nome = input_nome.value;
+        var email = input_email.value;
+        var telefone = input_telefone.value;
+        var cpf = input_cpf.value;
+        var nomeUsuario = input_nome_usuario.value;
+        var dataNascimento = input_data.value;
+        var codigoVerif = input_verificacao.value;
+
+
+        if (nome == '' || email == '' || telefone == '' || codigoVerif == '' || cpf == '' || nomeUsuario == '' || dataNascimento == '') {
+            alert('Preencha as informações corretamente.')
+        } else {
+            div_cadastro_usuario.style.display = `none`;
+            div_cadastro_senha.style.display = `flex`;
+        }
+
+    }
+
     function cadastrar() {
         var nome = input_nome.value;
         var email = input_email.value;
         var telefone = input_telefone.value;
         var cpf = input_cpf.value;
-        var nomeEmp = input_nome_empresa.value;
-        var cnpj = input_cnpj.value;
         var nomeUsuario = input_nome_usuario.value;
         var dataNascimento = input_data.value;
+        var codigoVerif = input_verificacao.value;
 
 
-        if (nome == '' || email == '' || telefone == '' || cpf == '' || nomeEmp == '' || cnpj == '' || nomeUsuario == '' || dataNascimento == '') {
+        if (nome == '' || email == '' || telefone == '' || cpf == '' || nomeUsuario == '' || dataNascimento == '') {
             alert('Preencha as informações corretamente.')
         } else {
             div_cadastro_usuario.style.display = `none`;
@@ -199,10 +234,10 @@
         }
 
     }
-
-    function finalizar() {
-        var senha = input_senha.value;
-        var senhaConf = input_senha_conf.value;
+    
+    function cadastrarEmp() {
+        var nomeEmp = input_nome_empresa.value;
+        var cnpj = input_cnpj.value;
         var tamanhoPropriedade = input_tamanhoPropriedade.value;
         var cidade = input_cidade.value;
         var logradouro = input_logradouro.value;
@@ -213,16 +248,29 @@
 
         if (tamanhoPropriedade == '' || tamanhoPropriedade <= 0 || cidade == '' || logradouro == '' || numero == '' || bairro == '' || estado == '') {
             alert('Preencha as informações corretamente.')
-        } else if (senha != senhaConf) {
-            alert('Confirmação de senha incorreta')
+        } else{
+            div_cadastro_empresa.style.display = `none`;
+            div_cadastro_senha.style.display = `flex`;
         }
-        else {
-            alert('Cadastro realizado com sucesso!')
-            window.location.href = 'login.html'
-        }
+
+
 
 
 
     }
+
+    function finalizar(){
+        var senha = input_senha.value;
+        var senhaConf = input_senhaConf.value;
+
+        if(senha != senhaConf){
+            alert('As senhas devem ser iguais!')
+        }else{
+            alert('Cadastro realizado com sucesso!')
+            window.location.href = 'login.html'
+        }
+    }
+
+
 
 </script>
