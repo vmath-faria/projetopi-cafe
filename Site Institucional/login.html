@@ -104,16 +104,13 @@
     function formulariofunction() {
         var email = email_input.value;
         var senha = senha_input.value;
-        if (email != 'julia@araripe.com' || senha != 'urubu100' || email != 'fernando@brandao.com' || senha != 'urubu100') {
-            erroformulario.innerHTML = `<br>Verificar Email ou Senha!`
-        } 
 
         if(email == 'julia@araripe.com' && senha == 'urubu100'){
             window.location.href = 'dashboard.html'
         }else if(email == 'fernando@brandao.com' && senha == 'urubu100'){
             window.location.href = 'dashboard_propriedades.html'
         } else {
-            window.location.href = 'dashboard_propriedades.html';
+           erroformulario.innerHTML = `<br>Verificar Email ou Senha!`
         }
 
 
