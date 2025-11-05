@@ -155,3 +155,70 @@ CREATE USER leitor@localhost IDENTIFIED BY 'Sptech#2024';
 GRANT SELECT ON coffech.leitura TO leitor@localhost;
 GRANT INSERT ON coffech.leitura TO escritor@localhost;
 FLUSH PRIVILEGES;
+
+-- SELECTS COM JOIN
+-- VERIFICAR USUÁRIOS E SEU GERENTE
+SELECT 
+    u.id_usuario AS 'ID do Funcionário',
+    u.nome_completo AS 'Nome do Funcionário',
+    IFNULL(g.id_usuario, 'Sou Gerente') AS 'ID do Gerente',
+    IFNULL(g.nome_completo, 'Sou gerente') AS 'Nome do Gerente'
+FROM usuario AS u
+LEFT JOIN usuario AS g 
+    ON u.fk_gerente = g.id_usuario;
+
+-- USUÁRIOS E SUAS EMPRESAS
+SELECT 
+    u.id_usuario AS 'ID do Funcionário',
+    u.nome_completo AS 'Nome do Funcionário',
+    u.nivel_acesso AS 'Nível de Acesso do Usuário',
+    e.nome_empresa AS 'Nome da Empresa'
+FROM usuario AS u
+JOIN empresa AS e 
+    ON u.fk_empresa = e.id_empresa;
+
+-- TOKENS, USUÁRIOS E SUAS EMPRESAS
+SELECT 
+    t.id_token AS 'ID do Token',
+    t.token AS 'Código do Token',
+    t.status_token AS 'Status do Token',
+    u.nome_completo AS 'Nome do Funcionário',
+    e.nome_empresa AS 'Nome da Empresa'
+FROM token AS t
+JOIN usuario AS u ON t.fk_usuario = u.id_usuario
+JOIN empresa AS e 
+    ON t.fk_empresa = e.id_empresa;
+
+-- PROPRIEDADES E SEUS RESPECTIVOS TALHÕES
+SELECT 
+    p.nome_propriedade AS 'Nome da Propriedade',
+    t.nome_talhao AS 'Nome do Talhão',
+    t.variedade_cafe AS 'Variedade do Café'
+FROM propriedade AS p
+JOIN talhao AS t 
+    ON p.id_propriedade = t.fk_propriedade;
+
+-- TALHÕES, SENSORES E SUAS RESPECTIVAS LEITURAS
+SELECT 
+    t.nome_talhao,
+    s.id_sensor,
+    s.status_sensor,
+    l.valor_umidade,
+    l.data_hora_leitura
+FROM talhao AS t
+JOIN sensor AS s 
+    ON t.id_talhao = s.fk_talhao
+JOIN leitura AS l 
+    ON s.id_sensor = l.fk_sensor;
+
+-- Exibe a empresa, suas propriedades, seus talhões e seus sensores
+SELECT 
+    e.nome_empresa AS 'Nome da Empresa',
+    p.nome_propriedade AS 'Nome da Propriedade',
+    t.nome_talhao AS 'Nome do Talhão',
+    s.id_sensor AS 'Nome do Sensor',
+    s.status_sensor As 'Status do Sensor'
+FROM empresa AS e
+JOIN propriedade AS p ON p.fk_empresa = e.id_empresa
+JOIN talhao AS t ON t.fk_propriedade = p.id_propriedade
+JOIN sensor AS s ON s.fk_talhao = t.id_talhao;
