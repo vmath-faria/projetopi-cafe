@@ -8,7 +8,4 @@ router.get('/empresa/:id', ctrl.listarPorEmpresa);
 // Dashboard de uma propriedade
 router.get('/:id/dashboard', ctrl.dashboard);
 
-// Lista todas as propriedades (sem filtro)
-router.get('/', ctrl.listar);
-
 module.exports = router;

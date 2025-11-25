@@ -69,35 +69,8 @@ const dashboardpropriedades = async (id_propriedade, alert_threshold = 30) => {
   };
 };
 
-// Lista todas as propriedades com média de umidade (opcional, sem filtro de empresa)
-const listarPropriedadesComMedia = async () => {
-  const sql = `
-    SELECT 
-      p.id_propriedade,
-      p.nome_propriedade,
-      p.logradouro,
-      p.estado,
-      p.cidade,
-      p.bairro,
-      p.cep,
-      p.numero,
-      COALESCE(ROUND(avgLeit.media_umidade,2), 0) AS media_umidade
-    FROM propriedade p
-    LEFT JOIN (
-      SELECT pr.id_propriedade, AVG(l.valor_umidade) AS media_umidade
-      FROM leitura l
-      JOIN sensor s ON l.fk_sensor = s.id_sensor
-      JOIN talhao t ON s.fk_talhao = t.id_talhao
-      JOIN propriedade pr ON t.fk_propriedade = pr.id_propriedade
-      GROUP BY pr.id_propriedade
-    ) AS avgLeit ON avgLeit.id_propriedade = p.id_propriedade
-    ORDER BY media_umidade DESC;
-  `;
-  return database.executar(sql);
-};
 
 module.exports = {
   listarPropriedadesPorEmpresa,
-  dashboardpropriedades,
-  listarPropriedadesComMedia
+  dashboardpropriedades
 };

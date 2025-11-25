@@ -38,30 +38,7 @@ const dashboard = async (req, res) => {
   }
 };
 
-const listarPorEmpresa = async (req, res) => {
-  try {
-    const idEmpresa = req.params.id;
-
-    const rows = await propriedadeModel.listarPropriedadesPorEmpresa(idEmpresa);
-
-    const withAlert = rows.map(r => {
-      let nivel = 'verde';
-      if (r.media_umidade <= 25) nivel = 'vermelho';
-      else if (r.media_umidade <= 40) nivel = 'amarelo';
-      return { ...r, nivel_alerta: nivel };
-    });
-
-    return res.json(withAlert);
-
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ erro: 'Erro ao listar propriedades da empresa.' });
-  }
-};
-
-
 module.exports = {
   listar,
-  dashboard,
-  listarPorEmpresa
+  dashboard
 };

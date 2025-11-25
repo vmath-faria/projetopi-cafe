@@ -86,9 +86,6 @@
                 <div class="botaozin">
                     <button class="continuar" onclick="continuar()">Continuar</button>
                 </div>
-                <div class="botaozin">
-                    <button class="continuar" onclick="cadastrar()">Cadastrar empresa</button> <br> <br> <br> <br>
-                </div>
             </div>
 
             <div class="possuiConta">
@@ -97,52 +94,6 @@
             </div>
         </div>
 
-        <div id='div_cadastro_empresa' class="card-cadastro" style="display: none;">
-            <h1>Cadastro</h1>
-            <div class="formCadastro">
-                <div class="campo">
-                    <b>Tamanho da propriedade</b> <br>
-                    <input type="text" id="input_tamanhoPropriedade"
-                        placeholder="Tamanho de sua propriedade em hectar" value="50"><br>
-                </div>
-                <div class="campo">
-                    <b>Estado</b> <br>
-                    <input type="text" id="input_estado" placeholder="Insira o estado da propriedade" value="ES"> <br>
-                </div>
-            </div>
-            <div class="formCadastro">
-                <div class="campo">
-                    <b>Cidade</b> <br>
-                    <input type="text" id="input_cidade" placeholder="Insira a cidade da propriedade" value="Guarapari"> <br>
-                </div>
-                <div class="campo">
-                    <b>Logradouro</b> <br>
-                    <input type="text" id="input_logradouro" placeholder="Insira o logradouro" value="Rua Esquilo"><br>
-                </div>
-            </div>
-            <div class="formCadastro">
-                <div class="campo">
-                    <b>Número</b> <br>
-                    <input type="text" id="input_numero" placeholder="Insira aqui o número da propriedade" value="13"> <br>
-                </div>
-                <div class="campo">
-                    <b>Bairro</b> <br>
-                    <input type="text" id="input_bairro" placeholder="Bairro da propriedade" value="Aracruz"> <br>
-                </div>
-            </div>
-            <div class="formCadastro">
-                <div class="campo">
-                    <b>Nome da Empresa</b> <br>
-                    <input type="text" id="input_nome_empresa" placeholder="Insira o nome da empresa" value="Nome"><br>
-                </div>
-                <div class="campo">
-                    <b>CNPJ</b> <br>
-                    <input type="text" id="input_cnpj" placeholder="Insira o CNPJ da empresa" value="9999999990010"> <br>
-                </div>
-            </div>
-            <button class="continuar" onclick="cadastrarEmp()">Continuar</button> <br> <br> <br> <br>
-
-        </div>
         <div id="div_cadastro_senha" class="card-cadastro" style="display: none;">
             <div class="formCadastro1">
             <h1 style="font-size: 50px;">Quase lá!</h1>
@@ -232,30 +183,6 @@
             div_cadastro_usuario.style.display = `none`;
             div_cadastro_empresa.style.display = `flex`;
         }
-
-    }
-    
-    function cadastrarEmp() {
-        var nomeEmp = input_nome_empresa.value;
-        var cnpj = input_cnpj.value;
-        var tamanhoPropriedade = input_tamanhoPropriedade.value;
-        var cidade = input_cidade.value;
-        var logradouro = input_logradouro.value;
-        var numero = input_numero.value;
-        var estado = input_estado.value;
-        var bairro = input_bairro.value;
-
-
-        if (tamanhoPropriedade == '' || tamanhoPropriedade <= 0 || cidade == '' || logradouro == '' || numero == '' || bairro == '' || estado == '') {
-            alert('Preencha as informações corretamente.')
-        } else{
-            div_cadastro_empresa.style.display = `none`;
-            div_cadastro_senha.style.display = `flex`;
-        }
-
-
-
-
 
     }
 
