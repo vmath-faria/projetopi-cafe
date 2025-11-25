@@ -1,6 +1,4 @@
-CREATE DATABASE coffech;
-
-USE coffech;
+USE coffech2;
 
 CREATE TABLE empresa (
 	id_empresa INT PRIMARY KEY AUTO_INCREMENT,

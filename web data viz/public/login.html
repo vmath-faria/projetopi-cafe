@@ -1,0 +1,150 @@
+    <!DOCTYPE html>
+    <html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Coffech - Login</title>
+
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="icon" href="./imgs/logo-fundo-marrom.png">
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="container">
+                <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
+                <ul class="navbar">
+                    <li><a href="index.html#div_sobrenos">Quem Somos?</a></li>
+                    <li><a href="index.html#div_solucao">Solução</a></li>
+                    <li><a href="index.html#div_simulador">Calculadora Financeira</a></li>
+                    <li><a href="index.html#div_beneficios">Benefícios</a></li>
+                    <li><a href="index.html#div_contato">Contato</a></li>
+                </ul>
+                <ul class="logincadastro">
+                    <li><a href="#">Login</a></li>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="login">
+            <div class="card-login">
+                <h1 class="formulario" style="color: black;">Login</h1>
+
+                <div class="formulario" id="form_login">
+
+                    <div class="campo-login">
+                        <span style="color: black;">E-mail:</span> <br>
+                        <input class="caixa" id="email_input" type="text" placeholder="Login"> <br>
+
+                        <div class="campo-login"> <br>
+                            <span style="color: black;">Senha:</span> <br>
+                            <input class="caixa" id="senha_input" type="password" placeholder="******">
+                        </div>
+
+                        <div class="campo erro" id="erroformulario"></div> <br>
+
+                        <button class="botao" id="btn_login" type="button">Entrar</button>
+                    </div>
+
+                    <br>
+                    <div class="criar-conta">
+                        <p><b>Não possui conta?</b></p>
+                        <a href="cadastro.html">Criar</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="imglogin">
+                <img src='imgs/imagemLogin.jpg'>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="container">
+                <div class="redes-sociais">
+                    <img height="50" src="./imgs/logo-fonte-branca.png">
+                    <p>Todos os direitos reservados a COFFECH 2025</p>
+                    <img src="./imgs/Icon-instagram.png">
+                    <img src="./imgs/icon-youtube.png">
+                    <img src="./imgs/Icon-linkedin.png">
+                    <img src="./imgs/Icon-facebook.png">
+                </div>
+
+                <div class="contatoFooter">
+                    <h6>Contato:</h6>
+                    <span>coffech@gmail.com</span>
+                </div>
+
+                <h5 class="equipe">Equipe Coffech:</h5>
+                <div class="nosso-time1">
+                    <p>Anderson</p>
+                    <p>Diego</p>
+                    <p>Guilherme</p>
+                </div>
+                <div class="nosso-time2">
+                    <p>João Ricardo</p>
+                    <p>Luan</p>
+                    <p>Victor Mattheus</p>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    </html>
+
+<script>
+document.getElementById("btn_login").addEventListener("click", async () => {
+    const email = document.getElementById("email_input").value.trim();
+    const senha = document.getElementById("senha_input").value.trim();
+    const erroBox = document.getElementById("erroformulario");
+
+    erroBox.innerHTML = "";
+
+    if (!email || !senha) {
+        erroBox.innerHTML = "Preencha todos os campos.";
+        return;
+    }
+
+    try {
+        const res = await fetch("http://localhost:3333/usuario/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, senha })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            erroBox.innerHTML = data.erro || "Credenciais inválidas.";
+            return;
+        }
+
+        // Salva o usuário como objeto JSON
+        const usuario = {
+            id_usuario: data.id_usuario,
+            email: data.email,
+            fk_empresa: data.fk_empresa,       // garante que está definido
+            nome_empresa: data.nome_empresa,   // opcional, se retornar do backend
+            nivel_acesso: data.nivel_acesso,
+            nome_usuario: data.nome_usuario
+        };
+        localStorage.setItem("usuario", JSON.stringify(usuario));
+
+        // Redirecionamento
+        if (data.nivel_acesso === "Proprietario") {
+            window.location.href = "dashboard_propriedades.html";
+        } else {
+            window.location.href = "dashboard.html";
+        }
+
+    } catch (err) {
+        console.error(err);
+        erroBox.innerHTML = "Erro interno. Contate o suporte.";
+    }
+});
+</script>
+
