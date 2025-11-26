@@ -1,9 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const ctrl = require('../controllers/propriedadesController');
+var express = require("express");
+var router = express.Router();
 
+var propriedadesController = require("../controllers/propriedadesController");
 
-// Dashboard de uma propriedade
-router.get('/:id/dashboard', ctrl.dashboard);
+router.get("/:empresaId", function (req, res) {
+  propriedadesController.buscarPropriedadessPorEmpresa(req, res);
+});
+
+router.post("/cadastrar", function (req, res) {
+  propriedadesController.cadastrar(req, res);
+})
 
 module.exports = router;

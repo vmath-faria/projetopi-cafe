@@ -48,12 +48,14 @@ function cadastrar(req, res) {
         }
     }
 
+// AUTENTICAR COM PROBLEMA EM BUSCAR PROPRIEDADE LINHA 71
+
 function autenticar (req, res){
- var email = req.body.emailServer;
-     var senha = req.body.senhaServer;
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
  
      if (email == undefined) {
-         res.status(400).send("Seu email está undefined!");
+         res.status(400).send("Seu email está indefinido!");
      } else if (senha == undefined) {
          res.status(400).send("Sua senha está indefinida!");
      } else {
@@ -68,21 +70,20 @@ function autenticar (req, res){
                       if (resultadoAutenticar.length == 1) {
                           console.log(resultadoAutenticar);
   
-                          aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                              .then((resultadoAquarios) => {
-                                  if (resultadoAquarios.length > 0) {
+                          /*propriedadesModel.buscarPropriedadesPorEmpresa(resultadoAutenticar[0].empresaId)
+                              .then((resultadoPropriedades) => {
+                                  if (resultadoPropriedades.length > 0) {
                                       res.json({
                                         id_usuario: user.id_usuario,
                                         email: user.email,
                                         fk_empresa: user.fk_empresa,
                                         nivel_acesso: user.nivel_acesso,
                                         nome_usuario: user.nome_usuario,
-                                        nome_empresa: user.nome_empresa
                                     });
                                   } else {
-                                      res.status(204).json({ aquarios: [] });
+                                      res.status(204).json({ propriedades: [] });
                                   }
-                              })
+                              })*/
                       } else if (resultadoAutenticar.length == 0) {
                           res.status(403).send("Email e/ou senha inválido(s)");
                       } else {

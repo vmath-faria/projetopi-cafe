@@ -45,7 +45,7 @@
 
                         <div class="campo erro" id="erroformulario"></div> <br>
 
-                        <button class="botao" id="btn_login" type="button">Entrar</button>
+                        <button class="botao" id="btn_login" type="button" onclick="entrar()">Entrar</button>
                     </div>
 
                     <br>
@@ -97,54 +97,68 @@
     </html>
 
 <script>
-document.getElementById("btn_login").addEventListener("click", async () => {
-    const email = document.getElementById("email_input").value.trim();
-    const senha = document.getElementById("senha_input").value.trim();
-    const erroBox = document.getElementById("erroformulario");
 
-    erroBox.innerHTML = "";
+    function entrar() {
 
-    if (!email || !senha) {
-        erroBox.innerHTML = "Preencha todos os campos.";
-        return;
-    }
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
 
-    try {
-        const res = await fetch("http://localhost:3333/usuario/login", {
+        if (emailVar == "" || senhaVar == "") {
+            alert('Mensagem de erro para todos os campos em branco');
+            return false;
+        }
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuario/autenticar", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, senha })
-        });
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
 
-        const data = await res.json();
+            if (resposta.ok) {
+                console.log(resposta);
 
-        if (!res.ok) {
-            erroBox.innerHTML = data.erro || "Credenciais inválidas.";
-            return;
-        }
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome_usuario;
+                    sessionStorage.ID_USUARIO = json.id_usuario;
+                    sessionStorage.NIVEL_ACESSO = json.nivel_acesso
+                    sessionStorage.PROPRIEDADES = JSON.stringify(json.propriedades)
 
-        // Salva o usuário como objeto JSON
-        const usuario = {
-            id_usuario: data.id_usuario,
-            email: data.email,
-            fk_empresa: data.fk_empresa,       // garante que está definido
-            nome_empresa: data.nome_empresa,   // opcional, se retornar do backend
-            nivel_acesso: data.nivel_acesso,
-            nome_usuario: data.nome_usuario
-        };
-        localStorage.setItem("usuario", JSON.stringify(usuario));
+                localStorage.setItem("usuario", JSON.stringify(usuario));
 
-        // Redirecionamento
-        if (data.nivel_acesso === "Proprietario") {
-            window.location.href = "dashboard_propriedades.html";
-        } else {
-            window.location.href = "dashboard.html";
-        }
+                // Redirecionamento
+                if (data.nivel_acesso === "Proprietario") {
+                    window.location.href = "dashboard_propriedades.html";
+                } else {
+                    window.location.href = "dashboard.html";
+                }
 
-    } catch (err) {
-        console.error(err);
-        erroBox.innerHTML = "Erro interno. Contate o suporte.";
-    }
-});
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+}
 </script>
 

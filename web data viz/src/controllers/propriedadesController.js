@@ -1,44 +1,48 @@
-const propriedadesModel = require('../models/propriedadesModel');
+var propriedadesModel = require("../models/propriedadesModel");
 
-const listar = async (req, res) => {
-  try {
-    const fk_empresa = req.query.fk_empresa; // receber do front
-    const rows = await propriedadesModel.listarPropriedadesComMedia(fk_empresa);
+function buscarPropriedadesPorEmpresa(req, res) {
+  var idUsuario = req.params.idUsuario;
 
-    const withAlert = rows.map(r => {
-      let nivel = 'verde';
+  propriedadesModel.buscarPropriedadesPorEmpresa(id_usuario).then((resultado) => {
+    if (resultado.length > 0) {
+      res.status(200).json(resultado);
+    } else {
+      res.status(204).json([]);
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar os propriedadess: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
 
-      if (r.media_umidade <= 25) nivel = 'vermelho';
-      else if (r.media_umidade <= 40) nivel = 'amarelo';
+// Usar o cadastrar?
+function cadastrar(req, res) {
+  var descricao = req.body.descricao;
+  var idUsuario = req.body.idUsuario;
 
-      return { ...r, nivel_alerta: nivel };
-    });
+  if (descricao == undefined) {
+    res.status(400).send("descricao está undefined!");
+  } else if (idUsuario == undefined) {
+    res.status(400).send("idUsuario está undefined!");
+  } else {
 
-    return res.json(withAlert);
 
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ erro: 'Erro ao listar propriedades' });
+    propriedadesModel.cadastrar(descricao, idUsuario)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
   }
-};
-
-
-
-const dashboard = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const alertThreshold = req.query.threshold ? Number(req.query.threshold) : 30;
-
-    const data = await propriedadesModel.dashboardpropriedades(id, alertThreshold);
-    return res.json(data);
-
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ erro: 'Erro ao buscar dashboard' });
-  }
-};
+}
 
 module.exports = {
-  listar,
-  dashboard
-};
+  buscarPropriedadesPorEmpresa
+}
