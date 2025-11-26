@@ -1,68 +1,106 @@
 const usuarioModel = require('../models/usuarioModel');
 const tokenModel = require('../models/tokenModel');
 
-const registrar = async (req, res) => {
-  try {
-    const { email, senha, nome_completo, nome_usuario, data_nascimento, cpf, nivel_acesso, token: tokenCode } = req.body;
+function cadastrar(req, res) {
+  var nome = nomeServer;
+  var email = emailServer;
+  var senha =senhaServer;
+  var telefone = telefoneServer;
+  var cpf = cpfServer;
+  var nomeUsuario = nomeUsuarioServer;
+  var dataNascimento = dataNascimentoServer;
+  var idEmpresa = idEmpresaVincularServer;
+  
+  if (nome == undefined) {
+        res.status(400).send("Seu nome está indefinido!");
+    } else if (email == undefined) {
+        res.status(400).send("Seu email está indefinido!");
+    } else if (senha == undefined) {
+        res.status(400).send("Sua senha está indefinida!");
+    } else if (telefone == undefined){
+        res.status(400).send("Seu telefone está indefinido!");
+    } else if (cpf == undefined) {
+        res.status(400).send("Seu CPF está indefinido!");
+    } else if (nomeUsuario == undefined) {
+        res.status(400).send("Seu Nome de Usuário está indefinido!");
+    } else if (dataNascimento == undefined) {
+      res.status(400).send("Sua Data de Nascimento está indefinida!");
+    } else if (idEmpresa == undefined) {
+        res.status(400).send("Sua empresa a vincular está indefinida!");
+    } else {
 
-    if (!tokenCode) return res.status(400).json({ erro: 'Token é obrigatório no cadastro.' });
-
-    const tokenRow = await tokenModel.buscarToken(tokenCode);
-    if (!tokenRow) return res.status(400).json({ erro: 'Token inválido.' });
-    if (tokenRow.status_token !== 'Pendente') return res.status(400).json({ erro: 'Token já usado ou expirado.' });
-
-    const fk_empresa = tokenRow.fk_empresa;
-
-    // SEM HASH — senha normal
-    const novoId = await usuarioModel.criarUsuario({
-      data_nascimento,
-      cpf,
-      nome_completo,
-      nome_usuario,
-      email,
-      senha,
-      nivel_acesso,
-      fk_empresa,
-      fk_gerente: null
-    });
-
-    await tokenModel.marcarTokenUsado(tokenRow.id_token, tokenRow.fk_empresa);
-
-    return res.status(201).json({ id_usuario: novoId });
-
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ erro: 'Erro interno ao registrar.' });
-  }
-};
-
-const login = async (req, res) => {
-  try {
-    const { email, senha } = req.body;
-    const user = await usuarioModel.buscarPorEmail(email);
-
-    if (!user) return res.status(401).json({ erro: 'Credenciais inválidas.' });
-
-    // SEM HASH — comparação direta
-    if (senha !== user.senha) {
-      return res.status(401).json({ erro: 'Credenciais inválidas.' });
+     // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            usuarioModel.cadastrar(nome, email, senha, telefone, cpf, nomeUsuario, dataNascimento, idEmpresa)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
     }
 
-    // Retorno atualizado com nome_usuario
-    return res.json({
-    id_usuario: user.id_usuario,
-    email: user.email,
-    fk_empresa: user.fk_empresa,
-    nivel_acesso: user.nivel_acesso,
-    nome_usuario: user.nome_usuario,
-    nome_empresa: user.nome_empresa // <- adicionar aqui
-    });
+function autenticar (req, res){
+ var email = req.body.emailServer;
+     var senha = req.body.senhaServer;
+ 
+     if (email == undefined) {
+         res.status(400).send("Seu email está undefined!");
+     } else if (senha == undefined) {
+         res.status(400).send("Sua senha está indefinida!");
+     } else {
 
 
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ erro: 'Erro interno ao logar.' });
-  }
+    usuarioModel.autenticar(email, senha)
+              .then(
+                  function (resultadoAutenticar) {
+                      console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                      console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+  
+                      if (resultadoAutenticar.length == 1) {
+                          console.log(resultadoAutenticar);
+  
+                          aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
+                              .then((resultadoAquarios) => {
+                                  if (resultadoAquarios.length > 0) {
+                                      res.json({
+                                        id_usuario: user.id_usuario,
+                                        email: user.email,
+                                        fk_empresa: user.fk_empresa,
+                                        nivel_acesso: user.nivel_acesso,
+                                        nome_usuario: user.nome_usuario,
+                                        nome_empresa: user.nome_empresa
+                                    });
+                                  } else {
+                                      res.status(204).json({ aquarios: [] });
+                                  }
+                              })
+                      } else if (resultadoAutenticar.length == 0) {
+                          res.status(403).send("Email e/ou senha inválido(s)");
+                      } else {
+                          res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                      }
+                  }
+                ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
+module.exports = { 
+  cadastrar,
+  autenticar
 };
-
-module.exports = { registrar, login };

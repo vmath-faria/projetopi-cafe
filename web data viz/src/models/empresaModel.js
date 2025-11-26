@@ -1,11 +1,20 @@
-const database = require('../database/config');
+var database = require("../database/config");
 
-const listarEmpresas = async () => {
-  const sql = `SELECT id_empresa, nome_empresa, cnpj, telefone_celular FROM empresa`;
-  const rows = await database.executar(sql);
-  return rows;
-};
+// Select retorna os tokens e o nome da empresa, mas como são enviados de volta para a lista do front?
 
-module.exports = {
-  listarEmpresas
+
+function listar() {
+  var instrucaoSql = `SELECT token, 
+        nome_empresa
+        FROM token 
+          JOIN empresa
+            ON fk_empresa = id_empresa
+          WHERE status_token = 'Pendente'
+              AND NOW() < data_expiracao;`;
+
+  return database.executar(instrucaoSql);
+}
+
+module.exports = {  
+  listar 
 };
