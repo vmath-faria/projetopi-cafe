@@ -1,105 +1,95 @@
 const usuarioModel = require('../models/usuarioModel');
+const propriedadesModel = require('../models/propriedadesModel');
 const tokenModel = require('../models/tokenModel');
 
 function cadastrar(req, res) {
-  var nome = nomeServer;
-  var email = emailServer;
-  var senha =senhaServer;
-  var telefone = telefoneServer;
-  var cpf = cpfServer;
-  var nomeUsuario = nomeUsuarioServer;
-  var dataNascimento = dataNascimentoServer;
-  var idEmpresa = idEmpresaVincularServer;
-  
-  if (nome == undefined) {
-        res.status(400).send("Seu nome está indefinido!");
-    } else if (email == undefined) {
-        res.status(400).send("Seu email está indefinido!");
-    } else if (senha == undefined) {
-        res.status(400).send("Sua senha está indefinida!");
-    } else if (telefone == undefined){
-        res.status(400).send("Seu telefone está indefinido!");
-    } else if (cpf == undefined) {
-        res.status(400).send("Seu CPF está indefinido!");
-    } else if (nomeUsuario == undefined) {
-        res.status(400).send("Seu Nome de Usuário está indefinido!");
-    } else if (dataNascimento == undefined) {
-      res.status(400).send("Sua Data de Nascimento está indefinida!");
-    } else if (idEmpresa == undefined) {
-        res.status(400).send("Sua empresa a vincular está indefinida!");
-    } else {
-
-     // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-            usuarioModel.cadastrar(nome, email, senha, telefone, cpf, nomeUsuario, dataNascimento, idEmpresa)
-                .then(
-                    function (resultado) {
-                        res.json(resultado);
-                    }
-                ).catch(
-                    function (erro) {
-                        console.log(erro);
-                        console.log(
-                            "\nHouve um erro ao realizar o cadastro! Erro: ",
-                            erro.sqlMessage
-                        );
-                        res.status(500).json(erro.sqlMessage);
-                    }
-                );
-        }
-    }
-
-// AUTENTICAR COM PROBLEMA EM BUSCAR PROPRIEDADE LINHA 71
-
-function autenticar (req, res){
+    var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
- 
-     if (email == undefined) {
-         res.status(400).send("Seu email está indefinido!");
-     } else if (senha == undefined) {
-         res.status(400).send("Sua senha está indefinida!");
-     } else {
+    var telefone = req.body.telefoneServer;
+    var cpf = req.body.cpfServer;
+    var nomeUsuario = req.body.nomeUsuarioServer;
+    var dataNascimento = req.body.dataNascimentoServer;
+    var idEmpresa = req.body.idEmpresaVincularServer;
 
+    if (!nome) return res.status(400).send("Nome indefinido");
+    if (!email) return res.status(400).send("Email indefinido");
+    if (!senha) return res.status(400).send("Senha indefinida");
+    if (!telefone) return res.status(400).send("Telefone indefinido");
+    if (!cpf) return res.status(400).send("CPF indefinido");
+    if (!nomeUsuario) return res.status(400).send("Usuário indefinido");
+    if (!dataNascimento) return res.status(400).send("Nascimento indefinido");
+
+  usuarioModel.cadastrar(
+    nome,
+    email,
+    senha,
+    telefone,
+    cpf,
+    nomeUsuario,
+    dataNascimento,
+    idEmpresa
+  )
+    .then(r => res.json(r))
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("Erro no cadastro");
+    });
+}
+
+
+function autenticar(req, res) {
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
+
+    if (!email) return res.status(400).send("Email indefinido");
+    if (!senha) return res.status(400).send("Senha indefinida");
 
     usuarioModel.autenticar(email, senha)
-              .then(
-                  function (resultadoAutenticar) {
-                      console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                      console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
-  
-                      if (resultadoAutenticar.length == 1) {
-                          console.log(resultadoAutenticar);
-  
-                          /*propriedadesModel.buscarPropriedadesPorEmpresa(resultadoAutenticar[0].empresaId)
-                              .then((resultadoPropriedades) => {
-                                  if (resultadoPropriedades.length > 0) {
-                                      res.json({
-                                        id_usuario: user.id_usuario,
-                                        email: user.email,
-                                        fk_empresa: user.fk_empresa,
-                                        nivel_acesso: user.nivel_acesso,
-                                        nome_usuario: user.nome_usuario,
-                                    });
-                                  } else {
-                                      res.status(204).json({ propriedades: [] });
-                                  }
-                              })*/
-                      } else if (resultadoAutenticar.length == 0) {
-                          res.status(403).send("Email e/ou senha inválido(s)");
-                      } else {
-                          res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-                      }
-                  }
-                ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
+        .then(resultado => {
 
+            if (resultado.length === 1) {
+
+                const user = resultado[0];
+
+                propriedadesModel.buscarPropriedadesPorEmpresa(user.id_empresa)
+                    .then(propriedades => {
+
+                        res.json({
+                            id_usuario: user.id_usuario,
+                            nome_usuario: user.nome_usuario,
+                            email: user.email,
+                            nivel_acesso: user.nivel_acesso,
+                            fk_empresa: user.id_empresa,
+                            propriedades: propriedades
+                        });
+
+                    })
+                    .catch(err => {
+                        console.log("Erro ao buscar propriedades:", err);
+                        res.json({
+                            id_usuario: user.id_usuario,
+                            nome_usuario: user.nome_usuario,
+                            email: user.email,
+                            nivel_acesso: user.nivel_acesso,
+                            fk_empresa: user.id_empresa,
+                            propriedades: []
+                        });
+                    });
+
+            } else if (resultado.length === 0) {
+                res.status(403).send("Email e/ou senha inválido(s)");
+            } else {
+                res.status(403).send("Mais de um usuário com o mesmo login.");
+            }
+
+        })
+        .catch(err => {
+            console.log("Erro ao autenticar:", err);
+            res.status(500).json(err.sqlMessage);
+        });
 }
+
 
 module.exports = { 
   cadastrar,
