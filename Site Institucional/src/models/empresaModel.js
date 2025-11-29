@@ -1,10 +1,9 @@
 var database = require("../database/config");
 
-// Select retorna os tokens e o nome da empresa, mas como são enviados de volta para a lista do front?
-
-
 function listar() {
-  var instrucaoSql = `SELECT token, 
+  var instrucaoSql = `SELECT id_token,
+        token, 
+        fk_empresa AS id_empresa,
         nome_empresa
         FROM token 
           JOIN empresa

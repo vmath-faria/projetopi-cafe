@@ -18,7 +18,7 @@
         </div>
         <div class="header-usuario">
             <div class="boas-vindas">
-                <p>Olá, Fernando!</p>
+                <p>Olá, <span id="b_usuario1">usuário</span>!</p>
                 <img src="./imgs/fotoperfil.png" class="usuario-foto">
             </div>
             <select oninput="select_function()" class="select-dash" id="header_select">
@@ -30,7 +30,7 @@
     </header>
 
     <div class="saudacoes">
-        <h1>Bom dia, Fernando!</h1>
+        <h1>Bom dia, <span id="b_usuario2">usuário</span>!</h1>
         <h2>Visualize abaixo os dados sobre sua plantação de café arábica</h2>
     </div>
 
@@ -101,33 +101,93 @@
     </div>
 </body>
 
-</html>
 <script>
-    function select_function() {
-        var select = header_select.value;
-        if (select == "index") {
-            window.location.href = "index.html"
-        } else {
-            window.location.href = "login.html"
-        }
+var API = "http://localhost:3333";
 
+    b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
+    b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
+
+    if (!sessionStorage.NOME_USUARIO) {
+        window.location.href = "login.html";
     }
-    // ALTERAR PARA PROPRIEDADES
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
+
+    if (sessionStorage.NIVEL_ACESSO !== "Proprietario") {
+        window.location.href = "dashboard.html";
+    }
+
+
+    carregarFazendas();
+
+
+async function carregarFazendas() {
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    if (!usuario || !usuario.fk_empresa) {
+        console.error("fk_empresa não encontrada");
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API}/propriedade/empresa/${usuario.fk_empresa}`);
+        const fazendas = await res.json();
+
+        console.log("Fazendas carregadas:", fazendas);
+
+        const container = document.getElementById("lista_fazendas");
+        container.innerHTML = "";
+
+        fazendas.forEach(f => {
+            const card = document.createElement("div");
+            card.className = "fazenda-card";
+            card.style.width = "20%";
+            card.innerHTML = `
+                <img style="width:100px" src="${definirIcone(f.nivel_alerta)}">
+                <br><b>${f.nome_propriedade}</b><br>${legendaAlerta(f.nivel_alerta)}
+            `;
+            card.onclick = () => {
+                localStorage.setItem("id_propriedade", f.id_propriedade);
+                window.location.href = "dashboard.html";
+            };
+            container.appendChild(card);
         });
+
+    } catch (err) {
+        console.error("Erro ao carregar fazendas", err);
     }
+}
+
+
+
+
+function definirIcone(nivel) {
+    switch(nivel) {
+        case "verde": return "imgs/fazenda_verde.png";
+        case "amarelo": return "imgs/fazenda_amarelo.png";
+        case "vermelho": return "imgs/fazenda_vermelho.png";
+        default: return "imgs/fazenda_verde.png";
+    }
+}
+
+function legendaAlerta(nivel) {
+    if (nivel === "verde") return "Excelente";
+    if (nivel === "amarelo") return "Atenção";
+    return "Em risco";
+}
+
+function select_function() {
+    const select = document.getElementById("header_select");
+    const opts = select.options;
+
+    for (let i = 0; i < opts.length; i++) {
+        if (opts[i].selected) {
+            if (opts[i].value === "index") {
+                sessionStorage.clear();
+                window.location.href = "index.html";
+            } else if (opts[i].value === "login") {
+                sessionStorage.clear();
+                window.location.href = "login.html";
+            }
+        }
+    }
+}
 </script>

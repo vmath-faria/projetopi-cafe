@@ -100,65 +100,49 @@
 
     function entrar() {
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
 
-        if (emailVar == "" || senhaVar == "") {
-            alert('Mensagem de erro para todos os campos em branco');
-            return false;
-        }
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+    if (emailVar === "" || senhaVar === "") {
+        alert("Preencha todos os campos.");
+        return;
+    }
 
-        fetch("/usuario/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome_usuario;
-                    sessionStorage.ID_USUARIO = json.id_usuario;
-                    sessionStorage.NIVEL_ACESSO = json.nivel_acesso
-                    sessionStorage.PROPRIEDADES = JSON.stringify(json.propriedades)
-
-                localStorage.setItem("usuario", JSON.stringify(usuario));
-
-                // Redirecionamento
-                if (data.nivel_acesso === "Proprietario") {
-                    window.location.href = "dashboard_propriedades.html";
-                } else {
-                    window.location.href = "dashboard.html";
-                }
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
+    fetch("/usuario/autenticar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: emailVar,
+            senhaServer: senhaVar
         })
+    })
+    .then(resposta => {
+        if (!resposta.ok) {
+            alert("Usuário ou senha inválidos.");
+            return;
+        }
 
-        return false;
+        return resposta.json();
+    })
+    .then(json => {
+        if (!json) return;
+
+        sessionStorage.EMAIL_USUARIO = json.email;
+        sessionStorage.NOME_USUARIO = json.nome_usuario;
+        sessionStorage.ID_USUARIO = json.id_usuario;
+        sessionStorage.NIVEL_ACESSO = json.nivel_acesso;
+        sessionStorage.PROPRIEDADES = JSON.stringify(json.propriedades);
+
+        if (json.nivel_acesso === "Proprietario") {
+            window.location.href = "dashboard_propriedades.html";
+        } else {
+            window.location.href = "dashboard.html";
+        }
+    })
+    .catch(err => console.error(err));
 }
+
 </script>
 
