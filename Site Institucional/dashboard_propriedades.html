@@ -28,15 +28,16 @@
     </div>
 
     <div class="saudacoes">
-        <h1>Bom dia, Fernando!</h1>
+        <h1>Bom dia, Fernando!</h1> <!-- Lembrar de deixar essa parte dinâmica -->
         <h2>Visualize abaixo os dados sobre sua plantação de café arábica</h2>
 
-        <div id="alerta">
-            </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
+        <section class="paramertros">
+
+            <article class="area-parametros-alerta">
+                <p>
+                    Parâmetros para Alertas
                 </p>
+            </article>
                 <div class="parametros-alerta">
                     <div class="item-regua perigo-frio">
                         <p>Perigo</p>
@@ -60,19 +61,30 @@
                     </div>
                 </div>
             </div>
+        </section>
+
 
         <!-- KPIs -->
         <div class="kpis">
             <div class="kpi">
-                <h3>Quantidade de Propriedades Acima do Ideal<abbr title="Verde indica que está dentro da faixa ideal de 60%~75%. Laranja indica que está entre 76%-80% e você deve evitar mais irrigação. Vermelho indica que está acima do ideal, com alto risco de perdas. Amarelo indica que está abaixo do ideal, sendo necessário irrigação imediata."><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3> 
+                <h3>Quantidade de Propriedades Acima do Ideal<abbr
+                        title="Verde indica que está dentro da faixa ideal de 60%~75%. Laranja indica que está entre 76%-80% e você deve evitar mais irrigação. Vermelho indica que está acima do ideal, com alto risco de perdas. Amarelo indica que está abaixo do ideal, sendo necessário irrigação imediata."><img
+                            src="./imgs/iconeInformativo.png" alt=""
+                            style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
                 <span id="kpi_umidade" style="color: green;">Z</span>
             </div>
             <div class="kpi">
-                <h3>Quantidades de Propriedades Abaixo do Ideal<abbr title="Indica a faixa horária mais comum de seca na sua plantação. Fique alerta nesses horários."><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
+                <h3>Quantidades de Propriedades Abaixo do Ideal<abbr
+                        title="Indica a faixa horária mais comum de seca na sua plantação. Fique alerta nesses horários."><img
+                            src="./imgs/iconeInformativo.png" alt=""
+                            style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
                 <span id="kpi_temp">Y</span>
             </div>
             <div class="kpi">
-                <h3>Quantidade de Propriedades com Umidade Ideal<abbr title="Exibe uma mensagem condizente com a média de umidade da plantação."><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
+                <h3>Quantidade de Propriedades com Umidade Ideal<abbr
+                        title="Exibe uma mensagem condizente com a média de umidade da plantação."><img
+                            src="./imgs/iconeInformativo.png" alt=""
+                            style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
                 <span id="kpi_saude" style="color: green;">X</span>
             </div>
             <!--ALERTA DINÂMICO-->
@@ -83,6 +95,10 @@
         <br>
         <div class="propriedades" id="propriedades">
 
+        </div>
+
+
+        <div id="alerta"> <!-- Lembrar de realizar uma função para esse id, lá nas rotas-->
         </div>
 </body>
 
@@ -116,4 +132,3 @@
         });
     }
 </script>
-
