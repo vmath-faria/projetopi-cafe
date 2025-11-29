@@ -202,22 +202,26 @@
 
         if(senhaVar != senhaConf){
             alert('As senhas devem ser iguais!')
-        }else{
-            alert('Cadastro realizado com sucesso!')
-            window.location.href = 'login.html'
-        } 
+            return false;
+        }
+    
 
-        for (let i = 0; i < listaTokensVálidos.length; i++) {
-            //Verificar a tabela adequada para chamar as empresas
-        console.log(listaTokensVálidos)
-      if (listaTokensVálidos[i].codigo_ativacao == codigoVerifVar) {
-        idEmpresaVincular = listaTokensVálidos[i].id
-        console.log("Código de ativação válido.");
-        break;
-      } else {
-        alert('Mensagem de erro para código inválido');
-      }
-    }
+        var tokenEncontrado = null;
+
+        for (var i = 0; i < listaTokensVálidos.length; i++) {
+            if (listaTokensVálidos[i].token === codigoVerifVar) {
+                tokenEncontrado = listaTokensVálidos[i];
+                break; 
+            }
+        }
+        if (!tokenEncontrado) {
+            alert("Código inválido");
+            return;
+        } else {
+            var idEmpresaVincular = tokenEncontrado.id_empresa;
+            console.log("Código de ativação válido.");
+        }
+
     console.log('Vou para o fetch')
     // Enviando o valor da nova input
     fetch("/usuario/cadastrar", {
@@ -262,22 +266,16 @@
 
   // Listando empresas cadastradas 
   function listar() {
-    fetch("/empresa/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaTokensVálidos.push(empresa);
+    fetch("/empresa/listar")
+      .then(res => res.json())
+      .then(empresas => {
 
-            console.log("listaTokensVálidos")
-            console.log(listaTokensVálidos[0].codigo_ativacao)
-          });
-        });
+        listaTokensVálidos = empresas;
+
+        console.log("Tokens carregados:");
+        listaTokensVálidos.forEach(t => console.log(t.token));
       })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
+      .catch(err => console.log("#ERRO:", err));
+}
 
 </script>

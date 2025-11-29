@@ -4,7 +4,9 @@ var database = require("../database/config");
 
 
 function listar() {
-  var instrucaoSql = `SELECT token, 
+  var instrucaoSql = `SELECT id_token,
+        token, 
+        fk_empresa AS id_empresa,
         nome_empresa
         FROM token 
           JOIN empresa
