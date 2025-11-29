@@ -135,7 +135,6 @@
         sessionStorage.NIVEL_ACESSO = json.nivel_acesso;
         sessionStorage.PROPRIEDADES = JSON.stringify(json.propriedades);
 
-        // redirecionamento
         if (json.nivel_acesso === "Proprietario") {
             window.location.href = "dashboard_propriedades.html";
         } else {

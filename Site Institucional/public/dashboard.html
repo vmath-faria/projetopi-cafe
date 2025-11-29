@@ -111,7 +111,6 @@ async function selecionarTalhao(idEmpresa, talhaoId) {
     try {
         const res = await fetch(`/talhao/${talhaoId}/leituras/historico`);
         const data = await res.json();
-        // renderizar gráficos específicos do talhão
     } catch (err) {
         console.error(err);
     }

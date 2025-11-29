@@ -6,15 +6,16 @@ const buscarToken = async (tokenCode) => {
   return rows[0];
 };
 
-const marcarTokenUsado = async (id_token, fk_empresa) => {
-  const sql = `
-    UPDATE token 
-    SET status_token = 'Usado' 
-    WHERE id_token = '${id_token}' AND fk_empresa = '${fk_empresa}'
-  `;
-  const result = await database.executar(sql);
-  return result.affectedRows;
-};
+function marcarTokenUsado(id_usuario, token) {
+    const sql = `
+        UPDATE token
+        SET status_token = 'Usado',
+            fk_usuario = ${id_usuario}
+        WHERE token = '${token}';
+    `;
+    console.log("Executando SQL:", sql);
+    return database.executar(sql);
+}
 
 module.exports = {
   buscarToken,

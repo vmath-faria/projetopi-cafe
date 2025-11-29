@@ -90,8 +90,26 @@ function autenticar(req, res) {
         });
 }
 
+function marcarTokenUsado(req, res) {
+    var token = req.body.token;
+    var id_usuario = req.body.id_usuario;
+
+    if (!token) {
+        return res.status(400).send("Token não enviado.");
+    }
+
+    tokenModel.marcarTokenUsado(id_usuario, token)
+        .then(result => {
+            res.status(200).json({ mensagem: "Token atualizado para 'Usado'." });
+        })
+        .catch(erro => {
+            console.log("Erro ao atualizar token:", erro);
+            res.status(500).send("Erro ao atualizar token.");
+        });
+}
 
 module.exports = { 
   cadastrar,
-  autenticar
+  autenticar,
+  marcarTokenUsado
 };
