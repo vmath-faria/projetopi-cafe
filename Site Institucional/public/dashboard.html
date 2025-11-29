@@ -156,8 +156,19 @@ function avaliarSaude(umidade) {
 }
 
 function select_function() {
-    const select = document.getElementById("header_select").value;
-    if (select === "index") window.location.href = "index.html";
-    else if (select === "login") window.location.href = "login.html";
+    const select = document.getElementById("header_select");
+    const opts = select.options;
+
+    for (let i = 0; i < opts.length; i++) {
+        if (opts[i].selected) {
+            if (opts[i].value === "index") {
+                sessionStorage.clear();
+                window.location.href = "index.html";
+            } else if (opts[i].value === "login") {
+                sessionStorage.clear();
+                window.location.href = "login.html";
+            }
+        }
+    }
 }
 </script>
