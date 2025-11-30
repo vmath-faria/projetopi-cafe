@@ -123,12 +123,12 @@ INSERT INTO token (token, fk_empresa, fk_usuario, status_token, data_expiracao)V
 ('R3T4Y5', 2, 6, 'Pendente', '2025-12-31');
 
 
--- PROPRIEDADES (1 por empresa)
+-- PROPRIEDADES 
 INSERT INTO propriedade (nome_propriedade, logradouro, estado, cidade, bairro, cep, numero, fk_empresa)VALUES
 ('Fazenda Cafés Arábicas Valiosos', 'Estrada Nova KM 5', 'Espírito Santo', 'Vila Velha', 'Zona Rural', '00000000', 'S/N', 1),
 ('Sítio Cafezais', 'Rodovia ES-123 KM 55', 'Espírito Santo', 'Vitória', 'Zona Rural', '12345678', 'S/N', 2);
 
--- TALHÕES (1 por propriedade)
+-- TALHÕES 
 INSERT INTO talhao (nome_talhao, variedade_cafe, fk_propriedade)VALUES
 ('Talhão 1 - Arábica Premium', 'Cafe arabica', 1),
 ('Talhão 2 - Arábica Clássico', 'Cafe arabica', 2);
@@ -220,3 +220,47 @@ FROM empresa AS e
 JOIN propriedade AS p ON p.fk_empresa = e.id_empresa
 JOIN talhao AS t ON t.fk_propriedade = p.id_propriedade
 JOIN sensor AS s ON s.fk_talhao = t.id_talhao;
+
+
+-- SPRINT TRÊS
+
+
+-- Novas Propriedades
+INSERT INTO propriedade (nome_propriedade, logradouro, estado, cidade, bairro, cep, numero, fk_empresa) VALUES
+('Fazenda Aurora', 'Estrada Municipal KM 12', 'Espírito Santo', 'Domingos Martins', 'Zona Rural', '29100000', 'S/N', 1),
+('Sítio Vale dos Grãos', 'Linha Verde KM 4', 'Espírito Santo', 'Santa Maria de Jetibá', 'Zona Rural', '29645000', '250', 1),
+('Fazenda Horizonte Alto', 'Rodovia BR-262 KM 98', 'Espírito Santo', 'Ibatiba', 'Zona Rural', '29395000', 'S/N', 1);
+
+INSERT INTO propriedade (nome_propriedade, logradouro, estado, cidade, bairro, cep, numero, fk_empresa) VALUES
+('Fazenda Ouro Negro', 'Fazenda Central KM 10', 'Minas Gerais', 'Três Pontas', 'Zona Rural', '37190000', 'S/N', 2),
+('Sítio Flor do Café', 'Rodovia MG-167 KM 33', 'Minas Gerais', 'Varginha', 'Zona Rural', '37062000', '1200', 2),
+('Fazenda Serra Viva', 'Estrada da Mantiqueira KM 8', 'Minas Gerais', 'Cambuquira', 'Zona Rural', '37420000', 'S/N', 2);
+
+-- Novos talhões
+
+INSERT INTO talhao (nome_talhao, variedade_cafe, fk_propriedade) VALUES
+('Talhão A - Arábica Bourbon', 'Café arábica', 3),
+('Talhão B - Arábica Catuaí', 'Café arábica', 3);
+
+INSERT INTO talhao (nome_talhao, variedade_cafe, fk_propriedade) VALUES
+('Talhão 1 - Arábica Amarelo', 'Café arábica', 4),
+('Talhão 2 - Arábica Vermelho', 'Café arábica', 4),
+('Talhão 3 - Arábica Topázio', 'Café arábica', 4);
+
+INSERT INTO talhao (nome_talhao, variedade_cafe, fk_propriedade) VALUES
+('Talhão Norte', 'Café arábica', 5),
+('Talhão Sul', 'Café arábica', 5);
+
+INSERT INTO talhao (nome_talhao, variedade_cafe, fk_propriedade) VALUES
+('Talhão Ouro 1', 'Café arábica', 6),
+('Talhão Ouro 2', 'Café arábica', 6),
+('Talhão Ouro 3', 'Café arábica', 6);
+
+INSERT INTO talhao (nome_talhao, variedade_cafe, fk_propriedade) VALUES
+('Talhão Flor A', 'Café arábica', 7),
+('Talhão Flor B', 'Café arábica', 7);
+
+INSERT INTO talhao (nome_talhao, variedade_cafe, fk_propriedade) VALUES
+('Talhão Serra 1', 'Café arábica', 8),
+('Talhão Serra 2', 'Café arábica', 8),
+('Talhão Serra 3', 'Café arábica', 8);
