@@ -89,7 +89,6 @@
         <!--ALERTA DINÂMICO-->
     </div>
 
-
     <h2>Selecione a propriedade desejada:</h2>
     <br>
     <div class="propriedades" id="propriedades">
@@ -103,6 +102,7 @@
 
 <script>
 var API = "http://localhost:3333";
+
 
     b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
     b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
@@ -119,6 +119,8 @@ var API = "http://localhost:3333";
     carregarFazendas();
 
 
+    setInterval(carregarFazendas, 20000);
+
 async function carregarFazendas() {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -128,50 +130,53 @@ async function carregarFazendas() {
     }
 
     try {
-        const res = await fetch(`${API}/propriedade/empresa/${usuario.fk_empresa}`);
+        const res = await fetch(`${API}/propriedades/empresa/${usuario.fk_empresa}`);
         const fazendas = await res.json();
 
-        console.log("Fazendas carregadas:", fazendas);
-
-        const container = document.getElementById("lista_fazendas");
+        const container = document.getElementById("propriedades");
         container.innerHTML = "";
 
         fazendas.forEach(f => {
             const card = document.createElement("div");
             card.className = "fazenda-card";
-            card.style.width = "20%";
+
             card.innerHTML = `
                 <img style="width:100px" src="${definirIcone(f.nivel_alerta)}">
-                <br><b>${f.nome_propriedade}</b><br>${legendaAlerta(f.nivel_alerta)}
+                <br><b>${f.nome_propriedade}</b>
+                <br>${legendaAlerta(f.nivel_alerta)}
             `;
+
             card.onclick = () => {
                 localStorage.setItem("id_propriedade", f.id_propriedade);
                 window.location.href = "dashboard.html";
             };
+
             container.appendChild(card);
         });
 
     } catch (err) {
-        console.error("Erro ao carregar fazendas", err);
+        console.error("Erro ao carregar fazendas:", err);
     }
 }
 
-
-
-
 function definirIcone(nivel) {
-    switch(nivel) {
+    switch (nivel) {
         case "verde": return "imgs/fazenda_verde.png";
-        case "amarelo": return "imgs/fazenda_amarelo.png";
+        case "amarelo": return "imgs/fazenda _amarelo.png";
+        case "laranja": return "imgs/fazenda_laranja.png";
         case "vermelho": return "imgs/fazenda_vermelho.png";
         default: return "imgs/fazenda_verde.png";
     }
 }
 
 function legendaAlerta(nivel) {
-    if (nivel === "verde") return "Excelente";
-    if (nivel === "amarelo") return "Atenção";
-    return "Em risco";
+    switch (nivel) {
+        case "verde": return "Excelente";
+        case "amarelo": return "Necessário irrigar";
+        case "laranja": return "Umidade próxima ao limite";
+        case "vermelho": return "Umidade acima do limite";
+        default: return "—";
+    }
 }
 
 function select_function() {

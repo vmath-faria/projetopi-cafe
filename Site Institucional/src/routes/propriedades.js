@@ -1,14 +1,11 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const propriedadeController = require("../controllers/propriedadesController");
 
-var propriedadesController = require("../controllers/propriedadesController");
+// Lista todas as propriedades da empresa
+router.get("/empresa/:idEmpresa", propriedadeController.listarPorEmpresa);
 
-router.get("/:empresaId", function (req, res) {
-  propriedadesController.buscarPropriedadessPorEmpresa(req, res);
-});
-
-router.post("/cadastrar", function (req, res) {
-  propriedadesController.cadastrar(req, res);
-})
+// Retorna uma propriedade específica, talvez seja necessário para a dash de talhão
+router.get("/:idPropriedade", propriedadeController.buscarPorId);
 
 module.exports = router;

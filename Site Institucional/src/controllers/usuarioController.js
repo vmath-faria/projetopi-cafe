@@ -52,7 +52,7 @@ function autenticar(req, res) {
 
                 const user = resultado[0];
 
-                propriedadesModel.buscarPropriedadesPorEmpresa(user.id_empresa)
+                propriedadesModel.listarPorEmpresa(user.id_empresa)
                     .then(propriedades => {
 
                         res.json({

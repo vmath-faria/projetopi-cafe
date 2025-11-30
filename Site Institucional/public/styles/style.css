@@ -756,6 +756,22 @@ body {
 /* ESTILIZAÇÃO DA DASHBOARD*/
 
 
+.propriedades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+}
+
+.fazenda-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+    border-radius: 8px;
+    padding: 12px;
+}
+
 body.dashboard {
     background-color: #f3dec2;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

@@ -1,48 +1,40 @@
-var propriedadesModel = require("../models/propriedadesModel");
+var propriedadeModel = require("../models/propriedadesModel");
 
-function buscarPropriedadesPorEmpresa(req, res) {
-  var idUsuario = req.params.idUsuario;
+function listarPorEmpresa(req, res) {
+    var idEmpresa = req.params.idEmpresa;
 
-  propriedadesModel.buscarPropriedadesPorEmpresa(id_usuario).then((resultado) => {
-    if (resultado.length > 0) {
-      res.status(200).json(resultado);
-    } else {
-      res.status(204).json([]);
-    }
-  }).catch(function (erro) {
-    console.log(erro);
-    console.log("Houve um erro ao buscar os propriedadess: ", erro.sqlMessage);
-    res.status(500).json(erro.sqlMessage);
-  });
+    propriedadeModel.listarPorEmpresa(idEmpresa)
+        .then(function(resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma propriedade encontrada!");
+            }
+        })
+        .catch(function(erro) {
+            console.log("Erro ao buscar propriedades:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
-// Usar o cadastrar?
-function cadastrar(req, res) {
-  var descricao = req.body.descricao;
-  var idUsuario = req.body.idUsuario;
+function buscarPorId(req, res) {
+    var idPropriedade = req.params.idPropriedade;
 
-  if (descricao == undefined) {
-    res.status(400).send("descricao está undefined!");
-  } else if (idUsuario == undefined) {
-    res.status(400).send("idUsuario está undefined!");
-  } else {
-
-
-    propriedadesModel.cadastrar(descricao, idUsuario)
-      .then((resultado) => {
-        res.status(201).json(resultado);
-      }
-      ).catch((erro) => {
-        console.log(erro);
-        console.log(
-          "\nHouve um erro ao realizar o cadastro! Erro: ",
-          erro.sqlMessage
-        );
-        res.status(500).json(erro.sqlMessage);
-      });
-  }
+    propriedadeModel.buscarPorId(idPropriedade)
+        .then(function(resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado[0]);
+            } else {
+                res.status(404).send("Propriedade não encontrada!");
+            }
+        })
+        .catch(function(erro) {
+            console.log("Erro ao buscar propriedade:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 module.exports = {
-  buscarPropriedadesPorEmpresa
-}
+    listarPorEmpresa,
+    buscarPorId
+};
