@@ -31,14 +31,15 @@
 
     <div class="saudacoes">
         <h1>Bom dia, <span id="b_usuario2">usuário</span>!</h1>
-        <h2>Visualize abaixo os dados sobre sua plantação de café arábica</h2>
+        <h2>Gere um token para cadastrar um novo funcionario:</h2>
         <div id="token"
         style="margin: 10px;"></div>
         <button    
-        style="border-radius: 20px; width: 100px; margin-top: 10px;"
+        style="border-radius: 20px; width: 100px; margin: 10px; background-color: #6f4e37; color: white;"
         onclick="gerarToken()"
         >
         Criar Token</button>
+        <h2>Visualize abaixo os dados sobre sua plantação de café arábica.</h2>
     </div>
 
     <section class="parametros">
@@ -190,7 +191,7 @@ function select_function() {
     var select = document.getElementById("header_select");
     var options = select.options;
 
-    for (var i = 0; i < opts.length; i++) {
+    for (var i = 0; i < options.length; i++) {
         if (options[i].selected) {
             if (options[i].value === "index") {
                 sessionStorage.clear();
@@ -214,5 +215,28 @@ function gerarToken() {
     }
 
     document.getElementById('token').innerText = token;
+
+    var id_usuario = sessionStorage.getItem("ID_USUARIO");
+    var id_empresa = sessionStorage.getItem("ID_EMPRESA");
+
+    fetch('/usuario/gerar-token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: token,
+            id_usuario: id_usuario,
+            id_empresa: id_empresa
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Token salvo no banco:", data);
+    })
+    .catch(error => {
+        console.error("Erro ao enviar token:", error);
+    });
 }
+
 </script>

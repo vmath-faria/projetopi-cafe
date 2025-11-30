@@ -177,15 +177,15 @@ function avaliarSaude(umidade) {
 }
 
 function select_function() {
-    const select = document.getElementById("header_select");
-    const opts = select.options;
+    var select = document.getElementById("header_select");
+    var options = select.options;
 
-    for (let i = 0; i < opts.length; i++) {
-        if (opts[i].selected) {
-            if (opts[i].value === "index") {
+    for (var i = 0; i < options.length; i++) {
+        if (options[i].selected) {
+            if (options[i].value === "index") {
                 sessionStorage.clear();
                 window.location.href = "index.html";
-            } else if (opts[i].value === "login") {
+            } else if (options[i].value === "login") {
                 sessionStorage.clear();
                 window.location.href = "login.html";
             }

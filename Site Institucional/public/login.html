@@ -133,7 +133,10 @@
         sessionStorage.NOME_USUARIO = json.nome_usuario;
         sessionStorage.ID_USUARIO = json.id_usuario;
         sessionStorage.NIVEL_ACESSO = json.nivel_acesso;
+        sessionStorage.ID_EMPRESA = json.fk_empresa;
         sessionStorage.PROPRIEDADES = JSON.stringify(json.propriedades);
+
+        console.log("ID_EMPRESA SALVO:", sessionStorage.ID_EMPRESA);
 
         if (json.nivel_acesso === "Proprietario") {
             window.location.href = "dashboard_propriedades.html";

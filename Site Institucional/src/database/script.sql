@@ -30,7 +30,7 @@ CREATE TABLE token (
     id_token INT AUTO_INCREMENT,
     token VARCHAR(64) UNIQUE NOT NULL, 
     fk_empresa INT NOT NULL,
-    fk_usuario INT UNIQUE NOT NULL,
+    fk_usuario INT NOT NULL,
     status_token VARCHAR(20) DEFAULT 'Pendente', 
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     data_expiracao DATETIME,        

@@ -1,14 +1,14 @@
 const sensorModel = require('../models/sensorModel');
 
-const inserirLeitura = async (req, res) => {
+var inserirLeitura = async (req, res) => {
   try {
-    const { valor_umidade, fk_sensor } = req.body;
+    var { valor_umidade, fk_sensor } = req.body;
 
     if (valor_umidade == null || !fk_sensor) {
       return res.status(400).json({ erro: 'Dados incompletos' });
     }
 
-    const id = await sensorModel.criarLeitura({ valor_umidade, fk_sensor });
+    var id = await sensorModel.criarLeitura({ valor_umidade, fk_sensor });
 
     return res.status(201).json({ id_leitura: id });
 
