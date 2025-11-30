@@ -140,6 +140,7 @@ async function carregarFazendas() {
     try {
         const res = await fetch(`${API}/propriedades/empresa/${usuario.fk_empresa}`);
         const fazendas = await res.json();
+        console.log(fazendas);
 
         const container = document.getElementById("propriedades");
         container.innerHTML = "";
