@@ -32,13 +32,10 @@
     <div class="saudacoes">
         <h1>Bom dia, <span id="b_usuario2">usuário</span>!</h1>
         <h2>Gere um token para cadastrar um novo funcionario:</h2>
-        <div id="token"
-        style="margin: 10px;"></div>
-        <button    
-        style="border-radius: 20px; width: 100px; margin: 10px; background-color: #6f4e37; color: white;"
-        onclick="gerarToken()"
-        >
-        Criar Token</button>
+        <div id="token" style="margin: 10px;"></div>
+        <button style="border-radius: 20px; width: 100px; margin: 10px; background-color: #6f4e37; color: white;"
+            onclick="gerarToken()">
+            Criar Token</button>
         <h2>Visualize abaixo os dados sobre sua plantação de café arábica.</h2>
     </div>
 
@@ -99,7 +96,8 @@
 
     <h2>Selecione a propriedade desejada:</h2>
     <br>
-    <div class="propriedades" id="propriedades" style="display: flex; flex-direction: row; align-items: center; justify-content: space-around;">
+    <div class="propriedades" id="propriedades"
+        style="display: flex; flex-direction: row; align-items: center; justify-content: space-around;">
 
     </div>
 
@@ -109,7 +107,7 @@
 </body>
 
 <script>
-var API = "http://localhost:3333";
+    var API = "http://localhost:3333";
 
 
     b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
@@ -129,115 +127,115 @@ var API = "http://localhost:3333";
 
     setInterval(carregarFazendas, 20000);
 
-async function carregarFazendas() {
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    async function carregarFazendas() {
+        const fk_empresa = JSON.parse(sessionStorage.getItem("ID_EMPRESA"));
 
-    if (!usuario || !usuario.fk_empresa) {
-        console.error("fk_empresa não encontrada");
-        return;
-    }
+        if (!fk_empresa) {
+            console.error("fk_empresa não encontrada");
+            return;
+        }
 
-    try {
-        const res = await fetch(`${API}/propriedades/empresa/${usuario.fk_empresa}`);
-        const fazendas = await res.json();
-        console.log(fazendas);
+        try {
+            const res = await fetch(`${API}/propriedades/empresa/${fk_empresa}`);
+            const fazendas = await res.json();
+            console.log(fazendas);
 
-        const container = document.getElementById("propriedades");
-        container.innerHTML = "";
+            const container = document.getElementById("propriedades");
+            container.innerHTML = "";
 
-        fazendas.forEach(f => {
-            const card = document.createElement("div");
-            card.className = "fazenda-card";
+            fazendas.forEach(f => {
+                const card = document.createElement("div");
+                card.className = "fazenda-card";
 
-            card.innerHTML = `
+                card.innerHTML = `
                 <img style="width:100px; align-items: center; cursor: pointer;"  src="${definirIcone(f.nivel_alerta)}">
                 <br><b>${f.nome_propriedade}</b>
                 <br>${legendaAlerta(f.nivel_alerta)}
             `;
 
-            card.onclick = () => {
-                localStorage.setItem("id_propriedade", f.id_propriedade);
-                window.location.href = "dashboard.html";
-            };
+                card.onclick = () => {
+                    localStorage.setItem("id_propriedade", f.id_propriedade);
+                    window.location.href = "dashboard.html";
+                };
 
-            container.appendChild(card);
-        });
+                container.appendChild(card);
+            });
 
-    } catch (err) {
-        console.error("Erro ao carregar fazendas:", err);
+        } catch (err) {
+            console.error("Erro ao carregar fazendas:", err);
+        }
     }
-}
 
-function definirIcone(nivel) {
-    switch (nivel) {
-        case "verde": return "imgs/fazenda_verde.png";
-        case "amarelo": return "imgs/fazenda _amarelo.png";
-        case "laranja": return "imgs/fazenda_laranja.png";
-        case "vermelho": return "imgs/fazenda_vermelho.png";
-        default: return "imgs/fazenda_verde.png";
+    function definirIcone(nivel) {
+        switch (nivel) {
+            case "verde": return "imgs/fazenda_verde.png";
+            case "amarelo": return "imgs/fazenda _amarelo.png";
+            case "laranja": return "imgs/fazenda_laranja.png";
+            case "vermelho": return "imgs/fazenda_vermelho.png";
+            default: return "imgs/fazenda_verde.png";
+        }
     }
-}
 
-function legendaAlerta(nivel) {
-    switch (nivel) {
-        case "verde": return "Excelente";
-        case "amarelo": return "Necessário irrigar";
-        case "laranja": return "Umidade próxima ao limite";
-        case "vermelho": return "Umidade acima do limite";
-        default: return "—";
+    function legendaAlerta(nivel) {
+        switch (nivel) {
+            case "verde": return "Excelente";
+            case "amarelo": return "Necessário irrigar";
+            case "laranja": return "Umidade próxima ao limite";
+            case "vermelho": return "Umidade acima do limite";
+            default: return "—";
+        }
     }
-}
 
-function select_function() {
-    var select = document.getElementById("header_select");
-    var options = select.options;
+    function select_function() {
+        var select = document.getElementById("header_select");
+        var options = select.options;
 
-    for (var i = 0; i < options.length; i++) {
-        if (options[i].selected) {
-            if (options[i].value === "index") {
-                sessionStorage.clear();
-                window.location.href = "index.html";
-            } else if (options[i].value === "login") {
-                sessionStorage.clear();
-                window.location.href = "login.html";
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].selected) {
+                if (options[i].value === "index") {
+                    sessionStorage.clear();
+                    window.location.href = "index.html";
+                } else if (options[i].value === "login") {
+                    sessionStorage.clear();
+                    window.location.href = "login.html";
+                }
             }
         }
     }
-}
 
-function gerarToken() {
-    var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    var token = '';
-    var tamanho = 6;
-    
-    for (var i = 0; i < tamanho; i++) {
-        var indiceAleatorio = Math.floor(Math.random() * caracteres.length); 
-        token += caracteres[indiceAleatorio];
-    }
+    function gerarToken() {
+        var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        var token = '';
+        var tamanho = 6;
 
-    document.getElementById('token').innerText = token;
+        for (var i = 0; i < tamanho; i++) {
+            var indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+            token += caracteres[indiceAleatorio];
+        }
 
-    var id_usuario = sessionStorage.getItem("ID_USUARIO");
-    var id_empresa = sessionStorage.getItem("ID_EMPRESA");
+        document.getElementById('token').innerText = token;
 
-    fetch('/usuario/gerar-token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            token: token,
-            id_usuario: id_usuario,
-            id_empresa: id_empresa
+        var id_usuario = sessionStorage.getItem("ID_USUARIO");
+        var id_empresa = sessionStorage.getItem("ID_EMPRESA");
+
+        fetch('/usuario/gerar-token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: token,
+                id_usuario: id_usuario,
+                id_empresa: id_empresa
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Token salvo no banco:", data);
-    })
-    .catch(error => {
-        console.error("Erro ao enviar token:", error);
-    });
-}
+            .then(response => response.json())
+            .then(data => {
+                console.log("Token salvo no banco:", data);
+            })
+            .catch(error => {
+                console.error("Erro ao enviar token:", error);
+            });
+    }
 
 </script>
