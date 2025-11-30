@@ -32,6 +32,13 @@
     <div class="saudacoes">
         <h1>Bom dia, <span id="b_usuario2">usuário</span>!</h1>
         <h2>Visualize abaixo os dados sobre sua plantação de café arábica</h2>
+        <div id="token"
+        style="margin: 10px;"></div>
+        <button    
+        style="border-radius: 20px; width: 100px; margin-top: 10px;"
+        onclick="gerarToken()"
+        >
+        Criar Token</button>
     </div>
 
     <section class="parametros">
@@ -180,19 +187,32 @@ function legendaAlerta(nivel) {
 }
 
 function select_function() {
-    const select = document.getElementById("header_select");
-    const opts = select.options;
+    var select = document.getElementById("header_select");
+    var options = select.options;
 
-    for (let i = 0; i < opts.length; i++) {
-        if (opts[i].selected) {
-            if (opts[i].value === "index") {
+    for (var i = 0; i < opts.length; i++) {
+        if (options[i].selected) {
+            if (options[i].value === "index") {
                 sessionStorage.clear();
                 window.location.href = "index.html";
-            } else if (opts[i].value === "login") {
+            } else if (options[i].value === "login") {
                 sessionStorage.clear();
                 window.location.href = "login.html";
             }
         }
     }
+}
+
+function gerarToken() {
+    var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var token = '';
+    var tamanho = 6;
+    
+    for (var i = 0; i < tamanho; i++) {
+        var indiceAleatorio = Math.floor(Math.random() * caracteres.length); 
+        token += caracteres[indiceAleatorio];
+    }
+
+    document.getElementById('token').innerText = token;
 }
 </script>
