@@ -91,7 +91,7 @@
 
     <h2>Selecione a propriedade desejada:</h2>
     <br>
-    <div class="propriedades" id="propriedades">
+    <div class="propriedades" id="propriedades" style="display: flex; flex-direction: row; align-items: center; justify-content: space-around;">
 
     </div>
 
@@ -141,7 +141,7 @@ async function carregarFazendas() {
             card.className = "fazenda-card";
 
             card.innerHTML = `
-                <img style="width:100px" src="${definirIcone(f.nivel_alerta)}">
+                <img style="width:100px; align-items: center; cursor: pointer;"  src="${definirIcone(f.nivel_alerta)}">
                 <br><b>${f.nome_propriedade}</b>
                 <br>${legendaAlerta(f.nivel_alerta)}
             `;

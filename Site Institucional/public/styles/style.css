@@ -755,7 +755,7 @@ body {
 
 /* ESTILIZAÇÃO DA DASHBOARD*/
 
-
+/* Não está aplicando na dash dinâmica das propriedades*/
 .propriedades {
     display: flex;
     flex-wrap: wrap;
@@ -771,6 +771,8 @@ body {
     border-radius: 8px;
     padding: 12px;
 }
+
+/* até aqui */
 
 body.dashboard {
     background-color: #f3dec2;
