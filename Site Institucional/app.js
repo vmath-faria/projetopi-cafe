@@ -21,6 +21,7 @@ var leituraRouter = require("./src/routes/leitura");
 var propriedadesRouter = require("./src/routes/propriedades");
 var talhaoRouter = require("./src/routes/talhao");
 var empresaRouter = require("./src/routes/empresa")
+var graficoGeralRouter = require("./src/routes/graficoGeral")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,6 +35,7 @@ app.use("/leitura", leituraRouter);
 app.use("/propriedades", propriedadesRouter);
 app.use("/talhao", talhaoRouter);
 app.use("/empresa", empresaRouter)
+app.use("/graficoGeral", graficoGeralRouter)
 
 
 app.listen(PORTA_APP, function () {
