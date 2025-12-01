@@ -94,21 +94,17 @@
         <!--ALERTA DINÂMICO-->
     </div>
 
-    <h2>Selecione a propriedade desejada:</h2>
-    <br>
-    <div class="propriedades" id="propriedades"
-        style="display: flex; flex-direction: row; align-items: center; justify-content: space-around;">
+    <section class="area-selecao-propriedades">
+        <h2>Selecione a propriedade desejada</h2>
 
-    </div>
-
+        <div class="lista-propriedades" id="propriedades"></div>
+    </section>
 
     <div id="alerta"> <!-- Lembrar de realizar uma função para esse id, lá nas rotas-->
     </div>
 </body>
 
 <script>
-    var API = "http://localhost:3333";
-
 
     b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
     b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
@@ -136,7 +132,7 @@
         }
 
         try {
-            const res = await fetch(`${API}/propriedades/empresa/${fk_empresa}`);
+            const res = await fetch(`/propriedades/empresa/${fk_empresa}`);
             const fazendas = await res.json();
             console.log(fazendas);
 
@@ -144,7 +140,7 @@
             container.innerHTML = "";
 
             fazendas.forEach(f => {
-                const card = document.createElement("div");
+                const card = document.createElement("section");
                 card.className = "fazenda-card";
 
                 card.innerHTML = `
