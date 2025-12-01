@@ -1,8 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const ctrl = require('../controllers/talhaoController');
+var express = require("express");
+var router = express.Router();
 
-router.get('/:id/leituras/realtime', ctrl.leiturasRealtime);
-router.get('/:id/leituras/historico', ctrl.mediaHistorica);
+var talhaoController = require("../controllers/talhaoController");
+
+router.get("/exibir/:idTalhao", function (req, res) {
+  talhaoController.exibir(req, res);
+});
 
 module.exports = router;

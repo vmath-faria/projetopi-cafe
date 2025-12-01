@@ -3,7 +3,7 @@ var router = express.Router();
 
 var graficoGeralController = require("../controllers/graficoGeralController");
 
-router.get("/exibir", function (req, res) {
+router.get("/exibir/:idPropriedade", function (req, res) {
   graficoGeralController.exibir(req, res);
 });
 
