@@ -138,15 +138,6 @@ async function selecionarTalhao(idEmpresa, talhaoId) {
     }
 }
 
-function renderizarKPIs(data) {
-    const medias = data.medias_talhoes.map(t => t.media_umidade);
-    const mediaGeral = medias.length ? (medias.reduce((a,b)=>a+b)/medias.length).toFixed(1) : 0;
-
-    document.getElementById("kpi_umidade").textContent = mediaGeral + "%";
-    document.getElementById("kpi_temp").textContent = "--";
-    document.getElementById("kpi_alertas").textContent = data.total_alertas;
-    document.getElementById("kpi_saude").textContent = avaliarSaude(mediaGeral);
-}
 
 function renderizarListaTalhoes(lista) {
     const select = document.getElementById("select_sensor");
