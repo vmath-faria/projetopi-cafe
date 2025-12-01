@@ -1,4 +1,4 @@
-var graficoGeralModel = require("../models/graficoGeralModel");
+var graficoGeralModel = require("../models/graficoGeralModels");
 
 function exibir(req, res) {
     var idPropriedade = req.params.idPropriedade;
