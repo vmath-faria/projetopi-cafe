@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffech - Cadastro</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="./imgs/logo-fundo-marrom.png">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="index.html"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
+            <ul class="navbar">
+                <li>
+                    <a href="index.html#div_sobrenos">Quem Somos?</a>
+                    <!-- TODAS AS TAGS a DA NAVBAR TERÃO ESSE HREF, MAS PRECISAMOS PESQUISAR COMO FAZ PARA REFERENCIAR UM ELEMENTO DENTRO DA PÁGINA-->
+                </li>
+                <li>
+                    <a href="index.html#div_solucao">Solução</a> <!-- PRECISARÁ REFERENCIAR A PARTE DE SOLUÇÃO-->
+                </li>
+                <li>
+                    <a href="index.html#div_simulador">Calculadora Financeira</a>
+                    <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
+                </li>
+                <li>
+                    <a href="index.html#div_beneficios">Benefícios</a> <!-- PRECISARÁ REFERENCIAR OS BENEFÍCIOS-->
+                </li>
+                <li>
+                    <a href="index.html#div_contato">Contato</a> <!-- PRECISARÁ REFERENCIAR O CONTATO-->
+                </li>
+            </ul>
+            <ul class="logincadastro">
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+                <li>
+                    <a href="index.html#cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cadastro">
+        <div id="div_cadastro_usuario" class="card-cadastro" style="display: flex;">
+            <h1>Cadastro</h1>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Nome Completo</b> <br>
+                    <input type="text" id="input_nome" placeholder="Insira seu nome completo" value="Fernando Brandão"><br>
+                </div>
+                <div class="campo">
+                    <b>Nome de usuario</b> <br>
+                    <input type="text" id="input_nome_usuario" placeholder="Insira o nome de usuario" value="Brandão"> <br>
+                </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Telefone</b> <br>
+                    <input type="text" id="input_telefone" placeholder="Insira seu telefone" value="11 9 8765 4321"> <br>
+                </div>
+                <div class="campo">
+                    <b>CPF</b> <br>
+                    <input type="text" id="input_cpf" placeholder="Insira seu CPF" value="99999999900"> <br>
+                </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Data de nascimento</b> <br>
+                    <input type="date" id="input_data" placeholder="Insira a data de nascimento" value="1980-01-01"><br>
+                </div>
+                <div class="campo">
+                    <b>Email</b> <br>
+                    <input type="text" id="input_email" placeholder="Insira seu e-mail" value="fernando@brandao.com"> <br>
+                </div>
+            </div>
+             <div class="formCadastro">
+            <div class="campo">
+                    <b>Senha</b> <br>
+                    <input type="password" id="input_senha" placeholder="Insira a sua senha" value="urubu100"><br>
+            </div>
+            <div class="campo">
+                    <b>Confirme sua senha</b> <br>
+                    <input type="password" id="input_senhaConf" placeholder="Reescreva a sua senha" value="urubu100"> <br>
+            </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Código verificação</b> <br>
+                    <input type="text" id="input_verificacao" placeholder="Ex: #123abcDE" value="#123abcDE"> <br>
+                </div>
+            </div>
+            <div class="botoes">
+                <div class="botaozin">
+                    <button class="continuar" onclick="cadastrar()">Cadastrar</button>
+                </div>
+            </div>
+
+            <div class="possuiConta">
+                <p><b>Já possui uma conta? </b> </p>
+                <a href="login.html"> Entrar</a>
+            </div>
+        </div>
+        <!-- INSERIR PÁGINA DE CADASTRO NO PAINEL?
+        <div id='div_cadastro_empresa' class="card-cadastro" style="display: none;">
+            <h1>Cadastro</h1>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Tamanho da propriedades</b> <br>
+                    <input type="text" id="input_tamanhopropriedades"
+                        placeholder="Tamanho de sua propriedades em hectar" value="50"><br>
+                </div>
+                <div class="campo">
+                    <b>Estado</b> <br>
+                    <input type="text" id="input_estado" placeholder="Insira o estado da propriedades" value="ES"> <br>
+                </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Cidade</b> <br>
+                    <input type="text" id="input_cidade" placeholder="Insira a cidade da propriedades" value="Guarapari"> <br>
+                </div>
+                <div class="campo">
+                    <b>Logradouro</b> <br>
+                    <input type="text" id="input_logradouro" placeholder="Insira o logradouro" value="Rua Esquilo"><br>
+                </div>
+            </div>
+            <div class="formCadastro">
+                <div class="campo">
+                    <b>Número</b> <br>
+                    <input type="text" id="input_numero" placeholder="Insira aqui o número da propriedades" value="13"> <br>
+                </div>
+                <div class="campo">
+                    <b>Bairro</b> <br>
+                    <input type="text" id="input_bairro" placeholder="Bairro da propriedades" value="Aracruz"> <br>
+                </div>
+            </div> -->
+        
+        <!-- JUNTAR INPUT DE SENHA COM OS DEMAIS INPUTS
+            -->
+        <div class="imgcadastro">
+            <img src='imgs/café-for-all.webp'>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <div class="container">
+            <div class="redes-sociais">
+                <img height="50" src="./imgs/logo-fonte-branca.png"> <!-- LOGO COFFECH!-->
+                <p>Todos os direitos reservados a COFFECH 2025</p>
+                <img src="./imgs/Icon-instagram.png"> <!-- ICONE INSTAGRAM-->
+                <img src="./imgs/icon-youtube.png"> <!-- ICONE YOUTUBE-->
+                <img src="./imgs/Icon-linkedin.png"> <!-- ICONE LINKEDIN-->
+                <img src="./imgs/Icon-facebook.png"> <!-- ICONE FACEBOOK-->
+            </div>
+            <div class="contatoFooter">
+                <h6>Contato:</h6>
+                <span>coffech@gmail.com</span>
+            </div>
+            <h5 class="equipe">Equipe Coffech:</h5>
+            <div class="nosso-time1">
+                <p>Anderson</p>
+                <p>Diego</p>
+                <p>Guilherme</p>
+            </div>
+            <div class="nosso-time2">
+                <p>João Ricardo</p>
+                <p>Luan</p>
+                <p>Victor Mattheus</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+
+    listaTokensVálidos = [];
+
+    listar()
+
+    function cadastrar() {
+        var nomeVar = input_nome.value;
+        var emailVar = input_email.value;
+        var telefoneVar = input_telefone.value;
+        var cpfVar = input_cpf.value;
+        var nomeUsuarioVar = input_nome_usuario.value;
+        var dataNascimentoVar = input_data.value;
+        var codigoVerifVar = input_verificacao.value;
+        var senhaVar = input_senha.value;
+        var senhaConf = input_senhaConf.value;
+
+        if (nomeVar == '' || emailVar == '' || telefoneVar == '' || cpfVar == '' || nomeUsuarioVar == '' || dataNascimentoVar == '' || codigoVerifVar || senhaVar == '' || senhaConfVar == '') {
+            alert('Preencha as informações corretamente.')
+            return false;
+        } 
+
+        if(senhaVar != senhaConf){
+            alert('As senhas devem ser iguais!')
+        }else{
+            alert('Cadastro realizado com sucesso!')
+            window.location.href = 'login.html'
+        } 
+
+        for (let i = 0; i < listaTokensVálidos.length; i++) {
+            //Verificar a tabela adequada para chamar as empresas
+        console.log(listaTokensVálidos)
+      if (listaTokensVálidos[i].codigo_ativacao == codigoVerifVar) {
+        idEmpresaVincular = listaTokensVálidos[i].id
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        alert('Mensagem de erro para código inválido');
+      }
+    }
+    console.log('Vou para o fetch')
+    // Enviando o valor da nova input
+    fetch("/usuario/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+
+
+        nomeServer:nomeVar,
+        emailServer:emailVar,
+        senhaServer: senhaVar,
+        telefoneServer:  telefoneVar,
+        cpfServer: cpfVar,
+        nomeUsuarioServer: nomeUsuarioVar,
+        dataNascimentoServer: dataNascimentoVar,
+        idEmpresaVincularServer: idEmpresaVincular
+      }),
+    })
+
+    .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+        } else {
+          alert("Houve um erro ao tentar realizar o cadastro!");
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  function listar() {
+    fetch("/empresa/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaTokensVálidos.push(empresa);
+
+            console.log("listaTokensVálidos")
+            console.log(listaTokensVálidos[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+</script>
