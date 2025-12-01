@@ -34,16 +34,16 @@
         <!-- KPIs -->
         <div class="kpis">
             <div class="kpi">
-                <h3>Quantidade de Sensores Ativos<abbr title="Este indica o tempo médio de seca na sua plantação"><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-                <span id="kpi_temp">X</span>
+                <h3>Talhões sem leitura recente<abbr title="Este indica o tempo médio de seca na sua plantação"><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
+                <span id="kpi_talhoes_sem_leitura"></span>
             </div>
             <div class="kpi">
-                <h3>Quantidade de Sensores Inativos<abbr title="Este indica o tempo médio de seca na sua plantação"><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-                <span id="kpi_temp">X</span>
+                <h3>Quantidade de propriedades em risco<abbr title="Este indica o tempo médio de seca na sua plantação"><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
+                <span id="kpi_inativo"></span>
             </div>
             <div class="kpi">
                 <h3>Talhão em Risco <abbr title="Quantidade de talhões fora da umidade ideal"><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-                <span id="kpi_alertas" style="color: red;">1</span>
+                <span id="kpi_alertas" style="color: red;"></span>
             </div>
         </div>
      
@@ -108,6 +108,7 @@
 <script>
     b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
     b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
+    var usuario = sessionStorage.ID_USUARIO;
 
     if (!sessionStorage.NOME_USUARIO) {
         window.location.href = "login.html";
@@ -120,7 +121,7 @@ async function carregarDashboard(idEmpresa) {
     try {
         const res = await fetch(`/propriedades/${idEmpresa}/dashboard`);
         const data = await res.json();
-        renderizarKPIs(data);
+        carregarKPIs(data);
         renderizarGraficoGeral(data.medias_talhoes);
         renderizarListaTalhoes(data.medias_talhoes);
     } catch (err) {
@@ -138,15 +139,6 @@ async function selecionarTalhao(idEmpresa, talhaoId) {
     }
 }
 
-function renderizarKPIs(data) {
-    const medias = data.medias_talhoes.map(t => t.media_umidade);
-    const mediaGeral = medias.length ? (medias.reduce((a,b)=>a+b)/medias.length).toFixed(1) : 0;
-
-    document.getElementById("kpi_umidade").textContent = mediaGeral + "%";
-    document.getElementById("kpi_temp").textContent = "--";
-    document.getElementById("kpi_alertas").textContent = data.total_alertas;
-    document.getElementById("kpi_saude").textContent = avaliarSaude(mediaGeral);
-}
 
 function renderizarListaTalhoes(lista) {
     const select = document.getElementById("select_sensor");
@@ -192,4 +184,45 @@ function select_function() {
         }
     }
 }
+
+document.addEventListener("DOMContentLoaded", carregarKPIs);
+
+function carregarKPIs() {
+
+    // --- KPI 1: Propriedades em risco ---
+    fetch("/kpi/propriedades-risco")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("kpi_inativo").innerText = data.total_risco;
+        })
+        .catch(err => {
+            console.error("Erro ao carregar KPI propriedades-risco:", err);
+            document.getElementById("kpi_inativo").innerText = "-";
+        });
+
+    // --- KPI 2: Talhões sem leitura ---
+    fetch("/kpi/talhoes-sem-leitura")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("kpi_talhoes_sem_leitura").innerText = data.talhoes_sem_leitura;
+        })
+        .catch(err => {
+            console.error("Erro ao carregar KPI talhoes-sem-leitura:", err);
+            document.getElementById("kpi_talhoes_sem_leitura").innerText = "-";
+        });
+
+    // 
+    /*
+    fetch("/kpi/NOVA_ROTA")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("ID_DO_ELEMENTO").innerText = data.campo_que_vem_da_api;
+        })
+        .catch(err => {
+            console.error("Erro KPI ...:", err);
+            document.getElementById("ID_DO_ELEMENTO").innerText = "-";
+        });
+    */
+}
+
 </script>

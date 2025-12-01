@@ -22,6 +22,10 @@ var propriedadesRouter = require("./src/routes/propriedades");
 var talhaoRouter = require("./src/routes/talhao");
 var empresaRouter = require("./src/routes/empresa")
 
+var kpiRouter = require("./src/routes/kpi");
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -34,7 +38,7 @@ app.use("/leitura", leituraRouter);
 app.use("/propriedades", propriedadesRouter);
 app.use("/talhao", talhaoRouter);
 app.use("/empresa", empresaRouter)
-
+app.use("/kpi", kpiRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
