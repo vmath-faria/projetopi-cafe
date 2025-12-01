@@ -1,6 +1,6 @@
 CREATE coffech2;
 
-USE coffech2;
+USE coffech3;
 
 CREATE TABLE empresa (
 	id_empresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -211,6 +211,31 @@ JOIN sensor AS s
 JOIN leitura AS l 
     ON s.id_sensor = l.fk_sensor;
 
+
+
+SELECT 
+    ROUND(AVG(l.valor_umidade),2) AS umidade_media
+FROM leitura l
+JOIN sensor s ON l.fk_sensor = s.id_sensor
+JOIN talhao t ON s.fk_talhao = t.id_talhao
+WHERE t.fk_propriedade = 4;
+
+SELECT l.valor_umidade
+FROM leitura l
+JOIN sensor s ON l.fk_sensor = s.id_sensor
+JOIN talhao t ON s.fk_talhao = t.id_talhao
+WHERE t.fk_propriedade = 4;
+
+
+select * from leitura;
+insert into leitura (valor_umidade, fk_sensor) values
+(100,4);
+
+select * from sensor;
+insert into sensor (fk_talhao) values
+(7);
+select * from talhao;
+select * from propriedade;
 -- Exibe a empresa, suas propriedades, seus talhões e seus sensores
 SELECT 
     e.nome_empresa AS 'Nome da Empresa',

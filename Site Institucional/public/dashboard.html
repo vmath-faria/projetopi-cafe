@@ -53,8 +53,8 @@
         <select oninput="selecionar()" class="selectTalhao" name="sensor" id="select_sensor">
             <option value="#" selected disabled></option>
             <option value="resumo">Resumo</option>
-            <option value="1">Talhão 1</option>
-            <option value="2">Talhão 2</option>
+            <!-- <option value="1">Talhão 1</option>
+            <option value="2">Talhão 2</option> -->
         
         </select>
 
@@ -105,88 +105,135 @@
     b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
     b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
 
+
     if (!sessionStorage.NOME_USUARIO) {
         window.location.href = "login.html";
     }
 
-    carregarDashboard(usuario.fk_empresa);
+    var idPropriedade = sessionStorage.id_propriedade; 
+
+carregarGraficoGeral(idPropriedade);
+carregarTalhoes();
 
 
+function carregarTalhoes() {
+    fetch(`/talhao/listar/${idPropriedade}`)
+        .then(res => res.json())
+        .then(lista => {
 
-async function carregarDashboard(idEmpresa) {
-    try {
-        const res = await fetch(`/propriedades/${idEmpresa}/dashboard`);
-        const data = await res.json();
-        renderizarKPIs(data);
-        renderizarGraficoGeral(data.medias_talhoes);
-        renderizarListaTalhoes(data.medias_talhoes);
-    } catch (err) {
-        console.error(err);
-    }
+            var select = document.getElementById("select_sensor");
+
+            for (var i = 0; i < lista.length; i++) {
+                var item = lista[i];
+
+                var option = document.createElement("option");
+                option.value = item.id_talhao;
+                option.textContent = item.nome_talhao;
+
+                select.appendChild(option);
+            }
+
+        });
 }
 
-async function selecionarTalhao(idEmpresa, talhaoId) {
-    if (talhaoId === "resumo") return carregarDashboard(idEmpresa);
-    try {
-        const res = await fetch(`/talhao/${talhaoId}/leituras/historico`);
-        const data = await res.json();
-    } catch (err) {
-        console.error(err);
-    }
+
+function carregarGraficoGeral(idPropriedade) {
+    fetch(`/graficoGeral/exibir/${idPropriedade}`, { cache: "no-store" })
+        .then(response => {
+            if (response.ok) return response.json();
+            else console.error("Erro ao buscar dados");
+        })
+        .then(data => {
+            console.log("Dados recebidos (geral):", data);
+
+            var umidadeMedia = data[0].umidade_media;
+
+            plotarGraficoGeral(idPropriedade, umidadeMedia);
+        })
+        .catch(erro => console.error("Erro:", erro));
 }
 
-function renderizarKPIs(data) {
-    const medias = data.medias_talhoes.map(t => t.media_umidade);
-    const mediaGeral = medias.length ? (medias.reduce((a,b)=>a+b)/medias.length).toFixed(1) : 0;
+function plotarGraficoGeral(idPropriedade, umidadeInicial) {
 
-    document.getElementById("kpi_umidade").textContent = mediaGeral + "%";
-    document.getElementById("kpi_temp").textContent = "--";
-    document.getElementById("kpi_alertas").textContent = data.total_alertas;
-    document.getElementById("kpi_saude").textContent = avaliarSaude(mediaGeral);
-}
+    console.log('Iniciando plotagem do gráfico geral...');
 
-function renderizarListaTalhoes(lista) {
-    const select = document.getElementById("select_sensor");
-    [...select.options].forEach(opt => { if(opt.value!=='resumo') opt.remove(); });
-    lista.forEach(t => {
-        const option = document.createElement("option");
-        option.value = t.id_talhao;
-        option.innerText = `Talhão ${t.id_talhao}`;
-        select.appendChild(option);
-    });
-}
+    let labels = ["Leitura 1"];
 
-function renderizarGraficoGeral(listaTalhoes) {
-    const ctx = document.getElementById("graficoGeral").getContext("2d");
-    const labels = listaTalhoes.map(t => t.nome_talhao);
-    const valores = listaTalhoes.map(t => t.media_umidade);
+    let dados = {
+        labels: labels,
+        datasets: [{
+            label: 'Umidade Média da Propriedade',
+            data: [umidadeInicial],
+            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgb(75, 192, 192)',
+            fill: false,
+            tension: 0.1
+        }]
+    };
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: { labels, datasets: [{ label: 'Umidade Média (%)', data: valores, backgroundColor: '#C08558' }] }
-    });
-}
-
-function avaliarSaude(umidade) {
-    if (umidade >= 60 && umidade <= 75) return "Ótima";
-    if (umidade < 60) return "Baixa";
-    return "Alta demais";
-}
-
-function select_function() {
-    var select = document.getElementById("header_select");
-    var options = select.options;
-
-    for (var i = 0; i < options.length; i++) {
-        if (options[i].selected) {
-            if (options[i].value === "index") {
-                sessionStorage.clear();
-                window.location.href = "index.html";
-            } else if (options[i].value === "login") {
-                sessionStorage.clear();
-                window.location.href = "login.html";
+    const config = {
+        type: 'line',
+        data: dados,
+        options: {
+        scales: {
+            y: {
+                min: 0,
+                max: 100
             }
         }
     }
+    };
+
+    let myChart = new Chart(
+        document.getElementById("graficoGeral"),
+        config
+    );
+
+    setTimeout(() => 
+        atualizarGraficoGeral(idPropriedade, dados, myChart), 
+        5000
+    );
 }
+
+
+
+function atualizarGraficoGeral(idPropriedade, dados, myChart) {
+
+    fetch(`/graficoGeral/exibir/${idPropriedade}`, { cache: 'no-store' })
+        .then(response => response.json())
+        .then(novo => {
+
+            let novoValor = novo[0].umidade_media;
+            let ultimoValor = dados.datasets[0].data[dados.datasets[0].data.length - 1];
+
+            console.log("Novo valor:", novoValor);
+            console.log("Último valor:", ultimoValor);
+
+            if (novoValor !== ultimoValor) {
+
+                dados.labels.push(`Leitura ${dados.labels.length + 1}`);
+
+                if (dados.datasets[0].data.length >= 10) {
+                    dados.datasets[0].data.shift();
+                    dados.labels.shift();
+                }
+
+                dados.datasets[0].data.push(novoValor);
+                myChart.update();
+            }
+
+            setTimeout(() => 
+                atualizarGraficoGeral(idPropriedade, dados, myChart), 
+                5000
+            );
+        })
+        .catch(erro => {
+            console.error("Erro ao atualizar gráfico geral:", erro);
+            setTimeout(() => 
+                atualizarGraficoGeral(idPropriedade, dados, myChart), 
+                5000
+            );
+        });
+}
+
 </script>

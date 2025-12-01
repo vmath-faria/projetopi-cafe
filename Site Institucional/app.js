@@ -17,7 +17,7 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuario");
-var leituraRouter = require("./src/routes/leitura");
+var kpiRiscoRouter = require("./src/routes/kpiRisco");
 var propriedadesRouter = require("./src/routes/propriedades");
 var talhaoRouter = require("./src/routes/talhao");
 var empresaRouter = require("./src/routes/empresa")
@@ -31,7 +31,7 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.use("/", indexRouter);
 app.use("/usuario", usuarioRouter);
-app.use("/leitura", leituraRouter);
+app.use("/kpiRisco", kpiRiscoRouter);
 app.use("/propriedades", propriedadesRouter);
 app.use("/talhao", talhaoRouter);
 app.use("/empresa", empresaRouter)
