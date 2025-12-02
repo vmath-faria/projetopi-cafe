@@ -238,11 +238,23 @@ function selecionar() {
    ============================ */
 
 function select_function() {
-    var valor = header_select.value;
+        var select = document.getElementById("header_select");
+        var options = select.options;
 
-    if (valor === "index" || valor === "login") {
-        sessionStorage.clear();
-        window.location.href = valor + ".html";
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].selected) {
+                if (options[i].value == "index") {
+                    sessionStorage.clear();
+                    window.location.href = "index.html";
+                } else if (options[i].value == "login") {
+                    sessionStorage.clear();
+                    window.location.href = "login.html";
+                } else if (options[i].value == "problema") {
+                    window.open("https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9", "_blank");
+                } else if (options[i].value == "requisicao") {
+                    window.open("https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9", "_blank");
+                }
+            }
+        }
     }
-}
 </script>
