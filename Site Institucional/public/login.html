@@ -140,8 +140,10 @@
 
         if (json.nivel_acesso === "Proprietario") {
             window.location.href = "dashboard_propriedades.html";
-        } else {
+        } else if(json.nivel_acesso === "Funcionario"){
             window.location.href = "dashboard.html";
+        }else{
+            window.location.href = "bob.html"
         }
     })
     .catch(err => console.error(err));
