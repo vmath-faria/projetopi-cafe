@@ -21,7 +21,10 @@
                 <select oninput="select_function()" class="select-dash" id="header_select">
                     <option selected disabled value="#"></option>
                     <option value="login">Entrar com outra conta</option>
+                    <option value="problema">Problemas?</option>
+                    <option value="requisicao">Pedidos?</option>
                     <option value="index">Sair</option>
+                    
                 </select>
             </div>
         </div>
@@ -141,6 +144,12 @@ function carregarGraficoGeral(idPropriedade) {
         .catch(erro => console.error("Erro:", erro));
 }
 
+function avaliarSaude(umidade) {
+    if (umidade >= 60 && umidade <= 75) return "Ótima";
+    if (umidade < 60) return "Baixa";
+    return "Alta demais";
+}
+
 function plotarGraficoGeral(idPropriedade, umidadeInicial) {
 
     console.log('Iniciando plotagem do gráfico geral...');
@@ -181,6 +190,32 @@ function plotarGraficoGeral(idPropriedade, umidadeInicial) {
         atualizarGraficoGeral(idPropriedade, dados, myChart), 
         5000
     );
+}
+
+
+function select_function() {
+    var select = document.getElementById("header_select");
+    var options = select.options;
+
+    for (var i = 0; i < options.length; i++) {
+        if (options[i].selected) {
+            if (options[i].value === "index") {
+                sessionStorage.clear();
+                window.location.href = "index.html";
+            } else if (options[i].value === "login") {
+                sessionStorage.clear();
+                window.location.href = "login.html";
+            } else if (options[i].value === "problema") {
+                sessionStorage.clear();
+                window.location.href = "https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9";
+            } else if (options[i].value === "requisicao") {
+                sessionStorage.clear();
+                window.location.href = "https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9";
+            }
+        }
+    
+    };
+
 }
 
 
