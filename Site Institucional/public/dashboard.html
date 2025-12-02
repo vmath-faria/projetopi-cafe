@@ -24,7 +24,6 @@
                     <option value="problema">Problemas?</option>
                     <option value="requisicao">Pedidos?</option>
                     <option value="index">Sair</option>
-                    
                 </select>
             </div>
         </div>
@@ -37,141 +36,132 @@
         <!-- KPIs -->
         <div class="kpis">
             <div class="kpi">
-                <h3>Talhões sem leitura recente<abbr title="Este indica o tempo médio de seca na sua plantação"><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-                <span id="kpi_talhoes_sem_leitura"></span>
+                <h3>Talhões sem leitura recente</h3>
+                <span id="kpi_talhoes_sem_leitura">0</span>
             </div>
             <div class="kpi">
-                <h3>Quantidade de propriedades em risco<abbr title="Este indica o tempo médio de seca na sua plantação"><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-                <span id="kpi_inativo"></span>
+                <h3>Sensores Ativos vs Inativos</h3>
+                <span id="kpi_inativo">0</span>
             </div>
             <div class="kpi">
-                <h3>Talhão em Risco <abbr title="Quantidade de talhões fora da umidade ideal"><img src="./imgs/iconeInformativo.png" alt="" style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-                <span id="kpi_alertas" style="color: red;"></span>
+                <h3>Talhão em Risco</h3>
+                <span id="kpi_alertas" style="color: red;">0</span>
             </div>
         </div>
-     
+
         <br>
-    
+
         <span style="font-size: 20px;"><b>Selecione o Talhão desejado:</b></span>
         <select oninput="selecionar()" class="selectTalhao" name="sensor" id="select_talhao">
             <option value="#" selected disabled></option>
             <option value="resumo">Resumo</option>
-            <!-- <option value="1">Talhão 1</option>
-            <option value="2">Talhão 2</option> -->
-        
         </select>
 
-
-        <!-- <div id="div_NovoSensor" style="display: none; margin-top: 15px;">
-            <span>Digite o código do Talhão:</span>
-            <input type="text" id="input_sensor"> 
-            <button onclick="adicionarSensor()">Adicionar Talhão</button>
-        </div> -->
-
-        <!--
-            -- Inserir alertas por talhão
-            -- Gráfico de Média da propriedade com aviso sobre risco de média
-            -- Gráfico de medida por talhão
-        -->
-
         <div class="containerGraficos">
-
-            <!-- Gráficos Sensor 2 -->
             <div id="graficoTalhao" class="containerSub" style="display: none;">
-                <div class="graficos2">
-                    <canvas id="graficoBarra"></canvas>
-                </div>
+                <canvas id="graficoBarra"></canvas>
             </div>
+
             <div class="graficos" id="graficoGeral">
-                <div><canvas id="graficoLinha"></canvas></div>
-                <div id="div_sensores"></div>
+                <canvas id="graficoLinha"></canvas>
             </div>
         </div>
     </div>
-</body>
 
+</body>
 </html>
 
 <script>
-    b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
-    b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
-    var usuario = sessionStorage.ID_USUARIO;
+/* ============================
+   INICIALIZAÇÃO
+   ============================ */
 
+b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
+b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
 
-    if (!sessionStorage.NOME_USUARIO) {
-        window.location.href = "login.html";
-    }
+if (!sessionStorage.NOME_USUARIO) {
+    window.location.href = "login.html";
+}
 
-    var idPropriedade = sessionStorage.id_propriedade; 
+var idPropriedade = sessionStorage.id_propriedade;
 
-carregarGraficoGeral(idPropriedade);
 carregarTalhoes();
+carregarGraficoGeral(idPropriedade);
+carregarKPIs();
 
+/* ============================
+   CARREGAR KPIs
+   ============================ */
+
+async function carregarKPIs() {
+    try {
+        const semLeitura = await (await fetch(`/kpi/talhoes-sem-leitura`)).json();
+        const sensores = await (await fetch(`/kpi/sensores-status`)).json();
+
+        document.getElementById("kpi_talhoes_sem_leitura").innerText =
+            semLeitura.talhoes_sem_leitura;
+
+        document.getElementById("kpi_inativo").innerText =
+            `${sensores.sensores_ativos} ativos / ${sensores.sensores_inativos} inativos`;
+
+    } catch (e) {
+        console.error("Erro ao carregar KPIs:", e);
+    }
+}
+/*
+NÃO TO CONSEGUINDO SEPARAR OS SELECTS POR TALHAO
+function carregarKpiSensores(idTalhao) {
+    fetch(`/kpi/sensores-status/${idTalhao}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("kpi_sensores").innerText =
+                `${data.sensores_ativos} ativos / ${data.sensores_inativos} inativos`;
+        })
+        .catch(err => console.error("Erro KPI sensores:", err));
+}
+
+
+ ============================
+   CARREGAR TALHÕES NO SELECT
+   ============================ */
 
 function carregarTalhoes() {
     fetch(`/talhao/listar/${idPropriedade}`)
         .then(res => res.json())
         .then(lista => {
-
-async function carregarDashboard(idEmpresa) {
-    try {
-        const res = await fetch(`/propriedades/${idEmpresa}/dashboard`);
-        const data = await res.json();
-        carregarKPIs(data);
-        renderizarGraficoGeral(data.medias_talhoes);
-        renderizarListaTalhoes(data.medias_talhoes);
-    } catch (err) {
-        console.error(err);
-    }
             var select = document.getElementById("select_talhao");
 
-            for (var i = 0; i < lista.length; i++) {
-                var item = lista[i];
-
+            lista.forEach(item => {
                 var option = document.createElement("option");
                 option.value = item.id_talhao;
                 option.textContent = item.nome_talhao;
-
                 select.appendChild(option);
-            }
-
-        }});
+            });
+        });
 }
 
+/* ============================
+   GRÁFICO GERAL
+   ============================ */
 
 function carregarGraficoGeral(idPropriedade) {
-    fetch(`/graficoGeral/exibir/${idPropriedade}`, { cache: "no-store" })
-        .then(response => {
-            if (response.ok) return response.json();
-            else console.error("Erro ao buscar dados");
-        })
+    fetch(`/graficoGeral/exibir/${idPropriedade}`)
+        .then(r => r.json())
         .then(data => {
-            console.log("Dados recebidos (geral):", data);
-
-            var umidadeMedia = data[0].umidade_media;
-
-            plotarGraficoGeral(idPropriedade, umidadeMedia);
-        })
-        .catch(erro => console.error("Erro:", erro));
+            plotarGraficoGeral(idPropriedade, data[0].umidade_media);
+        });
 }
 
-function avaliarSaude(umidade) {
-    if (umidade >= 60 && umidade <= 75) return "Ótima";
-    if (umidade < 60) return "Baixa";
-    return "Alta demais";
-}
+let graficoGeral = null;
 
-function plotarGraficoGeral(idPropriedade, umidadeInicial) {
-
-    console.log('Iniciando plotagem do gráfico geral...');
-
-    let labels = ["Leitura 1"];
+function plotarGraficoGeral(idPropriedade, valorInicial) {
+    const ctx = document.getElementById("graficoLinha");
 
     let dados = {
-        labels: labels,
+        labels: ["Leitura 1"],
         datasets: [{
             label: 'Umidade Média da Propriedade',
-            data: [umidadeInicial],
+            data: [valorInicial],
             borderColor: 'rgb(75, 192, 192)',
             backgroundColor: 'rgb(75, 192, 192)',
             fill: false,
@@ -179,209 +169,80 @@ function plotarGraficoGeral(idPropriedade, umidadeInicial) {
         }]
     };
 
-    const config = {
+    if (graficoGeral) graficoGeral.destroy();
+
+    graficoGeral = new Chart(ctx, {
         type: 'line',
         data: dados,
         options: {
-        scales: {
-            y: {
-                min: 0,
-                max: 100
-            }
-        }
-    }
-    };
-
-    let myChart = new Chart(
-        document.getElementById("graficoLinha"),
-        config
-    );
-
-    setTimeout(() => 
-        atualizarGraficoGeral(idPropriedade, dados, myChart), 
-        5000
-    );
-}
-
-
-function select_function() {
-    var select = document.getElementById("header_select");
-    var options = select.options;
-
-    for (var i = 0; i < options.length; i++) {
-        if (options[i].selected) {
-            if (options[i].value === "index") {
-                sessionStorage.clear();
-                window.location.href = "index.html";
-            } else if (options[i].value === "login") {
-                sessionStorage.clear();
-                window.location.href = "login.html";
-            } else if (options[i].value === "problema") {
-                sessionStorage.clear();
-                window.location.href = "https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9";
-            } else if (options[i].value === "requisicao") {
-                sessionStorage.clear();
-                window.location.href = "https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9";
-            }
-        }
-    
-    };
-
-}
-
-
-
-function atualizarGraficoGeral(idPropriedade, dados, myChart) {
-
-    fetch(`/graficoGeral/exibir/${idPropriedade}`, { cache: 'no-store' })
-        .then(response => response.json())
-        .then(novo => {
-
-            let novoValor = novo[0].umidade_media;
-            let ultimoValor = dados.datasets[0].data[dados.datasets[0].data.length - 1];
-
-            console.log("Novo valor:", novoValor);
-            console.log("Último valor:", ultimoValor);
-
-            if (novoValor != ultimoValor) {
-
-                dados.labels.push(`Leitura ${dados.labels.length + 1}`);
-
-                if (dados.datasets[0].data.length >= 10) {
-                    dados.datasets[0].data.shift();
-                    dados.labels.shift();
-                }
-
-                dados.datasets[0].data.push(novoValor);
-                myChart.update();
-            }
-
-            setTimeout(() => 
-                atualizarGraficoGeral(idPropriedade, dados, myChart), 
-                5000
-            );
-        })
-        .catch(erro => {
-            console.error("Erro ao atualizar gráfico geral:", erro);
-            setTimeout(() => 
-                atualizarGraficoGeral(idPropriedade, dados, myChart), 
-                5000
-            );
-        });
-}
-
-function selecionar(){
-    var selecionado = document.getElementById('select_talhao')
-    var valor = selecionado.value
-
-
-    for (var i = 0; i < selecionado.options.length; i++) {
-        var opcao = selecionado.options[i].value;
-
-        if (opcao == valor) {
-            if (opcao == "resumo") {
-                carregarGraficoGeral();
-                mostrarGraficoGeral();
-            } else {
-                carregarGraficoTalhao(Number(opcao));
-                mostrarGraficoTalhao()
-            }
-            break; 
-        }
-    }
-}
-
-document.addEventListener("DOMContentLoaded", carregarKPIs);
-
-function carregarKPIs() {
-
-    // --- KPI 1: Propriedades em risco ---
-    fetch("/kpi/propriedades-risco")
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("kpi_inativo").innerText = data.total_risco;
-        })
-        .catch(err => {
-            console.error("Erro ao carregar KPI propriedades-risco:", err);
-            document.getElementById("kpi_inativo").innerText = "-";
-        });
-
-    // --- KPI 2: Talhões sem leitura ---
-    fetch("/kpi/talhoes-sem-leitura")
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("kpi_talhoes_sem_leitura").innerText = data.talhoes_sem_leitura;
-        })
-        .catch(err => {
-            console.error("Erro ao carregar KPI talhoes-sem-leitura:", err);
-            document.getElementById("kpi_talhoes_sem_leitura").innerText = "-";
-        });
-
-    // 
-    /*
-    fetch("/kpi/NOVA_ROTA")
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("ID_DO_ELEMENTO").innerText = data.campo_que_vem_da_api;
-        })
-        .catch(err => {
-            console.error("Erro KPI ...:", err);
-            document.getElementById("ID_DO_ELEMENTO").innerText = "-";
-        });
-    */
-function carregarGraficoTalhao(idTalhao) {
-
-    fetch(`/graficoTalhao/exibir/${idTalhao}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log("Dados desse talhão:", data);
-
-            var umidade = data[0].umidade_media;
-
-            plotarGraficoTalhao(umidade);
-        })
-        .catch(e => console.error("Erro ao buscar dados do talhão:", e));
-}
-
-let graficoTalhao = null;
-
-function plotarGraficoTalhao(umidade) {
-
-    var graficoBarra = document.getElementById("graficoBarra");
-
-    if (graficoTalhao != null) {
-        graficoTalhao.destroy();
-    }
-
-    graficoTalhao = new Chart(graficoBarra, {
-        type: "bar",
-        data: {
-            labels: ["Leitura 1"],
-            datasets: [{
-                label: "Umidade média do talhão",
-                data: [umidade],
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            }
+            scales: { y: { min: 0, max: 100 } }
         }
     });
 }
 
-function mostrarGraficoGeral() {
-    document.getElementById("graficoGeral").style.display = "block";
-    document.getElementById("graficoTalhao").style.display = "none";
+/* ============================
+   GRÁFICO TALHÃO
+   ============================ */
+
+let graficoTalhao = null;
+
+function carregarGraficoTalhao(idTalhao) {
+    fetch(`/graficoTalhao/exibir/${idTalhao}`)
+        .then(res => res.json())
+        .then(data => {
+            plotarGraficoTalhao(data[0].umidade_media);
+        });
 }
 
-function mostrarGraficoTalhao() {
-    document.getElementById("graficoGeral").style.display = "none";
-    document.getElementById("graficoTalhao").style.display = "block";
+function plotarGraficoTalhao(valor) {
+    const ctx = document.getElementById("graficoBarra");
+
+    if (graficoTalhao) graficoTalhao.destroy();
+
+    graficoTalhao = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["Umidade média"],
+            datasets: [{
+                label: "Umidade do Talhão",
+                data: [valor],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: { y: { min: 0, max: 100 } }
+        }
+    });
 }
+
+/* ============================
+   ALTERAR ENTRE RESUMO E TALHÃO
+   ============================ */
+
+function selecionar() {
+    var valor = select_talhao.value;
+
+    if (valor === "resumo") {
+        document.getElementById("graficoGeral").style.display = "block";
+        document.getElementById("graficoTalhao").style.display = "none";
+        carregarGraficoGeral(idPropriedade);
+    } else {
+        carregarGraficoTalhao(Number(valor));
+        document.getElementById("graficoGeral").style.display = "none";
+        document.getElementById("graficoTalhao").style.display = "block";
+    }
+}
+
+/* ============================
+   SELECT DO MENU
+   ============================ */
+
+function select_function() {
+    var valor = header_select.value;
+
+    if (valor === "index" || valor === "login") {
+        sessionStorage.clear();
+        window.location.href = valor + ".html";
+    }
 }
 </script>

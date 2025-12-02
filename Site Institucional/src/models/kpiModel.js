@@ -1,16 +1,6 @@
 const database = require("../database/config");
 
-// KPI 1 - Quantidade de propriedades em risco
-function propriedadesEmRisco() {
-    const query = `
-        SELECT COUNT(*) AS total_risco
-        FROM vw_propriedade
-        WHERE nivel_alerta IN ('amarelo', 'laranja', 'vermelho');
-    `;
-    return database.executar(query);
-}
-
-// KPI 2 - Talhões sem leituras recentes (últimas 24h)
+// KPI - Talhões sem leituras recentes (últimas 24h)
 function talhoesSemLeitura() {
     const query = `
         SELECT COUNT(DISTINCT t.id_talhao) AS talhoes_sem_leitura
@@ -23,7 +13,18 @@ function talhoesSemLeitura() {
     return database.executar(query);
 }
 
+function sensoresStatusPorTalhao(idTalhao) {
+    const query = `
+        SELECT
+            COUNT(CASE WHEN status_sensor = 'Ativo' THEN 1 END) AS sensores_ativos,
+            COUNT(CASE WHEN status_sensor <> 'Ativo' OR status_sensor IS NULL THEN 1 END) AS sensores_inativos
+        FROM sensor
+        WHERE fk_talhao = ${idTalhao};
+    `;
+    return database.executar(query);
+}
+
 module.exports = {
-    propriedadesEmRisco,
-    talhoesSemLeitura
+    talhoesSemLeitura,
+    sensoresStatusPorTalhao
 };
