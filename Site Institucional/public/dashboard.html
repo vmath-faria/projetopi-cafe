@@ -87,27 +87,27 @@ var idPropriedade = sessionStorage.id_propriedade;
 
 carregarTalhoes();
 carregarGraficoGeral(idPropriedade);
-carregarKPIs();
+// carregarKPIs();
 
 /* ============================
    CARREGAR KPIs
    ============================ */
 
-async function carregarKPIs() {
-    try {
-        const semLeitura = await (await fetch(`/kpi/talhoes-sem-leitura`)).json();
-        const sensores = await (await fetch(`/kpi/sensores-status`)).json();
+// async function carregarKPIs(idTalhao) {
+//     console.log(idTalhao)
+//     try {
+//         const semLeitura = await (await fetch(`/kpi/talhoes-sem-leitura`)).json();
+//         const sensores = await (await fetch(`/kpi/sensores-status/${idTalhao}`)).json();
+//         document.getElementById("kpi_talhoes_sem_leitura").innerText =
+//             semLeitura.talhoes_sem_leitura;
 
-        document.getElementById("kpi_talhoes_sem_leitura").innerText =
-            semLeitura.talhoes_sem_leitura;
+//         document.getElementById("kpi_inativo").innerText =
+//             `${sensores.sensores_ativos} ativos / ${sensores.sensores_inativos} inativos`;
 
-        document.getElementById("kpi_inativo").innerText =
-            `${sensores.sensores_ativos} ativos / ${sensores.sensores_inativos} inativos`;
-
-    } catch (e) {
-        console.error("Erro ao carregar KPIs:", e);
-    }
-}
+//     } catch (e) {
+//         console.error("Erro ao carregar KPIs:", e);
+//     }
+// }
 /*
 NÃO TO CONSEGUINDO SEPARAR OS SELECTS POR TALHAO
 function carregarKpiSensores(idTalhao) {
@@ -154,14 +154,17 @@ function carregarGraficoGeral(idPropriedade) {
 
 let graficoGeral = null;
 
-function plotarGraficoGeral(idPropriedade, valorInicial) {
-    const ctx = document.getElementById("graficoLinha");
+function plotarGraficoGeral(idPropriedade, umidadeInicial) {
+
+    console.log('Iniciando plotagem do gráfico geral...');
+
+    let labels = ["Leitura 1"];
 
     let dados = {
-        labels: ["Leitura 1"],
+        labels: labels,
         datasets: [{
             label: 'Umidade Média da Propriedade',
-            data: [valorInicial],
+            data: [umidadeInicial],
             borderColor: 'rgb(75, 192, 192)',
             backgroundColor: 'rgb(75, 192, 192)',
             fill: false,
@@ -169,16 +172,69 @@ function plotarGraficoGeral(idPropriedade, valorInicial) {
         }]
     };
 
-    if (graficoGeral) graficoGeral.destroy();
-
-    graficoGeral = new Chart(ctx, {
+    const config = {
         type: 'line',
         data: dados,
         options: {
-            scales: { y: { min: 0, max: 100 } }
+        scales: {
+            y: {
+                min: 0,
+                max: 100
+            }
         }
-    });
+    }
+    };
+
+    let myChart = new Chart(
+        document.getElementById("graficoLinha"),
+        config
+    );
+
+    setTimeout(() => 
+        atualizarGraficoGeral(idPropriedade, dados, myChart), 
+        5000
+    );
 }
+
+function atualizarGraficoGeral(idPropriedade, dados, myChart) {
+
+    fetch(`/graficoGeral/exibir/${idPropriedade}`, { cache: 'no-store' })
+        .then(response => response.json())
+        .then(novo => {
+
+            let novoValor = novo[0].umidade_media;
+            let ultimoValor = dados.datasets[0].data[dados.datasets[0].data.length - 1];
+
+            console.log("Novo valor:", novoValor);
+            console.log("Último valor:", ultimoValor);
+
+            if (novoValor != ultimoValor) {
+
+                dados.labels.push(`Leitura ${dados.labels.length + 1}`);
+
+                if (dados.datasets[0].data.length >= 10) {
+                    dados.datasets[0].data.shift();
+                    dados.labels.shift();
+                }
+
+                dados.datasets[0].data.push(novoValor);
+                myChart.update();
+            }
+
+            setTimeout(() => 
+                atualizarGraficoGeral(idPropriedade, dados, myChart), 
+                5000
+            );
+        })
+        .catch(erro => {
+            console.error("Erro ao atualizar gráfico geral:", erro);
+            setTimeout(() => 
+                atualizarGraficoGeral(idPropriedade, dados, myChart), 
+                5000
+            );
+        });
+}
+
 
 /* ============================
    GRÁFICO TALHÃO

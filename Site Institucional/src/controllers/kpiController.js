@@ -1,6 +1,5 @@
 const kpiModel = require("../models/kpiModel");
 
-// KPI 2 - Talhões sem leitura recente
 async function talhoesSemLeitura(req, res) {
     try {
         const resultado = await kpiModel.talhoesSemLeitura();
