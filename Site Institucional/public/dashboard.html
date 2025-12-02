@@ -50,7 +50,7 @@
         <br>
     
         <span style="font-size: 20px;"><b>Selecione o Talhão desejado:</b></span>
-        <select oninput="selecionar()" class="selectTalhao" name="sensor" id="select_sensor">
+        <select oninput="selecionar()" class="selectTalhao" name="sensor" id="select_talhao">
             <option value="#" selected disabled></option>
             <option value="resumo">Resumo</option>
             <!-- <option value="1">Talhão 1</option>
@@ -73,26 +73,14 @@
 
         <div class="containerGraficos">
 
-            <!-- Gráficos Sensor 1 -->
-            <div id="div_grafico1" class="containerSub" style="display: none;">
-                <div class="graficos1">
-                    <canvas id="graficoLinha1"></canvas>
-                </div> <br>         
-                <br>                
-                
-            </div>
-
             <!-- Gráficos Sensor 2 -->
-            <div id="div_grafico2" class="containerSub" style="display: none;">
-                <div class="graficos1">
-                    <canvas id="graficoLinha2"></canvas>
-                </div> <br>
+            <div id="graficoTalhao" class="containerSub" style="display: none;">
                 <div class="graficos2">
-                    <canvas id="graficoBarra2"></canvas>
+                    <canvas id="graficoBarra"></canvas>
                 </div>
             </div>
-            <div class="graficos">
-                <div><canvas id="graficoGeral"></canvas></div>
+            <div class="graficos" id="graficoGeral">
+                <div><canvas id="graficoLinha"></canvas></div>
                 <div id="div_sensores"></div>
             </div>
         </div>
@@ -121,7 +109,7 @@ function carregarTalhoes() {
         .then(res => res.json())
         .then(lista => {
 
-            var select = document.getElementById("select_sensor");
+            var select = document.getElementById("select_talhao");
 
             for (var i = 0; i < lista.length; i++) {
                 var item = lista[i];
@@ -185,7 +173,7 @@ function plotarGraficoGeral(idPropriedade, umidadeInicial) {
     };
 
     let myChart = new Chart(
-        document.getElementById("graficoGeral"),
+        document.getElementById("graficoLinha"),
         config
     );
 
@@ -209,7 +197,7 @@ function atualizarGraficoGeral(idPropriedade, dados, myChart) {
             console.log("Novo valor:", novoValor);
             console.log("Último valor:", ultimoValor);
 
-            if (novoValor !== ultimoValor) {
+            if (novoValor != ultimoValor) {
 
                 dados.labels.push(`Leitura ${dados.labels.length + 1}`);
 
@@ -234,6 +222,82 @@ function atualizarGraficoGeral(idPropriedade, dados, myChart) {
                 5000
             );
         });
+}
+
+function selecionar(){
+    var selecionado = document.getElementById('select_talhao')
+    var valor = selecionado.value
+
+
+    for (var i = 0; i < selecionado.options.length; i++) {
+        var opcao = selecionado.options[i].value;
+
+        if (opcao == valor) {
+            if (opcao == "resumo") {
+                carregarGraficoGeral();
+                mostrarGraficoGeral();
+            } else {
+                carregarGraficoTalhao(Number(opcao));
+                mostrarGraficoTalhao()
+            }
+            break; 
+        }
+    }
+}
+
+function carregarGraficoTalhao(idTalhao) {
+
+    fetch(`/graficoTalhao/exibir/${idTalhao}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log("Dados desse talhão:", data);
+
+            var umidade = data[0].umidade_media;
+
+            plotarGraficoTalhao(umidade);
+        })
+        .catch(e => console.error("Erro ao buscar dados do talhão:", e));
+}
+
+let graficoTalhao = null;
+
+function plotarGraficoTalhao(umidade) {
+
+    var graficoBarra = document.getElementById("graficoBarra");
+
+    if (graficoTalhao != null) {
+        graficoTalhao.destroy();
+    }
+
+    graficoTalhao = new Chart(graficoBarra, {
+        type: "bar",
+        data: {
+            labels: ["Leitura 1"],
+            datasets: [{
+                label: "Umidade média do talhão",
+                data: [umidade],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    });
+}
+
+function mostrarGraficoGeral() {
+    document.getElementById("graficoGeral").style.display = "block";
+    document.getElementById("graficoTalhao").style.display = "none";
+}
+
+function mostrarGraficoTalhao() {
+    document.getElementById("graficoGeral").style.display = "none";
+    document.getElementById("graficoTalhao").style.display = "block";
 }
 
 </script>

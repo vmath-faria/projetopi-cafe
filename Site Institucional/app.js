@@ -20,8 +20,9 @@ var usuarioRouter = require("./src/routes/usuario");
 var kpiRiscoRouter = require("./src/routes/kpiRisco");
 var propriedadesRouter = require("./src/routes/propriedades");
 var talhaoRouter = require("./src/routes/talhao");
-var empresaRouter = require("./src/routes/empresa")
-var graficoGeralRouter = require("./src/routes/graficoGeral")
+var empresaRouter = require("./src/routes/empresa");
+var graficoGeralRouter = require("./src/routes/graficoGeral");
+var graficoTalhaoRouter = require("./src/routes/graficoTalhao");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,8 +35,9 @@ app.use("/usuario", usuarioRouter);
 app.use("/kpiRisco", kpiRiscoRouter);
 app.use("/propriedades", propriedadesRouter);
 app.use("/talhao", talhaoRouter);
-app.use("/empresa", empresaRouter)
-app.use("/graficoGeral", graficoGeralRouter)
+app.use("/empresa", empresaRouter);
+app.use("/graficoGeral", graficoGeralRouter);
+app.use("/graficoTalhao", graficoTalhaoRouter);
 
 
 app.listen(PORTA_APP, function () {
