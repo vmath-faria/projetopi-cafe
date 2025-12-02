@@ -21,7 +21,7 @@ body {
     display: flex;
     flex-direction: column;
     /* border: 2px solid red; */
-    background-color: #f3dec2;
+    background-color: var(--cor01);
 }
 
 body>header {
@@ -31,7 +31,7 @@ body>header {
     justify-content: space-between;
     gap: 16px;
     padding: 12px 48px;
-    background-color: #6f4e37;
+    background-color: var(--cor00);
 
     & .logo-header {
         /* border: 2px solid red; */
@@ -57,7 +57,7 @@ body>header {
             gap: 12px;
 
             & p {
-                color: #f3dec2;
+                color: var(--cor01);
                 font-weight: bold;
                 font-size: 15px;
                 margin: 0;
@@ -73,8 +73,8 @@ body>header {
     & .select-dash {
         cursor: pointer;
         background-color: transparent;
-        border: 1px solid #f3dec2;
-        color: #f3dec2;
+        border: 1px solid var(--cor01);
+        color: var(--cor01);
         padding-right: 32px;
         border-radius: 4px;
         font-size: 14px;
@@ -84,8 +84,8 @@ body>header {
         }
 
         & option {
-            background-color: #6f4e37;
-            color: #f3dec2;
+            background-color: var(--cor00);
+            color: var(--cor01);
             padding: 10px;
         }
     }
