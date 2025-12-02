@@ -34,7 +34,39 @@ function buscarPorId(req, res) {
         });
 }
 
+function buscarKpis(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+
+    propriedadeModel.buscarKpis(idEmpresa)
+        .then(function (listaFazendas) {
+            let kpis = {
+                abaixo_ideal: 0, 
+                ideal: 0,    
+                acima_ideal: 0  
+            };
+
+            listaFazendas.forEach(fazenda => {
+                const umidade = fazenda.umidade || 65; 
+
+                if (umidade < 60) {
+                    kpis.abaixo_ideal++;
+                } else if (umidade <= 75) {
+                    kpis.ideal++;
+                } else {
+                    kpis.acima_ideal++;
+                }
+            });
+            res.json(kpis);
+
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os KPIs.", erro.sqlMessage);
+            res.status(500).json(erro);
+        });
+}
+
 module.exports = {
     listarPorEmpresa,
+    buscarKpis,
     buscarPorId
 };
