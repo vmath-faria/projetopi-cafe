@@ -1,10 +1,11 @@
 var graficoGeralModel = require("../models/graficoGeralModels");
 
 function exibir(req, res) {
-    var idPropriedade = req.params.idPropriedade;
-
+    var idPropriedade = req.params.id_propriedade;
+ console.log("[graficoGeralController] idPropriedade =", idPropriedade);
     graficoGeralModel.exibir(idPropriedade)
         .then(resultado => {
+            console.log("[graficoGeralController] resultado:", resultado);
             res.status(200).json(resultado);
         })
         .catch(erro => {

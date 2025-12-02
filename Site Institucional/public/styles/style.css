@@ -897,11 +897,13 @@ option {
 }
 
 .containerSub {
+   background-color: #fff;
+    border-radius: 12px;
+    width: 57%;
+    height: 57%;
+    align-self: center;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+    margin-left: 50px;
 }
 
 .graficos1 {
@@ -914,8 +916,11 @@ option {
 .graficos2 {
     background-color: #fff;
     border-radius: 12px;
-    width: 87%;
-    height: 87%;
+    width: 57%;
+    height: 57%;
+    align-self: center;
+    display: flex;
+    margin-left: 20%;
 }
 
 .graficos {

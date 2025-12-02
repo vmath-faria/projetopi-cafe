@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BobIA</title>
+    <link rel="stylesheet" href="./styles/bob.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
+            <div class="sla">
+                <p id="header_nome">Olá, <span id="b_usuario1">usuário</span>!</p>
+                <select oninput="select_function()" class="select-dash" id="header_select">
+                    <option selected disabled value="#"></option>
+                    <option value="login">Entrar com outra conta</option>
+                    <option value="problema">Problemas?</option>
+                    <option value="requisicao">Pedidos?</option>
+                    <option value="index">Sair</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div id="container">
+            <h1>BobIA</h1>
+            <textarea id="pergunta" type="text" placeholder="Digite a pergunta..."></textarea>
+            <br><br>
+            <button onclick="gerarResposta()">Gerar Resposta</button>
+            <h3>Resposta da IA:</h3>
+            <div id="resposta"></div>
+        </div>
+        <div class="fluxogramas">
+            <h3>Incidentes com Arduino ou Servidor</h3>
+            <img height="600px" src="./imgs/nivel1.png">
+            <h3>Incidentes com Sensor</h3>
+            <img height="600px" src="./imgs/nivel2.png">
+            <h3>Requisições de Cadastro</h3>
+            <img height="600px" src="./imgs/nivel3.png">
+        </div>
+    </div>
+
+    <script>
+
+        async function gerarResposta() {
+            const pergunta = document.getElementById('pergunta').value;
+
+            const response = await fetch('/perguntar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ pergunta })
+            });
+
+            const data = await response.json();
+
+            resposta.style.display = 'block';
+            document.getElementById('resposta').innerText = data.resultado;
+        }
+
+        function select_function() {
+        var select = document.getElementById("header_select");
+        var options = select.options;
+
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].selected) {
+                if (options[i].value == "index") {
+                    sessionStorage.clear();
+                    window.location.href = "index.html";
+                } else if (options[i].value == "login") {
+                    sessionStorage.clear();
+                    window.location.href = "login.html";
+                } else if (options[i].value == "problema") {
+                    window.open("https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9", "_blank");
+                } else if (options[i].value == "requisicao") {
+                    window.open("https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9", "_blank");
+                }
+            }
+        }
+    }
+    </script>
+
+</body>
+
+</html>

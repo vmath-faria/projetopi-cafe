@@ -77,21 +77,21 @@
                     title="Verde indica que está dentro da faixa ideal de 60%~75%. Laranja indica que está entre 76%-80% e você deve evitar mais irrigação. Vermelho indica que está acima do ideal, com alto risco de perdas. Amarelo indica que está abaixo do ideal, sendo necessário irrigação imediata."><img
                         src="./imgs/iconeInformativo.png" alt=""
                         style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-            <span id="kpi_umidade" style="color: green;">Z</span>
+            <span id="kpi_umidade" style="color: green;"></span>
         </div>
         <div class="kpi">
             <h3>Quantidades de Propriedades Abaixo do Ideal<abbr
                     title="Indica a faixa horária mais comum de seca na sua plantação. Fique alerta nesses horários."><img
                         src="./imgs/iconeInformativo.png" alt=""
                         style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-            <span id="kpi_temp">Y</span>
+            <span id="kpi_temp"></span>
         </div>
         <div class="kpi">
             <h3>Quantidade de Propriedades com Umidade Ideal<abbr
                     title="Exibe uma mensagem condizente com a média de umidade da plantação."><img
                         src="./imgs/iconeInformativo.png" alt=""
                         style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-            <span id="kpi_saude" style="color: green;">X</span>
+            <span id="kpi_saude" style="color: green;"></span>
         </div>
         <!--ALERTA DINÂMICO-->
     </div>
@@ -152,7 +152,8 @@
             `;
 
                 card.onclick = () => {
-                    localStorage.setItem("id_propriedade", f.id_propriedade);
+                    // console.log(`Gravando informalçao ${f.id_propriedade}`)
+                    sessionStorage.setItem("id_propriedade", f.id_propriedade);
                     window.location.href = "dashboard.html";
                 };
 
@@ -168,7 +169,7 @@
         switch (nivel) {
             case "verde": return "imgs/fazenda_verde_att.png";
             case "amarelo": return "imgs/fazenda _amarelo_att.png";
-            case "laranja": return "imgs/fazenda_laranja_att.png";
+            case "laranja": return "imgs/fazenda _laranja_att.png";
             case "vermelho": return "imgs/fazenda_vermelho_att.png";
             default: return "imgs/fazenda_verde_att.png";
         }
@@ -241,5 +242,41 @@
                 console.error("Erro ao enviar token:", error);
             });
     }
+
+    atualizarKpis();
+
+setInterval(atualizarKpis, 20000); 
+
+async function atualizarKpis() {
+    const fk_empresa = sessionStorage.ID_EMPRESA;
+
+    if (!fk_empresa) return;
+    console.log('If da fk empresa')
+    try {
+        const res = await fetch(`/propriedades/kpis/${fk_empresa}`);
+        console.log('try antes do fech')
+        if (res.ok) {
+            const dados = await res.json();
+            console.log(`Lista de dados: ${dados}`)
+            
+            const kpiAcima = document.getElementById("kpi_umidade");
+            kpiAcima.innerHTML = dados.acima_ideal;
+            
+            kpiAcima.style.color = dados.acima_ideal > 0 ? "red" : "green";
+
+            const kpiAbaixo = document.getElementById("kpi_temp");
+            kpiAbaixo.innerHTML = dados.abaixo_ideal;
+            
+            kpiAbaixo.style.color = dados.abaixo_ideal > 0 ? "#fb8c00" : "green";
+
+            const kpiIdeal = document.getElementById("kpi_saude"); 
+            kpiIdeal.innerHTML = dados.ideal;
+            kpiIdeal.style.color = "green"; 
+        }
+
+    } catch (error) {
+        console.error("Erro ao atualizar KPIs:", error);
+    }
+}
 
 </script>
