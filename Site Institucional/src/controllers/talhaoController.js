@@ -1,22 +1,22 @@
 var talhaoModel = require("../models/talhaoModel");
 
-function exibir(req, res) {
-  var idTalhao = req.params.idTalhao;
+function listar(req, res) {
+   var idPropriedade = req.params.id_propriedade;
 
-  if (idTalhao == undefined) {
-    return res.status(400).json("idTalhao não informado");
+  if (idPropriedade == undefined) {
+    return res.status(400).json("idPropriedade não informado");
   }
 
-  talhaoModel.exibir(idTalhao)
+  talhaoModel.listar(idPropriedade)
     .then(resultado => {
       res.status(200).json(resultado);
     })
     .catch(erro => {
-      console.log("Erro ao buscar umidade média:", erro);
+      console.log("Erro ao buscar talhões da propriedade:", erro);
       res.status(500).json("Erro ao buscar dados");
     });
 }
 
 module.exports = {
-  exibir
+  listar
 };

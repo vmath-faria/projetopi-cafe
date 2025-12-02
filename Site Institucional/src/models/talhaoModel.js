@@ -1,16 +1,14 @@
 var database = require("../database/config");
 
-function exibir(idTalhao) {
-  var instrucaoSql = `SELECT 
-    AVG(l.valor_umidade) AS media_talhao
-FROM leitura l
-JOIN sensor s ON s.id_sensor = l.fk_sensor
-WHERE s.fk_talhao = ${idTalhao};
+function listar(idPropriedade) {
+  var instrucaoSql = `SELECT id_talhao, nome_talhao
+        FROM talhao
+        WHERE fk_propriedade = ${idPropriedade};
 `;
 
   return database.executar(instrucaoSql);
 }
 
 module.exports = {  
-  exibir 
+  listar 
 };
