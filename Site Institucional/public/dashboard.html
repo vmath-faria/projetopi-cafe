@@ -21,7 +21,10 @@
                 <select oninput="select_function()" class="select-dash" id="header_select">
                     <option selected disabled value="#"></option>
                     <option value="login">Entrar com outra conta</option>
+                    <option value="problema">Problemas?</option>
+                    <option value="requisicao">Pedidos?</option>
                     <option value="index">Sair</option>
+                    
                 </select>
             </div>
         </div>
@@ -95,11 +98,7 @@
                 <div><canvas id="graficoGeral"></canvas></div>
                 <div id="div_sensores"></div>
             </div>
-
-
         </div>
-
-
     </div>
 </body>
 
@@ -115,6 +114,7 @@
     }
 
     carregarDashboard(usuario.fk_empresa);
+
 
 
 async function carregarDashboard(idEmpresa) {
@@ -180,6 +180,12 @@ function select_function() {
             } else if (options[i].value === "login") {
                 sessionStorage.clear();
                 window.location.href = "login.html";
+            } else if (options[i].value === "problema") {
+                sessionStorage.clear();
+                window.location.href = "https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9";
+            } else if (options[i].value === "requisicao") {
+                sessionStorage.clear();
+                window.location.href = "https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9";
             }
         }
     }

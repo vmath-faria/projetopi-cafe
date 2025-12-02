@@ -24,6 +24,8 @@
             <select oninput="select_function()" class="select-dash" id="header_select">
                 <option selected disabled value="#"></option>
                 <option value="login">Entrar com outra conta</option>
+                <option value="problema">Problemas?</option>
+                <option value="requisicao">Pedidos?</option>
                 <option value="index">Sair</option>
             </select>
         </div>
@@ -94,21 +96,17 @@
         <!--ALERTA DINÂMICO-->
     </div>
 
-    <h2>Selecione a propriedade desejada:</h2>
-    <br>
-    <div class="propriedades" id="propriedades"
-        style="display: flex; flex-direction: row; align-items: center; justify-content: space-around;">
+    <section class="area-selecao-propriedades">
+        <h2>Selecione a propriedade desejada</h2>
 
-    </div>
-
+        <div class="lista-propriedades" id="propriedades"></div>
+    </section>
 
     <div id="alerta"> <!-- Lembrar de realizar uma função para esse id, lá nas rotas-->
     </div>
 </body>
 
 <script>
-    var API = "http://localhost:3333";
-
 
     b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
     b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
@@ -136,7 +134,7 @@
         }
 
         try {
-            const res = await fetch(`${API}/propriedades/empresa/${fk_empresa}`);
+            const res = await fetch(`/propriedades/empresa/${fk_empresa}`);
             const fazendas = await res.json();
             console.log(fazendas);
 
@@ -144,7 +142,7 @@
             container.innerHTML = "";
 
             fazendas.forEach(f => {
-                const card = document.createElement("div");
+                const card = document.createElement("section");
                 card.className = "fazenda-card";
 
                 card.innerHTML = `
@@ -168,11 +166,11 @@
 
     function definirIcone(nivel) {
         switch (nivel) {
-            case "verde": return "imgs/fazenda_verde.png";
-            case "amarelo": return "imgs/fazenda _amarelo.png";
-            case "laranja": return "imgs/fazenda_laranja.png";
-            case "vermelho": return "imgs/fazenda_vermelho.png";
-            default: return "imgs/fazenda_verde.png";
+            case "verde": return "imgs/fazenda_verde_att.png";
+            case "amarelo": return "imgs/fazenda _amarelo_att.png";
+            case "laranja": return "imgs/fazenda_laranja_att.png";
+            case "vermelho": return "imgs/fazenda_vermelho_att.png";
+            default: return "imgs/fazenda_verde_att.png";
         }
     }
 
@@ -198,6 +196,12 @@
                 } else if (options[i].value === "login") {
                     sessionStorage.clear();
                     window.location.href = "login.html";
+                } else if (options[i].value === "problema") {
+                    sessionStorage.clear();
+                    window.location.href = "https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9";
+                } else if (options[i].value === "requisicao") {
+                    sessionStorage.clear();
+                    window.location.href = "https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9";
                 }
             }
         }
