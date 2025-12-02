@@ -53,11 +53,11 @@
         <br>
     
         <span style="font-size: 20px;"><b>Selecione o Talhão desejado:</b></span>
-        <select oninput="selecionar()" class="selectTalhao" name="sensor" id="select_sensor">
+        <select oninput="selecionar()" class="selectTalhao" name="sensor" id="select_talhao">
             <option value="#" selected disabled></option>
             <option value="resumo">Resumo</option>
-            <option value="1">Talhão 1</option>
-            <option value="2">Talhão 2</option>
+            <!-- <option value="1">Talhão 1</option>
+            <option value="2">Talhão 2</option> -->
         
         </select>
 
@@ -76,26 +76,14 @@
 
         <div class="containerGraficos">
 
-            <!-- Gráficos Sensor 1 -->
-            <div id="div_grafico1" class="containerSub" style="display: none;">
-                <div class="graficos1">
-                    <canvas id="graficoLinha1"></canvas>
-                </div> <br>         
-                <br>                
-                
-            </div>
-
             <!-- Gráficos Sensor 2 -->
-            <div id="div_grafico2" class="containerSub" style="display: none;">
-                <div class="graficos1">
-                    <canvas id="graficoLinha2"></canvas>
-                </div> <br>
+            <div id="graficoTalhao" class="containerSub" style="display: none;">
                 <div class="graficos2">
-                    <canvas id="graficoBarra2"></canvas>
+                    <canvas id="graficoBarra"></canvas>
                 </div>
             </div>
-            <div class="graficos">
-                <div><canvas id="graficoGeral"></canvas></div>
+            <div class="graficos" id="graficoGeral">
+                <div><canvas id="graficoLinha"></canvas></div>
                 <div id="div_sensores"></div>
             </div>
         </div>
@@ -109,13 +97,21 @@
     b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
     var usuario = sessionStorage.ID_USUARIO;
 
+
     if (!sessionStorage.NOME_USUARIO) {
         window.location.href = "login.html";
     }
 
-    carregarDashboard(usuario.fk_empresa);
+    var idPropriedade = sessionStorage.id_propriedade; 
+
+carregarGraficoGeral(idPropriedade);
+carregarTalhoes();
 
 
+function carregarTalhoes() {
+    fetch(`/talhao/listar/${idPropriedade}`)
+        .then(res => res.json())
+        .then(lista => {
 
 async function carregarDashboard(idEmpresa) {
     try {
@@ -127,39 +123,36 @@ async function carregarDashboard(idEmpresa) {
     } catch (err) {
         console.error(err);
     }
+            var select = document.getElementById("select_talhao");
+
+            for (var i = 0; i < lista.length; i++) {
+                var item = lista[i];
+
+                var option = document.createElement("option");
+                option.value = item.id_talhao;
+                option.textContent = item.nome_talhao;
+
+                select.appendChild(option);
+            }
+
+        }});
 }
 
-async function selecionarTalhao(idEmpresa, talhaoId) {
-    if (talhaoId === "resumo") return carregarDashboard(idEmpresa);
-    try {
-        const res = await fetch(`/talhao/${talhaoId}/leituras/historico`);
-        const data = await res.json();
-    } catch (err) {
-        console.error(err);
-    }
-}
 
+function carregarGraficoGeral(idPropriedade) {
+    fetch(`/graficoGeral/exibir/${idPropriedade}`, { cache: "no-store" })
+        .then(response => {
+            if (response.ok) return response.json();
+            else console.error("Erro ao buscar dados");
+        })
+        .then(data => {
+            console.log("Dados recebidos (geral):", data);
 
-function renderizarListaTalhoes(lista) {
-    const select = document.getElementById("select_sensor");
-    [...select.options].forEach(opt => { if(opt.value!=='resumo') opt.remove(); });
-    lista.forEach(t => {
-        const option = document.createElement("option");
-        option.value = t.id_talhao;
-        option.innerText = `Talhão ${t.id_talhao}`;
-        select.appendChild(option);
-    });
-}
+            var umidadeMedia = data[0].umidade_media;
 
-function renderizarGraficoGeral(listaTalhoes) {
-    const ctx = document.getElementById("graficoGeral").getContext("2d");
-    const labels = listaTalhoes.map(t => t.nome_talhao);
-    const valores = listaTalhoes.map(t => t.media_umidade);
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: { labels, datasets: [{ label: 'Umidade Média (%)', data: valores, backgroundColor: '#C08558' }] }
-    });
+            plotarGraficoGeral(idPropriedade, umidadeMedia);
+        })
+        .catch(erro => console.error("Erro:", erro));
 }
 
 function avaliarSaude(umidade) {
@@ -167,6 +160,49 @@ function avaliarSaude(umidade) {
     if (umidade < 60) return "Baixa";
     return "Alta demais";
 }
+
+function plotarGraficoGeral(idPropriedade, umidadeInicial) {
+
+    console.log('Iniciando plotagem do gráfico geral...');
+
+    let labels = ["Leitura 1"];
+
+    let dados = {
+        labels: labels,
+        datasets: [{
+            label: 'Umidade Média da Propriedade',
+            data: [umidadeInicial],
+            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgb(75, 192, 192)',
+            fill: false,
+            tension: 0.1
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: dados,
+        options: {
+        scales: {
+            y: {
+                min: 0,
+                max: 100
+            }
+        }
+    }
+    };
+
+    let myChart = new Chart(
+        document.getElementById("graficoLinha"),
+        config
+    );
+
+    setTimeout(() => 
+        atualizarGraficoGeral(idPropriedade, dados, myChart), 
+        5000
+    );
+}
+
 
 function select_function() {
     var select = document.getElementById("header_select");
@@ -187,6 +223,70 @@ function select_function() {
                 sessionStorage.clear();
                 window.location.href = "https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9";
             }
+        }
+    
+    };
+
+}
+
+
+
+function atualizarGraficoGeral(idPropriedade, dados, myChart) {
+
+    fetch(`/graficoGeral/exibir/${idPropriedade}`, { cache: 'no-store' })
+        .then(response => response.json())
+        .then(novo => {
+
+            let novoValor = novo[0].umidade_media;
+            let ultimoValor = dados.datasets[0].data[dados.datasets[0].data.length - 1];
+
+            console.log("Novo valor:", novoValor);
+            console.log("Último valor:", ultimoValor);
+
+            if (novoValor != ultimoValor) {
+
+                dados.labels.push(`Leitura ${dados.labels.length + 1}`);
+
+                if (dados.datasets[0].data.length >= 10) {
+                    dados.datasets[0].data.shift();
+                    dados.labels.shift();
+                }
+
+                dados.datasets[0].data.push(novoValor);
+                myChart.update();
+            }
+
+            setTimeout(() => 
+                atualizarGraficoGeral(idPropriedade, dados, myChart), 
+                5000
+            );
+        })
+        .catch(erro => {
+            console.error("Erro ao atualizar gráfico geral:", erro);
+            setTimeout(() => 
+                atualizarGraficoGeral(idPropriedade, dados, myChart), 
+                5000
+            );
+        });
+}
+
+function selecionar(){
+    var selecionado = document.getElementById('select_talhao')
+    var valor = selecionado.value
+
+
+    for (var i = 0; i < selecionado.options.length; i++) {
+        var opcao = selecionado.options[i].value;
+
+        if (opcao == valor) {
+            if (opcao == "resumo") {
+                carregarGraficoGeral();
+                mostrarGraficoGeral();
+            } else {
+                carregarGraficoTalhao(Number(opcao));
+                mostrarGraficoTalhao()
+            }
+            break; 
         }
     }
 }
@@ -229,6 +329,59 @@ function carregarKPIs() {
             document.getElementById("ID_DO_ELEMENTO").innerText = "-";
         });
     */
+function carregarGraficoTalhao(idTalhao) {
+
+    fetch(`/graficoTalhao/exibir/${idTalhao}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log("Dados desse talhão:", data);
+
+            var umidade = data[0].umidade_media;
+
+            plotarGraficoTalhao(umidade);
+        })
+        .catch(e => console.error("Erro ao buscar dados do talhão:", e));
 }
 
+let graficoTalhao = null;
+
+function plotarGraficoTalhao(umidade) {
+
+    var graficoBarra = document.getElementById("graficoBarra");
+
+    if (graficoTalhao != null) {
+        graficoTalhao.destroy();
+    }
+
+    graficoTalhao = new Chart(graficoBarra, {
+        type: "bar",
+        data: {
+            labels: ["Leitura 1"],
+            datasets: [{
+                label: "Umidade média do talhão",
+                data: [umidade],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    });
+}
+
+function mostrarGraficoGeral() {
+    document.getElementById("graficoGeral").style.display = "block";
+    document.getElementById("graficoTalhao").style.display = "none";
+}
+
+function mostrarGraficoTalhao() {
+    document.getElementById("graficoGeral").style.display = "none";
+    document.getElementById("graficoTalhao").style.display = "block";
+}
+}
 </script>

@@ -17,11 +17,12 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuario");
-var leituraRouter = require("./src/routes/leitura");
+var kpiRiscoRouter = require("./src/routes/kpiRisco");
 var propriedadesRouter = require("./src/routes/propriedades");
 var talhaoRouter = require("./src/routes/talhao");
-var empresaRouter = require("./src/routes/empresa")
-var graficoGeralRouter = require("./src/routes/graficoGeral")
+var empresaRouter = require("./src/routes/empresa");
+var graficoGeralRouter = require("./src/routes/graficoGeral");
+var graficoTalhaoRouter = require("./src/routes/graficoTalhao");
 
 var kpiRouter = require("./src/routes/kpi");
 
@@ -35,12 +36,14 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.use("/", indexRouter);
 app.use("/usuario", usuarioRouter);
-app.use("/leitura", leituraRouter);
+app.use("/kpiRisco", kpiRiscoRouter);
 app.use("/propriedades", propriedadesRouter);
 app.use("/talhao", talhaoRouter);
-app.use("/empresa", empresaRouter)
 app.use("/kpi", kpiRouter);
 app.use("/graficoGeral", graficoGeralRouter)
+app.use("/empresa", empresaRouter);
+app.use("/graficoGeral", graficoGeralRouter);
+app.use("/graficoTalhao", graficoTalhaoRouter);
 
 
 app.listen(PORTA_APP, function () {

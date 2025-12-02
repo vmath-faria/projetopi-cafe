@@ -152,7 +152,8 @@
             `;
 
                 card.onclick = () => {
-                    localStorage.setItem("id_propriedade", f.id_propriedade);
+                    // console.log(`Gravando informalçao ${f.id_propriedade}`)
+                    sessionStorage.setItem("id_propriedade", f.id_propriedade);
                     window.location.href = "dashboard.html";
                 };
 
