@@ -124,22 +124,6 @@ b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
             console.error("Erro ao carregar KPIs:", e);
         }
     }
-    /*
-    NÃO TO CONSEGUINDO SEPARAR OS SELECTS POR TALHAO
-    function carregarKpiSensores(idTalhao) {
-        fetch(`/kpi/sensores-status/${idTalhao}`)
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById("kpi_sensores").innerText =
-                    `${data.sensores_ativos} ativos / ${data.sensores_inativos} inativos`;
-            })
-            .catch(err => console.error("Erro KPI sensores:", err));
-    }
-    
-    
-     ============================
-       CARREGAR TALHÕES NO SELECT
-       ============================ */
 
     function carregarTalhoes() {
         fetch(`/talhao/listar/${idPropriedade}`)
@@ -158,9 +142,7 @@ b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
         marcarTalhoesEmRisco()
     }
 
-    /* ============================
-       GRÁFICO GERAL
-       ============================ */
+    /* GRÁFICO GERAL */
 
     function carregarGraficoGeral(idPropriedade) {
         fetch(`/graficoGeral/exibir/${idPropriedade}`)
@@ -254,13 +236,7 @@ b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
     }
 
 
-    /* ============================
-       GRÁFICO TALHÃO
-       ============================ */
-
-    /* ============================
-   GRÁFICO TALHÃO (IGUAL AO GERAL)
-   ============================ */
+    /* GRÁFICO TALHÃO */
 
 var graficoTalhao = null;
 var dadosTalhao = null;
@@ -338,9 +314,7 @@ function atualizarGraficoTalhao() {
         });
 }
 
-    /* ============================
-       ALTERAR ENTRE RESUMO E TALHÃO
-       ============================ */
+    /* ALTERAR ENTRE RESUMO E TALHÃO */
 
     function selecionar() {
         var valor = select_talhao.value;
@@ -383,16 +357,28 @@ function atualizarGraficoTalhao() {
 
 
 
-    /* ============================
-       SELECT DO MENU
-       ============================ */
+    /* SELECT DO MENU*/
 
     function select_function() {
-        var valor = header_select.value;
+        var select = document.getElementById("header_select");
+        var options = select.options;
 
-        if (valor === "index" || valor === "login") {
-            sessionStorage.clear();
-            window.location.href = valor + ".html";
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].selected) {
+                if (options[i].value === "index") {
+                    sessionStorage.clear();
+                    window.location.href = "index.html";
+                } else if (options[i].value === "login") {
+                    sessionStorage.clear();
+                    window.location.href = "login.html";
+                } else if (options[i].value === "problema") {
+                    sessionStorage.clear();
+                    window.open("https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9");
+                } else if (options[i].value === "requisicao") {
+                    sessionStorage.clear();
+                    window.open("https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9");
+                }
+            }
         }
     }
 </script>
