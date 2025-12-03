@@ -1,8 +1,10 @@
 var kpiModel = require("../models/kpiModel");
 
 async function talhoesSemLeitura(req, res) {
+
+    var idPropriedade = req.params.id_propriedade;
     try {
-        var resultado = await kpiModel.talhoesSemLeitura();
+        var resultado = await kpiModel.talhoesSemLeitura(idPropriedade);
         res.status(200).json(resultado[0]);
     } catch (erro) {
         console.log("Erro ao buscar talhões sem leitura:", erro);

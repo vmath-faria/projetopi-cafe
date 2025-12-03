@@ -64,7 +64,8 @@ function autenticar(req, res) {
                             email: user.email,
                             nivel_acesso: user.nivel_acesso,
                             fk_empresa: user.id_empresa,
-                            propriedades: propriedades
+                            propriedades: propriedades,
+                            id_propriedade: user.fk_token_propriedade
                         });
 
                     })
@@ -76,7 +77,9 @@ function autenticar(req, res) {
                             email: user.email,
                             nivel_acesso: user.nivel_acesso,
                             fk_empresa: user.id_empresa,
-                            propriedades: []
+                            propriedades: [],
+                            id_propriedade: user.fk_token_propriedade
+
                         });
                     });
 

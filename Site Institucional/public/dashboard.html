@@ -84,7 +84,7 @@
         window.location.href = "login.html";
     }
 
-    var idPropriedade = sessionStorage.id_propriedade;
+    var idPropriedade = sessionStorage.ID_PROPRIEDADE;
 
     carregarTalhoes();
     carregarGraficoGeral(idPropriedade);
@@ -98,7 +98,7 @@
     async function carregarKPIs(idTalhao) {
         console.log(idTalhao)
         try {
-            var semLeitura = await (await fetch(`/kpi/talhoes-sem-leitura`)).json();
+            var semLeitura = await (await fetch(`/kpi/talhoes-sem-leitura/${idPropriedade}`)).json();
             document.getElementById("kpi_talhoes_sem_leitura").innerText =
                 semLeitura.talhoes_sem_leitura;
 

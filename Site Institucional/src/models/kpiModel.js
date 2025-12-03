@@ -1,14 +1,17 @@
 const database = require("../database/config");
 
 // KPI - Talhões sem leituras recentes (últimas 24h)
-function talhoesSemLeitura() {
+function talhoesSemLeitura(idPropriedade) {
     const query = `
         SELECT COUNT(DISTINCT t.id_talhao) AS talhoes_sem_leitura
-        FROM talhao t
-        JOIN sensor s ON s.fk_talhao = t.id_talhao
-        LEFT JOIN leitura l ON l.fk_sensor = s.id_sensor 
-            AND l.data_hora_leitura >= NOW() - INTERVAL 24 HOUR
-        WHERE l.id_leitura IS NULL;
+            FROM talhao t
+            JOIN sensor s ON s.fk_talhao = t.id_talhao
+            LEFT JOIN leitura l ON l.fk_sensor = s.id_sensor
+            WHERE t.fk_propriedade = ${idPropriedade}
+            AND (
+                l.data_hora_leitura IS NULL
+                OR l.data_hora_leitura < NOW() - INTERVAL 24 HOUR
+      );
     `;
     return database.executar(query);
 }

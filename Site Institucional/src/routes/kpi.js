@@ -7,7 +7,7 @@ router.get("/sensores-status/:id_talhao", kpiController.sensoresStatusPorTalhao)
 router.get("/sensores-status-geral/:id_propriedade", kpiController.sensoresStatusGeral);
 
 // KPI 2
-router.get("/talhoes-sem-leitura", kpiController.talhoesSemLeitura);
+router.get("/talhoes-sem-leitura/:id_propriedade", kpiController.talhoesSemLeitura);
 
 // KPI talhões em risco
 router.get("/talhoes-em-risco/:id_propriedade", kpiController.talhoesEmRisco);

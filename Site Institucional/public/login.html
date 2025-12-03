@@ -143,7 +143,11 @@
                 sessionStorage.ID_USUARIO = json.id_usuario;
                 sessionStorage.NIVEL_ACESSO = json.nivel_acesso;
                 sessionStorage.ID_EMPRESA = json.fk_empresa;
-                sessionStorage.PROPRIEDADES = JSON.stringify(json.propriedades);
+                if (sessionStorage.NIVEL_ACESSO == 'Proprietario') {
+                    sessionStorage.PROPRIEDADES = JSON.stringify(json.propriedades);
+                } else if (sessionStorage.NIVEL_ACESSO == 'Funcionario') {
+                    sessionStorage.ID_PROPRIEDADE = json.id_propriedade;   
+                }
 
                 console.log("ID_EMPRESA SALVO:", sessionStorage.ID_EMPRESA);
 
