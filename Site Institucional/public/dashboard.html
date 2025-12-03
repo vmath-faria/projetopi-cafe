@@ -82,7 +82,12 @@ b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
         window.location.href = "login.html";
     }
 
-    var idPropriedade = sessionStorage.ID_PROPRIEDADE;
+    if(sessionStorage.NIVEL_ACESSO == 'Funcionario') {
+        var idPropriedade = sessionStorage.ID_PROPRIEDADE;
+    } else {
+        var idPropriedade = sessionStorage.id_propriedade;
+    }
+    
 
     carregarTalhoes();
     carregarGraficoGeral(idPropriedade);
