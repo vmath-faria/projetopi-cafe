@@ -170,15 +170,6 @@ body>header {
     }
 }
 
-.sla {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1px;
-
-}
-
-
 /* .dashboard p {
     color: #f3dec2;
     font-weight: bold;

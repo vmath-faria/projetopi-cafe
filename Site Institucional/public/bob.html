@@ -1,29 +1,45 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BobIA</title>
-    <link rel="stylesheet" href="./styles/bob.css">
+    <link rel="stylesheet" href="styles/bob.css">
+    <link rel="icon" href="./imgs/logo-fundo-marrom.png">
 </head>
 
 <body>
-    <div class="header">
-        <div class="container">
-            <a href="index.html#"><img src="./imgs/logo-fonte-marrom.png" class="titulo"></a>
-            <div class="sla">
-                <p id="header_nome">Olá, <span id="b_usuario1">usuário</span>!</p>
-                <select oninput="select_function()" class="select-dash" id="header_select">
-                    <option selected disabled value="#"></option>
-                    <option value="login">Entrar com outra conta</option>
-                    <option value="problema">Problemas?</option>
-                    <option value="requisicao">Pedidos?</option>
-                    <option value="index">Sair</option>
-                </select>
-            </div>
+    <header>
+        <div class="logo-header">
+            <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
         </div>
-    </div>
+        <nav>
+            <ul>
+                <li><a onclick="Incidentes()">Incidentes</a></li>
+                <li><a onclick="Problema()">Problema</a></li>
+                <li><a onclick="Requisicao()">Requisição de Token</a></li>
+                <li><a href="https://drive.google.com/file/d/1OqU5ZA7m8hyr-1FQHZUV0Doec7wVyb2d/view?usp=sharing"
+                        target="_blank">Documentação</a></li>
+                <li><a href="https://drive.google.com/file/d/1y4EwHhu5YMqrbVHIG_CXW9YDZkuZrK1b/view?usp=sharing"
+                        target="_blank">Manual de Instalação</a></li>
+                <li>
+                    <a href="https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e"
+                        target="_blank">JIRA</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="header-usuario">
+            <div class="boas-vindas">
+                <p>Olá, <span id="b_usuario1">usuário</span>!</p>
+            </div>
+            <select oninput="select_function()" class="select-dash" id="header_select">
+                <option selected disabled value="#"></option>
+                <option value="index">Sair</option>
+            </select>
+        </div>
+    </header>
+
     <div class="box">
         <div id="container">
             <h1>BobIA</h1>
@@ -33,13 +49,26 @@
             <h3>Resposta da IA:</h3>
             <div id="resposta"></div>
         </div>
-        <div class="fluxogramas">
-            <h3>Incidentes com Arduino ou Servidor</h3>
-            <img height="600px" src="./imgs/nivel1.png">
-            <h3>Incidentes com Sensor</h3>
-            <img height="600px" src="./imgs/nivel2.png">
-            <h3>Requisições de Cadastro</h3>
-            <img height="600px" src="./imgs/nivel3.png">
+
+        <div id="fluxos" class="fluxogramas" style="display: none;">
+            <div id="tela_incidentes" style="display: none;">
+                <h3>Incidentes com Arduino ou Servidor</h3>
+                <img height="600px" src="./imgs/Diagrama de Incidente.png">
+            </div>
+
+            <div id="tela_problema" style="display: none;">
+                <h3>Fluxo de Problemas</h3>
+                <img height="600px" src="./imgs/Diagrama de Problema.png">
+            </div>
+
+            <div id="tela_requisicao" style="display: none;">
+                <h3>Requisição de Token</h3>
+                <img height="600px" src="./imgs/Diagrama Requisição de Token.png">
+            </div>
+             <button onclick="VoltarParaIA()">
+                Voltar para IA
+            </button>
+
         </div>
     </div>
 
@@ -65,25 +94,52 @@
         }
 
         function select_function() {
-        var select = document.getElementById("header_select");
-        var options = select.options;
+            var select = document.getElementById("header_select");
+            var options = select.options;
 
-        for (var i = 0; i < options.length; i++) {
-            if (options[i].selected) {
-                if (options[i].value == "index") {
-                    sessionStorage.clear();
-                    window.location.href = "index.html";
-                } else if (options[i].value == "login") {
-                    sessionStorage.clear();
-                    window.location.href = "login.html";
-                } else if (options[i].value == "problema") {
-                    window.open("https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9", "_blank");
-                } else if (options[i].value == "requisicao") {
-                    window.open("https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9", "_blank");
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].selected) {
+                    if (options[i].value == "index") {
+                        sessionStorage.clear();
+                        window.location.href = "index.html";
+                    } else if (options[i].value == "login") {
+                        sessionStorage.clear();
+                        window.location.href = "login.html";
+                    } else if (options[i].value == "problema") {
+                        window.open("https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9", "_blank");
+                    } else if (options[i].value == "requisicao") {
+                        window.open("https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9", "_blank");
+                    }
                 }
             }
         }
-    }
+        function esconderTelas() {
+            document.getElementById("container").style.display = "none";
+            document.getElementById("fluxos").style.display = "block";
+            document.getElementById("tela_incidentes").style.display = "none";
+            document.getElementById("tela_problema").style.display = "none";
+            document.getElementById("tela_requisicao").style.display = "none";
+        }
+
+        function Incidentes() {
+            esconderTelas();
+            document.getElementById("tela_incidentes").style.display = "block";
+        }
+
+        function Problema() {
+            esconderTelas();
+            document.getElementById("tela_problema").style.display = "block";
+        }
+
+        function Requisicao() {
+            esconderTelas();
+            document.getElementById("tela_requisicao").style.display = "block";
+        }
+
+        function VoltarParaIA() {
+            document.getElementById("fluxos").style.display = "none";
+            document.getElementById("container").style.display = "block";
+        }
     </script>
 
 </body>
