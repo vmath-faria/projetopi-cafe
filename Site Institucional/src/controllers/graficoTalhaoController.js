@@ -3,7 +3,6 @@ var graficoTalhaoModel = require("../models/graficoTalhaoModel");
 function exibir(req, res) {
     var idTalhao = req.params.id_talhao;
 
-
     graficoTalhaoModel.exibir(idTalhao)
         .then(resultado => {
             res.status(200).json(resultado);
