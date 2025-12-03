@@ -5,29 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffech Dashboard</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
     <link rel="icon" href="./imgs/logo-fundo-marrom.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="dashboard">
 
-    <div class="header">
-        <div class="container">
+    <header>
+        <div class="logo-header">
             <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
-            <div class="sla">
-                <p id="header_nome">Olá, <span id="b_usuario1">usuário</span>!</p>
-                <img src="./imgs/fotoperfil.png" class="foto">
-                <select oninput="select_function()" class="select-dash" id="header_select">
-                    <option selected disabled value="#"></option>
-                    <option value="login">Entrar com outra conta</option>
-                    <option value="problema">Problemas?</option>
-                    <option value="requisicao">Pedidos?</option>
-                    <option value="index">Sair</option>
-                </select>
-            </div>
         </div>
-    </div>
+        <div class="header-usuario">
+            <div class="boas-vindas">
+                <p>Olá, <span id="b_usuario1">usuário</span>!</p>
+                <img src="./imgs/fotoperfil.png" class="usuario-foto">
+            </div>
+            <select oninput="select_function()" class="select-dash" id="header_select">
+                <option selected disabled value="#"></option>
+                <option value="login">Entrar com outra conta</option>
+                <option value="problema">Problemas?</option>
+                <option value="requisicao">Pedidos?</option>
+                <option value="index">Sair</option>
+            </select>
+        </div>
+    </header>
 
     <div class="saudacoes">
         <h1 id="saudacao">Bom dia, <span id="b_usuario2">usuário</span>!</h1>
@@ -72,10 +74,6 @@
 </html>
 
 <script>
-/* ============================
-   INICIALIZAÇÃO
-   ============================ */
-
 b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
 b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
 
@@ -87,43 +85,7 @@ var idPropriedade = sessionStorage.id_propriedade;
 
 carregarTalhoes();
 carregarGraficoGeral(idPropriedade);
-// carregarKPIs();
 
-/* ============================
-   CARREGAR KPIs
-   ============================ */
-
-// async function carregarKPIs(idTalhao) {
-//     console.log(idTalhao)
-//     try {
-//         const semLeitura = await (await fetch(`/kpi/talhoes-sem-leitura`)).json();
-//         const sensores = await (await fetch(`/kpi/sensores-status/${idTalhao}`)).json();
-//         document.getElementById("kpi_talhoes_sem_leitura").innerText =
-//             semLeitura.talhoes_sem_leitura;
-
-//         document.getElementById("kpi_inativo").innerText =
-//             `${sensores.sensores_ativos} ativos / ${sensores.sensores_inativos} inativos`;
-
-//     } catch (e) {
-//         console.error("Erro ao carregar KPIs:", e);
-//     }
-// }
-/*
-NÃO TO CONSEGUINDO SEPARAR OS SELECTS POR TALHAO
-function carregarKpiSensores(idTalhao) {
-    fetch(`/kpi/sensores-status/${idTalhao}`)
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("kpi_sensores").innerText =
-                `${data.sensores_ativos} ativos / ${data.sensores_inativos} inativos`;
-        })
-        .catch(err => console.error("Erro KPI sensores:", err));
-}
-
-
- ============================
-   CARREGAR TALHÕES NO SELECT
-   ============================ */
 
 function carregarTalhoes() {
     fetch(`/talhao/listar/${idPropriedade}`)
@@ -140,9 +102,7 @@ function carregarTalhoes() {
         });
 }
 
-/* ============================
-   GRÁFICO GERAL
-   ============================ */
+/* GRÁFICO GERAL */
 
 function carregarGraficoGeral(idPropriedade) {
     fetch(`/graficoGeral/exibir/${idPropriedade}`)
