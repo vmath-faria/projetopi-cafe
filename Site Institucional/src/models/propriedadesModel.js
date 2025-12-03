@@ -3,7 +3,7 @@ var database = require("../database/config");
 // Lista propriedades + nível de alerta baseado na média das últimas leituras
 function listarPorEmpresa(idEmpresa) {
     var instrucao = `
-        SELECT * FROM vw_propriedade WHERE fk_empresa = ${idEmpresa};
+        SELECT * FROM vw_propriedade1 WHERE fk_empresa = ${idEmpresa};
     `;
 
     return database.executar(instrucao);
