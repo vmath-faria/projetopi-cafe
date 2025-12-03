@@ -69,236 +69,327 @@
     </div>
 
 </body>
+
 </html>
 
 <script>
-/* ============================
-   INICIALIZAÇÃO
-   ============================ */
+    /* ============================
+       INICIALIZAÇÃO
+       ============================ */
 
-b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
-b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
+    b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
+    b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
 
-if (!sessionStorage.NOME_USUARIO) {
-    window.location.href = "login.html";
-}
+    if (!sessionStorage.NOME_USUARIO) {
+        window.location.href = "login.html";
+    }
 
-var idPropriedade = sessionStorage.id_propriedade;
+    var idPropriedade = sessionStorage.id_propriedade;
 
-carregarTalhoes();
-carregarGraficoGeral(idPropriedade);
-// carregarKPIs();
-
-/* ============================
-   CARREGAR KPIs
-   ============================ */
-
-// async function carregarKPIs(idTalhao) {
-//     console.log(idTalhao)
-//     try {
-//         const semLeitura = await (await fetch(`/kpi/talhoes-sem-leitura`)).json();
-//         const sensores = await (await fetch(`/kpi/sensores-status/${idTalhao}`)).json();
-//         document.getElementById("kpi_talhoes_sem_leitura").innerText =
-//             semLeitura.talhoes_sem_leitura;
-
-//         document.getElementById("kpi_inativo").innerText =
-//             `${sensores.sensores_ativos} ativos / ${sensores.sensores_inativos} inativos`;
-
-//     } catch (e) {
-//         console.error("Erro ao carregar KPIs:", e);
-//     }
-// }
-/*
-NÃO TO CONSEGUINDO SEPARAR OS SELECTS POR TALHAO
-function carregarKpiSensores(idTalhao) {
-    fetch(`/kpi/sensores-status/${idTalhao}`)
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("kpi_sensores").innerText =
-                `${data.sensores_ativos} ativos / ${data.sensores_inativos} inativos`;
-        })
-        .catch(err => console.error("Erro KPI sensores:", err));
-}
+    carregarTalhoes();
+    carregarGraficoGeral(idPropriedade);
+    carregarKPIs('resumo');
 
 
- ============================
-   CARREGAR TALHÕES NO SELECT
-   ============================ */
 
-function carregarTalhoes() {
-    fetch(`/talhao/listar/${idPropriedade}`)
-        .then(res => res.json())
-        .then(lista => {
-            var select = document.getElementById("select_talhao");
+    // carregarKPIs();
 
-            lista.forEach(item => {
-                var option = document.createElement("option");
-                option.value = item.id_talhao;
-                option.textContent = item.nome_talhao;
-                select.appendChild(option);
-            });
-        });
-}
 
-/* ============================
-   GRÁFICO GERAL
-   ============================ */
+    async function carregarKPIs(idTalhao) {
+        console.log(idTalhao)
+        try {
+            var semLeitura = await (await fetch(`/kpi/talhoes-sem-leitura`)).json();
+            document.getElementById("kpi_talhoes_sem_leitura").innerText =
+                semLeitura.talhoes_sem_leitura;
 
-function carregarGraficoGeral(idPropriedade) {
-    fetch(`/graficoGeral/exibir/${idPropriedade}`)
-        .then(r => r.json())
-        .then(data => {
-            plotarGraficoGeral(idPropriedade, data[0].umidade_media);
-        });
-}
-
-let graficoGeral = null;
-
-function plotarGraficoGeral(idPropriedade, umidadeInicial) {
-
-    console.log('Iniciando plotagem do gráfico geral...');
-
-    let labels = ["Leitura 1"];
-
-    let dados = {
-        labels: labels,
-        datasets: [{
-            label: 'Umidade Média da Propriedade',
-            data: [umidadeInicial],
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgb(75, 192, 192)',
-            fill: false,
-            tension: 0.1
-        }]
-    };
-
-    const config = {
-        type: 'line',
-        data: dados,
-        options: {
-        scales: {
-            y: {
-                min: 0,
-                max: 100
+            var leitura;
+            if (!idTalhao || idTalhao == "resumo") {
+                // Aqui mostra a quantidade sensores ativos da propriedade
+                sensores = await (await fetch(`/kpi/sensores-status-geral/${idPropriedade}`)).json();
+            } else {
+                // Aqui eu chamo a rota para filtrar os sensores de cada talhão
+                sensores = await (await fetch(`/kpi/sensores-status/${idTalhao}`)).json();
             }
+
+            document.getElementById("kpi_inativo").innerText =
+                `${sensores.sensores_ativos} ativos / ${sensores.sensores_inativos} inativos`;
+
+            var risco = await (await fetch(`/kpi/talhoes-em-risco/${idPropriedade}`)).json();
+            document.getElementById("kpi_alertas").innerText = risco.length;
+
+        } catch (e) {
+            console.error("Erro ao carregar KPIs:", e);
         }
     }
-    };
+    /*
+    NÃO TO CONSEGUINDO SEPARAR OS SELECTS POR TALHAO
+    function carregarKpiSensores(idTalhao) {
+        fetch(`/kpi/sensores-status/${idTalhao}`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("kpi_sensores").innerText =
+                    `${data.sensores_ativos} ativos / ${data.sensores_inativos} inativos`;
+            })
+            .catch(err => console.error("Erro KPI sensores:", err));
+    }
+    
+    
+     ============================
+       CARREGAR TALHÕES NO SELECT
+       ============================ */
 
-    let myChart = new Chart(
-        document.getElementById("graficoLinha"),
-        config
-    );
+    function carregarTalhoes() {
+        fetch(`/talhao/listar/${idPropriedade}`)
+            .then(res => res.json())
+            .then(lista => {
+                var select = document.getElementById("select_talhao");
 
-    setTimeout(() => 
-        atualizarGraficoGeral(idPropriedade, dados, myChart), 
-        5000
-    );
-}
+                lista.forEach(item => {
+                    var option = document.createElement("option");
+                    option.value = item.id_talhao;
+                    option.textContent = item.nome_talhao;
+                    select.appendChild(option);
+                });
+            });
 
-function atualizarGraficoGeral(idPropriedade, dados, myChart) {
+        marcarTalhoesEmRisco()
+    }
 
-    fetch(`/graficoGeral/exibir/${idPropriedade}`, { cache: 'no-store' })
-        .then(response => response.json())
-        .then(novo => {
+    /* ============================
+       GRÁFICO GERAL
+       ============================ */
 
-            let novoValor = novo[0].umidade_media;
-            let ultimoValor = dados.datasets[0].data[dados.datasets[0].data.length - 1];
+    function carregarGraficoGeral(idPropriedade) {
+        fetch(`/graficoGeral/exibir/${idPropriedade}`)
+            .then(r => r.json())
+            .then(data => {
+                plotarGraficoGeral(idPropriedade, data[0].umidade_media);
+            });
+    }
 
-            console.log("Novo valor:", novoValor);
-            console.log("Último valor:", ultimoValor);
+    var graficoGeral = null;
 
-            if (novoValor != ultimoValor) {
+    function plotarGraficoGeral(idPropriedade, umidadeInicial) {
 
-                dados.labels.push(`Leitura ${dados.labels.length + 1}`);
+        console.log('Iniciando plotagem do gráfico geral...');
 
-                if (dados.datasets[0].data.length >= 10) {
-                    dados.datasets[0].data.shift();
-                    dados.labels.shift();
+        var labels = ["Leitura 1"];
+
+        var dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Umidade Média da Propriedade',
+                data: [umidadeInicial],
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgb(75, 192, 192)',
+                fill: false,
+                tension: 0.1
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: dados,
+            options: {
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100
+                    }
+                }
+            }
+        };
+
+        var myChart = new Chart(
+            document.getElementById("graficoLinha"),
+            config
+        );
+
+        setTimeout(() =>
+            atualizarGraficoGeral(idPropriedade, dados, myChart),
+            5000
+        );
+    }
+
+    function atualizarGraficoGeral(idPropriedade, dados, myChart) {
+
+        fetch(`/graficoGeral/exibir/${idPropriedade}`, { cache: 'no-store' })
+            .then(response => response.json())
+            .then(novo => {
+
+                var novoValor = novo[0].umidade_media;
+                var ultimoValor = dados.datasets[0].data[dados.datasets[0].data.length - 1];
+
+                console.log("Novo valor:", novoValor);
+                console.log("Último valor:", ultimoValor);
+
+                if (novoValor != ultimoValor) {
+
+                    dados.labels.push(`Leitura ${dados.labels.length + 1}`);
+
+                    if (dados.datasets[0].data.length >= 10) {
+                        dados.datasets[0].data.shift();
+                        dados.labels.shift();
+                    }
+
+                    dados.datasets[0].data.push(novoValor);
+                    myChart.update();
                 }
 
-                dados.datasets[0].data.push(novoValor);
-                myChart.update();
-            }
-
-            setTimeout(() => 
-                atualizarGraficoGeral(idPropriedade, dados, myChart), 
-                5000
-            );
-        })
-        .catch(erro => {
-            console.error("Erro ao atualizar gráfico geral:", erro);
-            setTimeout(() => 
-                atualizarGraficoGeral(idPropriedade, dados, myChart), 
-                5000
-            );
-        });
-}
+                setTimeout(() =>
+                    atualizarGraficoGeral(idPropriedade, dados, myChart),
+                    5000
+                );
+            })
+            .catch(erro => {
+                console.error("Erro ao atualizar gráfico geral:", erro);
+                setTimeout(() =>
+                    atualizarGraficoGeral(idPropriedade, dados, myChart),
+                    5000
+                );
+            });
+    }
 
 
-/* ============================
-   GRÁFICO TALHÃO
+    /* ============================
+       GRÁFICO TALHÃO
+       ============================ */
+
+    /* ============================
+   GRÁFICO TALHÃO (IGUAL AO GERAL)
    ============================ */
 
-let graficoTalhao = null;
+var graficoTalhao = null;
+var dadosTalhao = null;
+var idTalhaoAtual = null;
 
 function carregarGraficoTalhao(idTalhao) {
+    idTalhaoAtual = idTalhao;
+
     fetch(`/graficoTalhao/exibir/${idTalhao}`)
-        .then(res => res.json())
+        .then(r => r.json())
         .then(data => {
             plotarGraficoTalhao(data[0].umidade_media);
-        });
+        })
+        .catch(err => console.error("Erro carregar grafico talhao:", err));
 }
 
-function plotarGraficoTalhao(valor) {
+function plotarGraficoTalhao(umidadeInicial) {
+
     const ctx = document.getElementById("graficoBarra");
 
     if (graficoTalhao) graficoTalhao.destroy();
 
+    dadosTalhao = {
+        labels: ["Leitura 1"],
+        datasets: [{
+            label: "Umidade Média do Talhão",
+            data: [umidadeInicial],
+            borderWidth: 2
+        }]
+    };
+
     graficoTalhao = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: ["Umidade média"],
-            datasets: [{
-                label: "Umidade do Talhão",
-                data: [valor],
-                borderWidth: 2
-            }]
-        },
+        type: "line",
+        data: dadosTalhao,
         options: {
-            scales: { y: { min: 0, max: 100 } }
+            scales: {
+                y: { min: 0, max: 100 }
+            }
         }
     });
+
+    setTimeout(atualizarGraficoTalhao, 5000);
 }
 
-/* ============================
-   ALTERAR ENTRE RESUMO E TALHÃO
-   ============================ */
+function atualizarGraficoTalhao() {
 
-function selecionar() {
-    var valor = select_talhao.value;
+    fetch(`/graficoTalhao/exibir/${idTalhaoAtual}`, { cache: 'no-store' })
+        .then(r => r.json())
+        .then(novo => {
 
-    if (valor === "resumo") {
-        document.getElementById("graficoGeral").style.display = "block";
-        document.getElementById("graficoTalhao").style.display = "none";
-        carregarGraficoGeral(idPropriedade);
-    } else {
-        carregarGraficoTalhao(Number(valor));
-        document.getElementById("graficoGeral").style.display = "none";
-        document.getElementById("graficoTalhao").style.display = "block";
+            var novoValor = novo[0].umidade_media;
+            var ultimoValor = dadosTalhao.datasets[0].data[dadosTalhao.datasets[0].data.length - 1];
+
+            console.log("Novo valor:", novoValor, "| Último valor:", ultimoValor);
+
+            if (novoValor != ultimoValor) {
+
+                dadosTalhao.labels.push(`Leitura ${dadosTalhao.labels.length + 1}`);
+
+                if (dadosTalhao.datasets[0].data.length >= 10) {
+                    dadosTalhao.datasets[0].data.shift();
+                    dadosTalhao.labels.shift();
+                }
+
+                dadosTalhao.datasets[0].data.push(novoValor);
+
+                graficoTalhao.update();
+            }
+
+            setTimeout(atualizarGraficoTalhao, 5000);
+        })
+        .catch(err => {
+            console.error("Erro ao atualizar gráfico talhão:", err);
+            setTimeout(atualizarGraficoTalhao, 5000);
+        });
+}
+
+    /* ============================
+       ALTERAR ENTRE RESUMO E TALHÃO
+       ============================ */
+
+    function selecionar() {
+        var valor = select_talhao.value;
+        carregarKPIs(valor)
+
+        if (valor === "resumo") {
+            document.getElementById("graficoGeral").style.display = "block";
+            document.getElementById("graficoTalhao").style.display = "none";
+            carregarGraficoGeral(idPropriedade);
+        } else {
+            carregarGraficoTalhao(Number(valor));
+            document.getElementById("graficoGeral").style.display = "none";
+            document.getElementById("graficoTalhao").style.display = "block";
+        }
+
     }
-}
 
-/* ============================
-   SELECT DO MENU
-   ============================ */
+    function marcarTalhoesEmRisco() {
+        const options = document.querySelectorAll("#select_talhao option");
+        // options.forEach(op => {
+        // op.style.color = "black";
+        // op.style.fontWeight = "normal";
+    // });
+        fetch(`/kpi/talhoes-em-risco/${idPropriedade}`)
+        
+            .then(res => res.json())
+            .then(talhoesRisco => {
+                talhoesRisco.forEach(t => {
+                    const option = document.querySelector(`#select_talhao option[value="${t.id_talhao}"]`);
+                    if (option && (t.umidade_media < 60 || t.umidade_media > 80)) {
+                        option.style.color = "red";
+                        option.style.fontWeight = "bold";
+                    }
+                });
 
-function select_function() {
-    var valor = header_select.value;
-
-    if (valor === "index" || valor === "login") {
-        sessionStorage.clear();
-        window.location.href = valor + ".html";
+            })
+            .catch(err => console.error("Erro ao marcar risco:", err));
     }
-}
+
+
+
+
+    /* ============================
+       SELECT DO MENU
+       ============================ */
+
+    function select_function() {
+        var valor = header_select.value;
+
+        if (valor === "index" || valor === "login") {
+            sessionStorage.clear();
+            window.location.href = valor + ".html";
+        }
+    }
 </script>

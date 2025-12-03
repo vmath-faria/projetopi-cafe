@@ -325,3 +325,32 @@ SELECT
 			LEFT JOIN leitura l 
 				ON l.fk_sensor = s.id_sensor
 			GROUP BY p.id_propriedade;
+            
+            
+            
+SELECT 
+    ROUND(AVG(l.valor_umidade), 2) AS umidade_media
+FROM leitura l
+JOIN sensor s ON l.fk_sensor = s.id_sensor
+WHERE s.fk_talhao = 6;
+
+SELECT 
+    t.id_talhao,
+    ROUND(AVG(l.valor_umidade), 2) AS umidade_media
+FROM talhao t
+JOIN sensor s ON s.fk_talhao = t.id_talhao
+JOIN leitura l ON l.fk_sensor = s.id_sensor
+WHERE t.fk_propriedade = 4
+GROUP BY t.id_talhao
+HAVING AVG(l.valor_umidade) < 60 OR AVG(l.valor_umidade) > 80;
+
+select * from leitura;
+select * from sensor;
+insert into leitura (valor_umidade, fk_sensor) values
+(100, 3),
+(100, 3),
+(100, 3),
+(100, 3),
+(100, 3);
+
+select * from talhao;

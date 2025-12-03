@@ -584,9 +584,20 @@ footer {
     display: flex;
 }
 
-.imglogin img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+.graficos {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 57%;
+    height: 57%;
+    margin-top: 20px;
+}
+
+
+canvas {
+    width: 95%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    /* mantém proporção visual */
+    border-radius: 8px;
 }
