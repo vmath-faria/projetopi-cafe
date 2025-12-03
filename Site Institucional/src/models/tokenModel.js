@@ -17,7 +17,7 @@ function marcarTokenUsado(id_usuario, token) {
     return database.executar(sql);
 }
 
-function salvarToken(token, id_usuario, id_empresa, data_criacao, data_expiracao) {
+function salvarToken(token, id_usuario, id_empresa, data_criacao, data_expiracao, id_propriedade) {
 
     function formatDateToMySQL(date) {
         return date.toISOString().slice(0, 19).replace('T', ' ');
@@ -27,8 +27,8 @@ function salvarToken(token, id_usuario, id_empresa, data_criacao, data_expiracao
     var dataExpiracaoMySQL = formatDateToMySQL(data_expiracao);
 
     var sql = `
-        INSERT INTO token (token, fk_empresa, fk_usuario, data_criacao, data_expiracao)
-        VALUES ('${token}', ${id_empresa}, ${id_usuario}, '${dataCriacaoMySQL}', '${dataExpiracaoMySQL}');
+        INSERT INTO token (token, fk_empresa, fk_usuario, data_criacao, data_expiracao, fk_propriedade)
+        VALUES ('${token}', ${id_empresa}, ${id_usuario}, '${dataCriacaoMySQL}', '${dataExpiracaoMySQL}', ${id_propriedade});
     `;
 
     return database.executar(sql);

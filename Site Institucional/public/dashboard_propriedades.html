@@ -35,7 +35,7 @@
         <h1>Bom dia, <span id="b_usuario2">usuário</span>!</h1>
         <h2>Gere um token para cadastrar um novo funcionario:</h2>
         <h2>Selecione a propriedade:</h2>
-        <select oninput="selecionar()" class="selectTalhao" name="sensor" id="select_propriedade">
+        <select class="selectTalhao" name="sensor" id="select_propriedade">
             <option value="#" selected disabled></option>
         </select>
         <div id="token" style="margin: 10px;"></div>
@@ -227,6 +227,7 @@
 
         var id_usuario = sessionStorage.getItem("ID_USUARIO");
         var id_empresa = sessionStorage.getItem("ID_EMPRESA");
+        var id_propriedade = Number(select_propriedade.value);
 
         fetch('/usuario/gerar-token', {
             method: 'POST',
@@ -236,7 +237,8 @@
             body: JSON.stringify({
                 token: token,
                 id_usuario: id_usuario,
-                id_empresa: id_empresa
+                id_empresa: id_empresa,
+                id_propriedade: id_propriedade
             })
         })
             .then(response => response.json())

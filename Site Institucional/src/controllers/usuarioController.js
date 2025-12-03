@@ -109,17 +109,18 @@ function marcarTokenUsado(req, res) {
 }
 
 function gerarToken(req, res) {
-    var { token, id_usuario, id_empresa } = req.body;
+    var { token, id_usuario, id_empresa, id_propriedade } = req.body;
 
     if (!token) return res.status(400).send("Token não enviado.");
     if (!id_usuario) return res.status(400).send("ID do usuário não enviado.");
     if (!id_empresa) return res.status(400).send("ID da empresa não enviado.");
+    if (!id_propriedade) return res.status(400).send("ID da propriedade não enviado.");
 
     var data_criacao = new Date();
     var data_expiracao = new Date();
     data_expiracao.setHours(data_expiracao.getHours() + 24);
 
-    tokenModel.salvarToken(token, id_usuario, id_empresa, data_criacao, data_expiracao)
+    tokenModel.salvarToken(token, id_usuario, id_empresa, data_criacao, data_expiracao, id_propriedade)
         .then(() => {
             res.status(200).json({ mensagem: "Token armazenado com sucesso.", token });
         })
