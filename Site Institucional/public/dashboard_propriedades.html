@@ -34,6 +34,10 @@
     <div class="saudacoes">
         <h1>Bom dia, <span id="b_usuario2">usuário</span>!</h1>
         <h2>Gere um token para cadastrar um novo funcionario:</h2>
+        <h2>Selecione a propriedade:</h2>
+        <select oninput="selecionar()" class="selectTalhao" name="sensor" id="select_propriedade">
+            <option value="#" selected disabled></option>
+        </select>
         <div id="token" style="margin: 10px;"></div>
         <button style="border-radius: 20px; width: 100px; margin: 10px; background-color: #6f4e37; color: white;"
             onclick="gerarToken()">
@@ -121,6 +125,7 @@
 
 
     carregarFazendas();
+    carregarPropriedades();
 
 
     setInterval(carregarFazendas, 20000);
@@ -278,5 +283,36 @@ async function atualizarKpis() {
         console.error("Erro ao atualizar KPIs:", error);
     }
 }
+
+
+async function carregarPropriedades() {
+        const fk_empresa = JSON.parse(sessionStorage.getItem("ID_EMPRESA"));
+
+        if (!fk_empresa) {
+            console.error("fk_empresa não encontrada");
+            return;
+        }
+
+        try {
+            const res = await fetch(`/propriedades/empresa/${fk_empresa}`);
+            const propriedades = await res.json();
+            console.log(propriedades);
+
+            const container = document.getElementById("propriedades");
+            container.innerHTML = "";
+            var select = document.getElementById("select_propriedade");
+
+            propriedades.forEach(item => {
+                    var option = document.createElement("option");
+                    option.value = item.id_propriedade;
+                    option.textContent = item.nome_propriedade;
+                    select.appendChild(option);
+                });
+            } catch (err) {
+            console.error("Erro ao carregar propriedades:", err);
+        }
+}
+
+
 
 </script>
