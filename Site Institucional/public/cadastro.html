@@ -226,7 +226,10 @@
         return;
     }
 
+    console.log(tokenEncontrado);
     var idEmpresaVincular = tokenEncontrado.id_empresa;
+    var idPropriedade = tokenEncontrado.id_propriedade;
+    console.log(tokenEncontrado.id_propriedade);
     console.log("Código de ativação válido.");
 
     fetch("/usuario/cadastrar", {
@@ -240,7 +243,8 @@
             cpfServer: cpfVar,
             nomeUsuarioServer: nomeUsuarioVar,
             dataNascimentoServer: dataNascimentoVar,
-            idEmpresaVincularServer: idEmpresaVincular
+            idEmpresaVincularServer: idEmpresaVincular,
+            idPropriedadeServer: idPropriedade
         })
     })
     .then(res => res.json())

@@ -11,6 +11,7 @@ function cadastrar(req, res) {
     var nomeUsuario = req.body.nomeUsuarioServer;
     var dataNascimento = req.body.dataNascimentoServer;
     var idEmpresa = req.body.idEmpresaVincularServer;
+    var idPropriedade = req.body.idPropriedadeServer;
 
     if (!nome) return res.status(400).send("Nome indefinido");
     if (!email) return res.status(400).send("Email indefinido");
@@ -19,6 +20,7 @@ function cadastrar(req, res) {
     if (!cpf) return res.status(400).send("CPF indefinido");
     if (!nomeUsuario) return res.status(400).send("Usuário indefinido");
     if (!dataNascimento) return res.status(400).send("Nascimento indefinido");
+    if (!idPropriedade) return res.status(400).send("Propriedade indefinida");
 
   usuarioModel.cadastrar(
     nome,
@@ -28,7 +30,8 @@ function cadastrar(req, res) {
     cpf,
     nomeUsuario,
     dataNascimento,
-    idEmpresa
+    idEmpresa,
+    idPropriedade
   )
     .then(r => res.json(r))
     .catch(err => {
