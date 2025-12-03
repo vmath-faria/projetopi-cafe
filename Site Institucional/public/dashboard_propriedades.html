@@ -24,6 +24,8 @@
             <select oninput="select_function()" class="select-dash" id="header_select">
                 <option selected disabled value="#"></option>
                 <option value="login">Entrar com outra conta</option>
+                <option value="problema">Problemas?</option>
+                <option value="requisicao">Pedidos?</option>
                 <option value="index">Sair</option>
             </select>
         </div>
@@ -32,13 +34,10 @@
     <div class="saudacoes">
         <h1>Bom dia, <span id="b_usuario2">usuário</span>!</h1>
         <h2>Gere um token para cadastrar um novo funcionario:</h2>
-        <div id="token"
-        style="margin: 10px;"></div>
-        <button    
-        style="border-radius: 20px; width: 100px; margin: 10px; background-color: #6f4e37; color: white;"
-        onclick="gerarToken()"
-        >
-        Criar Token</button>
+        <div id="token" style="margin: 10px;"></div>
+        <button style="border-radius: 20px; width: 100px; margin: 10px; background-color: #6f4e37; color: white;"
+            onclick="gerarToken()">
+            Criar Token</button>
         <h2>Visualize abaixo os dados sobre sua plantação de café arábica.</h2>
     </div>
 
@@ -78,39 +77,36 @@
                     title="Verde indica que está dentro da faixa ideal de 60%~75%. Laranja indica que está entre 76%-80% e você deve evitar mais irrigação. Vermelho indica que está acima do ideal, com alto risco de perdas. Amarelo indica que está abaixo do ideal, sendo necessário irrigação imediata."><img
                         src="./imgs/iconeInformativo.png" alt=""
                         style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-            <span id="kpi_umidade" style="color: green;">Z</span>
+            <span id="kpi_umidade" style="color: green;"></span>
         </div>
         <div class="kpi">
             <h3>Quantidades de Propriedades Abaixo do Ideal<abbr
                     title="Indica a faixa horária mais comum de seca na sua plantação. Fique alerta nesses horários."><img
                         src="./imgs/iconeInformativo.png" alt=""
                         style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-            <span id="kpi_temp">Y</span>
+            <span id="kpi_temp"></span>
         </div>
         <div class="kpi">
             <h3>Quantidade de Propriedades com Umidade Ideal<abbr
                     title="Exibe uma mensagem condizente com a média de umidade da plantação."><img
                         src="./imgs/iconeInformativo.png" alt=""
                         style="width:16px; height:16px; vertical-align:middle; margin-left:5px;"></abbr></h3>
-            <span id="kpi_saude" style="color: green;">X</span>
+            <span id="kpi_saude" style="color: green;"></span>
         </div>
         <!--ALERTA DINÂMICO-->
     </div>
 
-    <h2>Selecione a propriedade desejada:</h2>
-    <br>
-    <div class="propriedades" id="propriedades" style="display: flex; flex-direction: row; align-items: center; justify-content: space-around;">
+    <section class="area-selecao-propriedades">
+        <h2>Selecione a propriedade desejada</h2>
 
-    </div>
-
+        <div class="lista-propriedades" id="propriedades"></div>
+    </section>
 
     <div id="alerta"> <!-- Lembrar de realizar uma função para esse id, lá nas rotas-->
     </div>
 </body>
 
 <script>
-var API = "http://localhost:3333";
-
 
     b_usuario1.innerHTML = sessionStorage.NOME_USUARIO;
     b_usuario2.innerHTML = sessionStorage.NOME_USUARIO;
@@ -129,115 +125,158 @@ var API = "http://localhost:3333";
 
     setInterval(carregarFazendas, 20000);
 
-async function carregarFazendas() {
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    async function carregarFazendas() {
+        const fk_empresa = JSON.parse(sessionStorage.getItem("ID_EMPRESA"));
 
-    if (!usuario || !usuario.fk_empresa) {
-        console.error("fk_empresa não encontrada");
-        return;
-    }
+        if (!fk_empresa) {
+            console.error("fk_empresa não encontrada");
+            return;
+        }
 
-    try {
-        const res = await fetch(`${API}/propriedades/empresa/${usuario.fk_empresa}`);
-        const fazendas = await res.json();
-        console.log(fazendas);
+        try {
+            const res = await fetch(`/propriedades/empresa/${fk_empresa}`);
+            const fazendas = await res.json();
+            console.log(fazendas);
 
-        const container = document.getElementById("propriedades");
-        container.innerHTML = "";
+            const container = document.getElementById("propriedades");
+            container.innerHTML = "";
 
-        fazendas.forEach(f => {
-            const card = document.createElement("div");
-            card.className = "fazenda-card";
+            fazendas.forEach(f => {
+                const card = document.createElement("section");
+                card.className = "fazenda-card";
 
-            card.innerHTML = `
+                card.innerHTML = `
                 <img style="width:100px; align-items: center; cursor: pointer;"  src="${definirIcone(f.nivel_alerta)}">
                 <br><b>${f.nome_propriedade}</b>
                 <br>${legendaAlerta(f.nivel_alerta)}
             `;
 
-            card.onclick = () => {
-                sessionStorage.setItem("id_propriedade", f.id_propriedade);
-                window.location.href = "dashboard.html";
-            };
+                card.onclick = () => {
+                    // console.log(`Gravando informalçao ${f.id_propriedade}`)
+                    sessionStorage.setItem("id_propriedade", f.id_propriedade);
+                    window.location.href = "dashboard.html";
+                };
 
-            container.appendChild(card);
-        });
+                container.appendChild(card);
+            });
 
-    } catch (err) {
-        console.error("Erro ao carregar fazendas:", err);
+        } catch (err) {
+            console.error("Erro ao carregar fazendas:", err);
+        }
     }
-}
 
-function definirIcone(nivel) {
-    switch (nivel) {
-        case "verde": return "imgs/fazenda_verde.png";
-        case "amarelo": return "imgs/fazenda _amarelo.png";
-        case "laranja": return "imgs/fazenda_laranja.png";
-        case "vermelho": return "imgs/fazenda_vermelho.png";
-        default: return "imgs/fazenda_verde.png";
+    function definirIcone(nivel) {
+        switch (nivel) {
+            case "verde": return "imgs/fazenda_verde_att.png";
+            case "amarelo": return "imgs/fazenda _amarelo_att.png";
+            case "laranja": return "imgs/fazenda _laranja_att.png";
+            case "vermelho": return "imgs/fazenda_vermelho_att.png";
+            default: return "imgs/fazenda_verde_att.png";
+        }
     }
-}
 
-function legendaAlerta(nivel) {
-    switch (nivel) {
-        case "verde": return "Excelente";
-        case "amarelo": return "Necessário irrigar";
-        case "laranja": return "Umidade próxima ao limite";
-        case "vermelho": return "Umidade acima do limite";
-        default: return "—";
+    function legendaAlerta(nivel) {
+        switch (nivel) {
+            case "verde": return "Excelente";
+            case "amarelo": return "Necessário irrigar";
+            case "laranja": return "Umidade próxima ao limite";
+            case "vermelho": return "Umidade acima do limite";
+            default: return "—";
+        }
     }
-}
 
-function select_function() {
-    var select = document.getElementById("header_select");
-    var options = select.options;
+    function select_function() {
+        var select = document.getElementById("header_select");
+        var options = select.options;
 
-    for (var i = 0; i < options.length; i++) {
-        if (options[i].selected) {
-            if (options[i].value === "index") {
-                sessionStorage.clear();
-                window.location.href = "index.html";
-            } else if (options[i].value === "login") {
-                sessionStorage.clear();
-                window.location.href = "login.html";
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].selected) {
+                if (options[i].value === "index") {
+                    sessionStorage.clear();
+                    window.location.href = "index.html";
+                } else if (options[i].value === "login") {
+                    sessionStorage.clear();
+                    window.location.href = "login.html";
+                } else if (options[i].value === "problema") {
+                    sessionStorage.clear();
+                    window.location.href = "https://coffechinc.atlassian.net/jira/software/form/5964626c-d758-4dc4-a0c0-e069abe43b57?atlOrigin=eyJpIjoiMWM4N2JhZDc5YWJlNGYyNzkyMWFmMjIzN2I2NzM0ODQiLCJwIjoiaiJ9";
+                } else if (options[i].value === "requisicao") {
+                    sessionStorage.clear();
+                    window.location.href = "https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e?atlOrigin=eyJpIjoiYjE1NGVlNTExODBmNDA3Y2IzMjA2NmY4MGJiZTAyNTAiLCJwIjoiaiJ9";
+                }
             }
         }
     }
-}
 
-function gerarToken() {
-    var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    var token = '';
-    var tamanho = 6;
-    
-    for (var i = 0; i < tamanho; i++) {
-        var indiceAleatorio = Math.floor(Math.random() * caracteres.length); 
-        token += caracteres[indiceAleatorio];
+    function gerarToken() {
+        var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        var token = '';
+        var tamanho = 6;
+
+        for (var i = 0; i < tamanho; i++) {
+            var indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+            token += caracteres[indiceAleatorio];
+        }
+
+        document.getElementById('token').innerText = token;
+
+        var id_usuario = sessionStorage.getItem("ID_USUARIO");
+        var id_empresa = sessionStorage.getItem("ID_EMPRESA");
+
+        fetch('/usuario/gerar-token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: token,
+                id_usuario: id_usuario,
+                id_empresa: id_empresa
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Token salvo no banco:", data);
+            })
+            .catch(error => {
+                console.error("Erro ao enviar token:", error);
+            });
     }
 
-    document.getElementById('token').innerText = token;
+    atualizarKpis();
 
-    var id_usuario = sessionStorage.getItem("ID_USUARIO");
-    var id_empresa = sessionStorage.getItem("ID_EMPRESA");
+setInterval(atualizarKpis, 20000); 
 
-    fetch('/usuario/gerar-token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            token: token,
-            id_usuario: id_usuario,
-            id_empresa: id_empresa
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Token salvo no banco:", data);
-    })
-    .catch(error => {
-        console.error("Erro ao enviar token:", error);
-    });
+async function atualizarKpis() {
+    const fk_empresa = sessionStorage.ID_EMPRESA;
+
+    if (!fk_empresa) return;
+    console.log('If da fk empresa')
+    try {
+        const res = await fetch(`/propriedades/kpis/${fk_empresa}`);
+        console.log('try antes do fech')
+        if (res.ok) {
+            const dados = await res.json();
+            console.log(`Lista de dados: ${dados}`)
+            
+            const kpiAcima = document.getElementById("kpi_umidade");
+            kpiAcima.innerHTML = dados.acima_ideal;
+            
+            kpiAcima.style.color = dados.acima_ideal > 0 ? "red" : "green";
+
+            const kpiAbaixo = document.getElementById("kpi_temp");
+            kpiAbaixo.innerHTML = dados.abaixo_ideal;
+            
+            kpiAbaixo.style.color = dados.abaixo_ideal > 0 ? "#fb8c00" : "green";
+
+            const kpiIdeal = document.getElementById("kpi_saude"); 
+            kpiIdeal.innerHTML = dados.ideal;
+            kpiIdeal.style.color = "green"; 
+        }
+
+    } catch (error) {
+        console.error("Erro ao atualizar KPIs:", error);
+    }
 }
 
 </script>

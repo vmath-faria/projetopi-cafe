@@ -1,5 +1,5 @@
-CREATE DATABASE coffech2;
-USE coffech2;
+CREATE DATABASE coffech3;
+USE coffech3;
 
 CREATE TABLE empresa (
 	id_empresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -8,40 +8,6 @@ CREATE TABLE empresa (
     telefone_celular VARCHAR(15)
 );
 
-CREATE TABLE usuario (
-    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-    data_nascimento DATE,
-    cpf VARCHAR (11),
-    nome_completo VARCHAR (100),
-    nome_usuario VARCHAR(100),
-    email VARCHAR(100) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    nivel_acesso VARCHAR(20),
-		CONSTRAINT chk_nivel_acesso 
-			CHECK (nivel_acesso IN ('Proprietario', 'Funcionario', 'Suporte')),
-	fk_empresa INT,
-    fk_gerente INT,
-			FOREIGN KEY (fk_empresa)
-				REFERENCES empresa (id_empresa),
-			FOREIGN KEY(fk_gerente) 
-				REFERENCES usuario (id_usuario)
-);
-
-CREATE TABLE token (
-    id_token INT AUTO_INCREMENT,
-    token VARCHAR(64) UNIQUE NOT NULL, 
-    fk_empresa INT NOT NULL,
-    fk_usuario INT NOT NULL,
-    status_token VARCHAR(20) DEFAULT 'Pendente', 
-    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-    data_expiracao DATETIME,        
-    CONSTRAINT chk_status_token
-        CHECK (status_token IN ('Pendente', 'Usado', 'Expirado')),
-    PRIMARY KEY(id_token, fk_empresa),
-    FOREIGN KEY(fk_empresa) REFERENCES empresa(id_empresa),
-    FOREIGN KEY(fK_usuario) REFERENCES usuario(id_usuario)
-);
-			
 CREATE TABLE propriedade (
 	id_propriedade INT PRIMARY KEY AUTO_INCREMENT,
     nome_propriedade VARCHAR(100),
@@ -66,6 +32,52 @@ CREATE TABLE talhao(
             FOREIGN KEY (fk_propriedade)
                 REFERENCES propriedade (id_propriedade)
 );
+
+CREATE TABLE token (
+    id_token INT AUTO_INCREMENT,
+    token VARCHAR(64) UNIQUE NOT NULL, 
+    fk_empresa INT NOT NULL,
+    
+    status_token VARCHAR(20) DEFAULT 'Pendente', 
+    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    data_expiracao DATETIME,        
+    fk_propriedade INT,
+    CONSTRAINT chk_status_token
+        CHECK (status_token IN ('Pendente', 'Usado', 'Expirado')),
+    PRIMARY KEY(id_token, fk_empresa),
+    FOREIGN KEY(fk_empresa) REFERENCES empresa(id_empresa),
+    FOREIGN KEY(fk_propriedade) REFERENCES propriedade(id_propriedade)
+);
+
+CREATE TABLE usuario (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    data_nascimento DATE,
+    cpf VARCHAR (11),
+    nome_completo VARCHAR (100),
+    nome_usuario VARCHAR(100),
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(20),
+		CONSTRAINT chk_nivel_acesso 
+			CHECK (nivel_acesso IN ('Proprietario', 'Funcionario', 'Suporte')),
+	fk_empresa INT,
+    fk_gerente INT,
+			FOREIGN KEY (fk_empresa)
+				REFERENCES empresa (id_empresa),
+			FOREIGN KEY(fk_gerente) 
+				REFERENCES usuario (id_usuario),
+	fk_token INT,
+			FOREIGN KEY (fk_token)
+				REFERENCES token(id_token),
+	fk_token_propriedade INT,
+			FOREIGN KEY (fk_token_propriedade)
+				REFERENCES token(fk_propriedade)
+);
+
+ALTER TABLE token ADD COLUMN fk_usuario INT NOT NULL;
+ALTER TABLE token ADD CONSTRAINT fk_token_usuario
+	FOREIGN KEY(fK_usuario) REFERENCES usuario(id_usuario);
+
     
 CREATE TABLE sensor(
 	id_sensor INT PRIMARY KEY AUTO_INCREMENT,
@@ -143,13 +155,13 @@ INSERT INTO leitura (valor_umidade, fk_sensor)VALUES
 (39.55, 1);
 
 -- CRIAÇÃO DOS USUÁRIOS DA API
-CREATE USER escritor@localhost IDENTIFIED BY 'Sptech#2024';
-CREATE USER leitor@localhost IDENTIFIED BY 'Sptech#2024';
+-- CREATE USER escritor@localhost IDENTIFIED BY 'Sptech#2024';
+-- CREATE USER leitor@localhost IDENTIFIED BY 'Sptech#2024';
 
 -- PERMISSÃO DOS USUÁRIOS
-GRANT SELECT ON coffech2.leitura TO leitor@localhost;
-GRANT INSERT ON coffech2.leitura TO escritor@localhost;
-FLUSH PRIVILEGES;
+-- GRANT SELECT ON coffech2.leitura TO leitor@localhost;
+-- GRANT INSERT ON coffech2.leitura TO escritor@localhost;
+-- FLUSH PRIVILEGES;
 
 -- SELECTS COM JOIN
 -- VERIFICAR USUÁRIOS E SEU GERENTE
@@ -222,15 +234,6 @@ JOIN talhao t ON s.fk_talhao = t.id_talhao
 WHERE t.fk_propriedade = 4;
 
 
-select * from leitura;
-insert into leitura (valor_umidade, fk_sensor) values
-(100,4);
-
-select * from sensor;
-insert into sensor (fk_talhao) values
-(7);
-select * from talhao;
-select * from propriedade;
 -- Exibe a empresa, suas propriedades, seus talhões e seus sensores
 SELECT 
     e.nome_empresa AS 'Nome da Empresa',
@@ -307,93 +310,4 @@ SELECT
 				ON s.fk_talhao = t.id_talhao
 			LEFT JOIN leitura l 
 				ON l.fk_sensor = s.id_sensor
-			GROUP BY p.id_propriedade;
-            
-
-
-
--- Inserção de Sensores nos talhões --
-INSERT INTO sensor VALUES
-	(DEFAULT, '2025-12-01', 'Ativo', 3),
-    (DEFAULT, '2025-12-01', 'Ativo', 3),
-    (DEFAULT, '2025-12-01', 'Ativo', 4),
-    (DEFAULT, '2025-12-01', 'Ativo', 4),
-    (DEFAULT, '2025-12-01', 'Ativo', 5),
-    (DEFAULT, '2025-12-01', 'Ativo', 5),
-    (DEFAULT, '2025-12-01', 'Ativo', 6),
-    (DEFAULT, '2025-12-01', 'Ativo', 6),
-    (DEFAULT, '2025-12-01', 'Ativo', 7),
-    (DEFAULT, '2025-12-01', 'Ativo', 7),
-    (DEFAULT, '2025-12-01', 'Ativo', 8),
-    (DEFAULT, '2025-12-01', 'Ativo', 8),
-    (DEFAULT, '2025-12-01', 'Ativo', 9),
-    (DEFAULT, '2025-12-01', 'Ativo', 9),
-    (DEFAULT, '2025-12-01', 'Ativo', 10),
-    (DEFAULT, '2025-12-01', 'Ativo', 10),
-    (DEFAULT, '2025-12-01', 'Ativo', 11),
-    (DEFAULT, '2025-12-01', 'Ativo', 11),
-    (DEFAULT, '2025-12-01', 'Ativo', 12),
-    (DEFAULT, '2025-12-01', 'Ativo', 12),
-    (DEFAULT, '2025-12-01', 'Ativo', 13),
-    (DEFAULT, '2025-12-01', 'Ativo', 13),
-    (DEFAULT, '2025-12-01', 'Ativo', 14),
-    (DEFAULT, '2025-12-01', 'Ativo', 14),
-    (DEFAULT, '2025-12-01', 'Ativo', 15),
-    (DEFAULT, '2025-12-01', 'Ativo', 15),
-    (DEFAULT, '2025-12-01', 'Ativo', 16),
-    (DEFAULT, '2025-12-01', 'Ativo', 16),
-    (DEFAULT, '2025-12-01', 'Ativo', 17),
-    (DEFAULT, '2025-12-01', 'Ativo', 17);
-    
-    
--- Update para atribuição de leitura aos sensores
-UPDATE leitura SET fk_sensor = 5 WHERE id_leitura BETWEEN 600 AND 700;
-UPDATE leitura SET fk_sensor = 6 WHERE id_leitura BETWEEN 700 AND 800;
-UPDATE leitura SET fk_sensor = 7 WHERE id_leitura BETWEEN 800 AND 900;
-UPDATE leitura SET fk_sensor = 8 WHERE id_leitura BETWEEN 900 AND 1000;
-UPDATE leitura SET fk_sensor = 9 WHERE id_leitura BETWEEN 1000 AND 1100;
-UPDATE leitura SET fk_sensor = 10 WHERE id_leitura BETWEEN 1100 AND 1200;
-UPDATE leitura SET fk_sensor = 11 WHERE id_leitura BETWEEN 1300 AND 1400;
-UPDATE leitura SET fk_sensor = 12 WHERE id_leitura BETWEEN 1400 AND 1500;
-UPDATE leitura SET fk_sensor = 13 WHERE id_leitura BETWEEN 1500 AND 1600;
-UPDATE leitura SET fk_sensor = 14 WHERE id_leitura BETWEEN 1700 AND 1800;
-UPDATE leitura SET fk_sensor = 15 WHERE id_leitura BETWEEN 1900 AND 2000;
-UPDATE leitura SET fk_sensor = 16 WHERE id_leitura BETWEEN 2000 AND 2100;
-UPDATE leitura SET fk_sensor = 17 WHERE id_leitura BETWEEN 2100 AND 2200;
-UPDATE leitura SET fk_sensor = 18 WHERE id_leitura BETWEEN 2200 AND 2300;
-UPDATE leitura SET fk_sensor = 19 WHERE id_leitura BETWEEN 2300 AND 2400;
-UPDATE leitura SET fk_sensor = 20 WHERE id_leitura BETWEEN 2400 AND 2500;
-UPDATE leitura SET fk_sensor = 21 WHERE id_leitura BETWEEN 2500 AND 2600;
-UPDATE leitura SET fk_sensor = 22 WHERE id_leitura BETWEEN 2600 AND 2700;
-UPDATE leitura SET fk_sensor = 23 WHERE id_leitura BETWEEN 2700 AND 2800;
-UPDATE leitura SET fk_sensor = 24 WHERE id_leitura BETWEEN 2800 AND 2900;
-UPDATE leitura SET fk_sensor = 25 WHERE id_leitura BETWEEN 2900 AND 3000;
-UPDATE leitura SET fk_sensor = 26 WHERE id_leitura BETWEEN 3000 AND 3100;
-UPDATE leitura SET fk_sensor = 27 WHERE id_leitura BETWEEN 3100 AND 3200;
-UPDATE leitura SET fk_sensor = 28 WHERE id_leitura BETWEEN 3200 AND 3300;
-UPDATE leitura SET fk_sensor = 29 WHERE id_leitura BETWEEN 3300 AND 3400;
-UPDATE leitura SET fk_sensor = 30 WHERE id_leitura BETWEEN 3400 AND 3500;
-UPDATE leitura SET fk_sensor = 31 WHERE id_leitura BETWEEN 3500 AND 3600;
-UPDATE leitura SET fk_sensor = 32 WHERE id_leitura BETWEEN 3600 AND 3700;
-UPDATE leitura SET fk_sensor = 33 WHERE id_leitura BETWEEN 3700 AND 3800;
-UPDATE leitura SET fk_sensor = 34 WHERE id_leitura BETWEEN 3800 AND 3847;
-SELECT * FROM sensor;
-
--- Criação de View e Select para KPIs da Dash Propriedade
--- INSERIR HAVING com a Porcentagem desejada  >> Ex: SELECT fk_propriedade, AVG(Media) FROM vw_talhao GROUP BY fk_propriedade HAVING AVG(Media) > 40;
-CREATE OR REPLACE VIEW vw_talhao AS
-SELECT id_talhao, AVG(valor_umidade) AS Media, fk_propriedade 
-	FROM leitura
-		JOIN sensor
-			ON sensor.id_sensor = leitura.fk_sensor
-		JOIN talhao
-			ON talhao.id_talhao = sensor.fk_talhao
-		GROUP BY id_talhao, fk_propriedade;
-
-SELECT fk_propriedade, AVG(Media) FROM vw_talhao GROUP BY fk_propriedade;
-
-SELECT fk_propriedade, AVG(Media) FROM vw_talhao GROUP BY fk_propriedade HAVING AVG(Media) > 40;
-
-
-
 			GROUP BY p.id_propriedade;

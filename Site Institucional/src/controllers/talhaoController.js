@@ -1,34 +1,22 @@
-const talhaoModel = require('../models/talhaoModel');
+var talhaoModel = require("../models/talhaoModel");
 
-const leiturasRealtime = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const limit = req.query.limit ? parseInt(req.query.limit) : 100;
+function listar(req, res) {
+   var idPropriedade = req.params.id_propriedade;
 
-    const rows = await talhaoModel.leiturasRealtimeDoTalhao(id, limit);
-    return res.json(rows);
-
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ erro: 'Erro ao buscar leituras realtime' });
+  if (idPropriedade == undefined) {
+    return res.status(400).json("idPropriedade não informado");
   }
-};
 
-const mediaHistorica = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const months = req.query.months ? parseInt(req.query.months) : 6;
-
-    const rows = await talhaoModel.mediaHistoricaMensal(id, months);
-    return res.json(rows);
-
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ erro: 'Erro ao buscar média histórica' });
-  }
-};
+  talhaoModel.listar(idPropriedade)
+    .then(resultado => {
+      res.status(200).json(resultado);
+    })
+    .catch(erro => {
+      console.log("Erro ao buscar talhões da propriedade:", erro);
+      res.status(500).json("Erro ao buscar dados");
+    });
+}
 
 module.exports = {
-  leiturasRealtime,
-  mediaHistorica
+  listar
 };

@@ -1,201 +1,175 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffech - Página Inicial</title>
-
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" href="./imgs/logo-fundo-marrom.png">
 </head>
 
 <body>
-    <div class="header">
-        <div class="container">
-            <a href="index.html#"><img src="./imgs/logo-fonte-branca.png" class="titulo"></a>
-            <ul class="navbar">
-                <li>
-                    <a href="#div_sobrenos">Quem Somos?</a>
-                    <!-- TODAS AS TAGS a DA NAVBAR TERÃO ESSE HREF, MAS PRECISAMOS PESQUISAR COMO FAZ PARA REFERENCIAR UM ELEMENTO DENTRO DA PÁGINA-->
-                </li>
-                <li>
-                    <a href="#div_solucao">Solução</a> <!-- PRECISARÁ REFERENCIAR A PARTE DE SOLUÇÃO-->
-                </li>
-                <li>
-                    <a href="#div_simulador">Calculadora Financeira</a> <!-- PRECISARÁ REFERENCIAR A CALCULADORA-->
-                </li>
-                <li>
-                    <a href="#div_beneficios">Benefícios</a> <!-- PRECISARÁ REFERENCIAR OS BENEFÍCIOS-->
-                </li>
-                <li>
-                    <a href="#div_contato">Contato</a> <!-- PRECISARÁ REFERENCIAR O CONTATO-->
-                </li>
-            </ul>
-            <ul class="logincadastro">
-                <li>
-                    <a href="login.html">Login</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-            </ul>
+
+    <header>
+        <div class="logo-header">
+            <a href="#">
+                <img src="./imgs/logo-fonte-branca.png" alt="Logo Coffech">
+            </a>
         </div>
-    </div>
-    <div class="banner">
-        <div class="containerInicio">
-            <h2>Solução <i>IoT</i> perfeita para sua plantação!</h2>
-            <p>Levamos tecnologia ao campo para garantir um café mais sustentável,
-                produtivo e de qualidade <br> <br>
+
+        <nav>
+            <ul>
+                <li><a href="#div_sobrenos">Quem Somos?</a></li>
+                <li><a href="#div_solucao">Solução</a></li>
+                <li><a href="#div_simulador">Calculadora</a></li>
+                <li><a href="#div_beneficios">Benefícios</a></li>
+                <li>
+                    <a href="https://coffechinc.atlassian.net/jira/software/form/f4236487-a1f5-4d21-937f-cba31eb0bc6e"
+                        target="_blank">Contato</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="header-botao">
+            <a href="login.html">Login</a>
+            <a href="cadastro.html" class="btn-destaque">Cadastro</a>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="banner">
+            <div class="banner-content">
+                <h2>Solução <i>IoT</i> perfeita para sua plantação!</h2>
+                <p>
+                    Levamos tecnologia ao campo para garantir um café mais sustentável,
+                    produtivo e de qualidade.
+                </p>
                 <a href="#div_simulador" class="botao">Faça sua simulação!</a>
-            </p>
-        </div>
-    </div>
+            </div>
+        </section>
 
-    <div class="sobre-nos" id="div_sobrenos">
-        <div class="container">
-            <h3>A COFFECH</h3>
-            <p>A Coffech nasceu com o propósito de levar tecnologia acessível e sustentável para o campo. Nosso foco é
-                apoiar produtores de café na modernização da gestão de suas lavouras, garantindo mais produtividade,
-                qualidade e eficiência no uso da água e dos recursos naturais.</p>
-            <img src="./imgs/colheita-cafe.png">
-        </div>
-    </div>
+        <section class="sobre-nos" id="div_sobrenos">
+            <div class="texto-section">
+                <h3>A COFFECH</h3>
+                <p>
+                    A Coffech nasceu com o propósito de levar tecnologia acessível e sustentável para o campo.
+                    Nosso foco é apoiar produtores de café na modernização da gestão de suas lavouras,
+                    garantindo mais produtividade, qualidade e eficiência no uso da água.
+                </p>
+            </div>
+            <img src="./imgs/colheita-cafe.png" alt="Colheita de café">
+        </section>
 
-    <div class="solucao" id="div_solucao">
-        <div class="container">
-            <h3>Nossa Solução</h3>
-            <h2>Monitoramento Inteligente com Sensores de Umidade</h2>
-            <p>Desenvolvemos um sistema de monitoramento da umidade do solo integrado ao Arduino UNO R3 e sensores
-                inteligentes, que coleta dados em tempo real e os apresenta em um dashboard intuitivo. <br>
-                Com isso, o produtor sabe quando e quanto irrigar, evitando desperdícios, preservando o solo e
-                garantindo uma produção de café mais saudável, lucrativa e sustentável.</p>
-        </div>
-        <img src="./imgs/DiagramaCoffech.png" alt="" style="width: 75%;">
-    </div>
+        <section class="solucao" id="div_solucao">
+            <div class="texto-section">
+                <h3>Nossa Solução</h3>
+                <h2>Monitoramento Inteligente com Sensores</h2>
+                <p>
+                    Desenvolvemos um sistema de monitoramento da umidade do solo integrado ao Arduino UNO R3
+                    e sensores inteligentes. O produtor sabe quando e quanto irrigar, evitando desperdícios
+                    e garantindo uma produção mais saudável e lucrativa.
+                </p>
+            </div>
+            <img src="./imgs/DiagramaCoffech.png" alt="Diagrama IoT" style="width: 60%;">
+        </section>
 
-    <div class="simulador" id="div_simulador">
-        <div class="container">
+        <section class="simulador" id="div_simulador">
             <h2>Calcule seus gastos</h2>
+
             <div class="card-calculadora" id="div_calculadora">
                 <div class="campo">
-                    <br>
-                    <span><b>Área da sua plantação em hectares:</b></span> <br>
-                    <input type="number" placeholder="Insira a quantidade em hectares" 
-                        id="input_area" value="50">
+                    <label for="input_area">Área da plantação (hectares):</label>
+                    <input type="number" id="input_area" placeholder="Ex: 50" value="50">
                 </div>
-                <div class="campo">
-                    <br>
-                    <span><b>Produção atual de sacas por hectare:</b></span> <br>
-                    <input type="number" placeholder="Insira a quantidade de sacas colhidas por hectare"
-                        id="input_produtividade" value="10">
-                </div>
-                <div class="campo">
-                    <span><b>Consumo anual de água na irrigação(m³/ha):</b></span>
-                    <input type="number" placeholder="Insira o consumo anual de água em m³/ha/ano"
-                        id="input_consumo_agua" value="8000">
-                </div>
-                <div class="campo">
-                    <span><b>Preço por unidade de saca:</b></span>
-                    <input type="number" placeholder="Insira o preço unitário da saca de café" 
-                        id="input_preco_saca" value="2400">
-                </div>
-            </div>
-            <div id="div_resultado" style="display: none; width: 100%; height: 100%;"></div>
-            <div>
-                <button class="botao-gastos" onclick="calcular()" id="button_calcular">Calcular Gastos</button>
-            </div>
-        </div>
-    </div>
 
-    <div class="beneficios" id="div_beneficios">
-        <div class="container">
+                <div class="campo">
+                    <label for="input_produtividade">Sacas por hectare:</label>
+                    <input type="number" id="input_produtividade" placeholder="Ex: 10" value="10">
+                </div>
+
+                <div class="campo">
+                    <label for="input_consumo_agua">Consumo de água (m³/ha/ano):</label>
+                    <input type="number" id="input_consumo_agua" placeholder="Ex: 8000" value="8000">
+                </div>
+
+                <div class="campo">
+                    <label for="input_preco_saca">Preço da saca (R$):</label>
+                    <input type="number" id="input_preco_saca" placeholder="Ex: 2400" value="2400">
+                </div>
+
+                <div id="div_resultado" style="display: none; margin-top: 20px; text-align: left;"></div>
+
+                <div class="botao-simulador">
+                    <button class="botao-gastos" onclick="calcular()" id="button_calcular">Calcular Gastos</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="beneficios" id="div_beneficios">
             <h2>Benefícios</h2>
             <div class="boxes">
-                <div class="box">
-                    <img src="./imgs/water-saving.png" style="width: 90px;">
+                <article class="box">
+                    <img src="./imgs/water-saving.png" alt="Economia">
                     <p>Até 30% de economia de água no manejo.</p>
-                </div>
-                <div class="box">
-                    <img src="./imgs/cost-decreasing.png" style="width: 90px;">
+                </article>
+
+                <article class="box">
+                    <img src="./imgs/cost-decreasing.png" alt="Custos">
                     <p>Redução nos gastos operacionais.</p>
-                </div>
-                <div class="box">
-                    <img src="./imgs/quality.png" style="width: 90px;">
+                </article>
+
+                <article class="box">
+                    <img src="./imgs/quality.png" alt="Qualidade">
                     <p>Café de maior qualidade e valor de mercado.</p>
-                </div>
-                <div class="box">
-                    <img src="./imgs/light-bulb.png" style="width: 90px;">
-                    <p>Decisões rápidas e assertivas com base em dados reais.</p>
-                </div>
+                </article>
+
+                <article class="box">
+                    <img src="./imgs/light-bulb.png" alt="Inteligência">
+                    <p>Decisões assertivas com base em dados reais.</p>
+                </article>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- 
-        AINDA NÃO DEFINIDO QUAIS PLANOS TEREMOS, MAS FICARÃO LOGO ABAIXO DOS BENEFÍCIOS
-        -->
+    </main>
 
-    <div class="contato" id="div_contato">
+    <footer>
         <div class="container">
-            <div class="titulo">
-                <h2>Entre em contato conosco!</h2>
-            </div>
-            <div class="boxcontato">
-                <div class="imagem-contato">
-                    <img src="./imgs/coffee-background.png"> <!-- FICARÁ DO LADO DAS INPUTS-->
-                </div>
-                <div class="forms">
-                    <div class="campo">
-                        <span>Email:</span>
-                        <input type="text" id="emailform_input" placeholder="Insira seu Email">
-                    </div>
-                    <div class="campo">
-                        <span>Assunto:</span>
-                        <input type="text" id="assuntoform_input" placeholder="Assunto">
-                    </div>
-                    <div class="campo">
-                        <span>Mensagem</span>
-                        <input type="text" id="mensagemform_input" class="input-grande" placeholder="Mensagem">
-                    </div>
-                    <button class="botaoContato" onclick="mensagem_function()">Enviar Mensagem!
-                    </button>
-                    <div class="telefone">
-                        Telefone: (XX) XXXXX-XXXX
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
 
-    <div class="footer">
-        <div class="container">
             <div class="redes-sociais">
-                <img height="50" src="./imgs/logo-fonte-branca.png"> <!-- LOGO COFFECH!-->
+                <img style="width: 150px;" src="./imgs/logo-fonte-branca.png" alt="Logo Coffech">
                 <p>Todos os direitos reservados a COFFECH 2025</p>
-                <img src="./imgs/Icon-instagram.png"> <!-- ICONE INSTAGRAM-->
-                <img src="./imgs/icon-youtube.png"> <!-- ICONE YOUTUBE-->
-                <img src="./imgs/Icon-linkedin.png"> <!-- ICONE LINKEDIN-->
-                <img src="./imgs/Icon-facebook.png"> <!-- ICONE FACEBOOK-->
+                <div class="icones-sociais">
+                    <img src="./imgs/Icon-instagram.png" alt="Instagram">
+                    <img src="./imgs/icon-youtube.png" alt="Youtube">
+                    <img src="./imgs/Icon-linkedin.png" alt="Linkedin">
+                    <img src="./imgs/Icon-facebook.png" alt="Facebook">
+                </div>
             </div>
+
             <div class="contatoFooter">
-                <h6>Contato:</h6>
+                <h6>Contato</h6>
                 <span>coffech@gmail.com</span>
             </div>
-            <h5 class="equipe">Equipe Coffech:</h5>
-            <div class="nosso-time1">
-                <p>Anderson</p>
-                <p>Diego</p>
-                <p>Guilherme</p>
+
+            <div class="equipe-footer">
+                <h5>Equipe Coffech</h5>
+                <div class="lista-equipe">
+                    <div class="nosso-time1">
+                        <p>Anderson</p>
+                        <p>Diego</p>
+                        <p>Guilherme</p>
+                    </div>
+                    <div class="nosso-time2">
+                        <p>João Ricardo</p>
+                        <p>Luan</p>
+                        <p>Victor Mattheus</p>
+                    </div>
+                </div>
             </div>
-            <div class="nosso-time2">
-                <p>João Ricardo</p>
-                <p>Luan</p>
-                <p>Victor Mattheus</p>
-            </div>
+
         </div>
-    </div>
+    </footer>
 </body>
 
 </html>
@@ -209,17 +183,25 @@
             alert("Recebemos a sua solicitação!")
         }
     }
-
     function calcular() {
         var area = Number(input_area.value);
         var produtividade_atual = Number(input_produtividade.value);
         var consumo_agua_atual = Number(input_consumo_agua.value);
+        var preco_saca_cafe = Number(input_preco_saca.value);
+
         var botao = document.getElementById("button_calcular");
         var calculadora = document.getElementById("div_calculadora");
+        var div_resultado = document.getElementById("div_resultado");
+
+        var campos = document.getElementsByClassName("campo");
 
         if (div_resultado.style.display == "block") {
             div_resultado.style.display = "none";
-            calculadora.style.display = "flex";
+
+            for (var i = 0; i < campos.length; i++) {
+                campos[i].style.display = "flex";
+            }
+
             botao.innerText = "Calcular Gastos";
             input_area.value = "";
             input_produtividade.value = "";
@@ -229,7 +211,10 @@
         }
 
         if (area <= 0 || produtividade_atual <= 0 || consumo_agua_atual <= 0) {
-            calculadora.style.display = "none";
+            for (var i = 0; i < campos.length; i++) {
+                campos[i].style.display = "none";
+            }
+
             div_resultado.style.display = "block";
             div_resultado.innerHTML =
                 "<b>⚠️ Preencha todos os campos corretamente para gerar a análise.</b>";
@@ -239,7 +224,7 @@
             var produtividade_ideal = 30;
             var consumo_ideal_agua = 6300; // Retirado do Embrapa http://www.sapc.embrapa.br/arquivos/consorcio/spcb_anais/simposio8/20.pdf
             var preco_m3_agua = 0.2713;
-            var preco_saca_cafe = Number(input_preco_saca.value);
+            // var preco_saca_cafe = Number(input_preco_saca.value); // Movi lá pra cima
             var custo_produto = 3500;
 
             var ganho_financeiro = 0;
@@ -324,7 +309,9 @@
           Este resultado é alcançado com um investimento inicial de <b>${custo_produto.toLocaleString('pt-br', { style: 'currency', 'currency': 'BRL' })}</b> no nosso kit.
           `;
             }
-            calculadora.style.display = "none";
+            for (var i = 0; i < campos.length; i++) {
+                campos[i].style.display = "none";
+            }
             div_resultado.style.display = "block";
             botao.innerText = `Fazer uma nova simulação!`
         }

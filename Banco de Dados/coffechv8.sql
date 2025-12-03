@@ -1,6 +1,6 @@
 CREATE coffech2;
 
-USE coffech2;
+USE coffech3;
 
 CREATE TABLE empresa (
 	id_empresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -205,12 +205,49 @@ SELECT
     s.status_sensor,
     l.valor_umidade,
     l.data_hora_leitura
-FROM talhao AS t
-JOIN sensor AS s 
-    ON t.id_talhao = s.fk_talhao
-JOIN leitura AS l 
-    ON s.id_sensor = l.fk_sensor;
+FROM
+    talhao AS t
+        JOIN
+    sensor AS s ON t.id_talhao = s.fk_talhao
+        JOIN
+    leitura AS l ON s.id_sensor = l.fk_sensor;
 
+
+SELECT 
+    ROUND(AVG(l.valor_umidade), 2) AS umidade_media
+FROM leitura l
+JOIN sensor s ON l.fk_sensor = s.id_sensor
+WHERE s.fk_talhao = 6;
+SELECT 
+    ROUND(AVG(l.valor_umidade),2) AS umidade_media
+FROM leitura l
+JOIN sensor s ON l.fk_sensor = s.id_sensor
+JOIN talhao t ON s.fk_talhao = t.id_talhao
+WHERE t.fk_propriedade = 4;
+
+SELECT l.valor_umidade
+FROM leitura l
+JOIN sensor s ON l.fk_sensor = s.id_sensor
+JOIN talhao t ON s.fk_talhao = t.id_talhao
+WHERE t.fk_propriedade = 4;
+
+SELECT id_talhao, nome_talhao
+        FROM talhao
+        WHERE fk_propriedade = 4;
+select * from leitura;
+insert into leitura (valor_umidade, fk_sensor) values
+(0,3);
+
+select * from sensor;
+insert into sensor (fk_talhao) values
+(7);
+select * from talhao;
+SELECT 
+        ROUND(AVG(valor_umidade), 2) AS umidade_media
+        FROM leitura
+        WHERE fk_sensor IN (
+            SELECT id_sensor FROM sensor WHERE fk_talhao = 1;
+select * from propriedade;
 -- Exibe a empresa, suas propriedades, seus talhões e seus sensores
 SELECT 
     e.nome_empresa AS 'Nome da Empresa',
@@ -288,3 +325,32 @@ SELECT
 			LEFT JOIN leitura l 
 				ON l.fk_sensor = s.id_sensor
 			GROUP BY p.id_propriedade;
+            
+            
+            
+SELECT 
+    ROUND(AVG(l.valor_umidade), 2) AS umidade_media
+FROM leitura l
+JOIN sensor s ON l.fk_sensor = s.id_sensor
+WHERE s.fk_talhao = 6;
+
+SELECT 
+    t.id_talhao,
+    ROUND(AVG(l.valor_umidade), 2) AS umidade_media
+FROM talhao t
+JOIN sensor s ON s.fk_talhao = t.id_talhao
+JOIN leitura l ON l.fk_sensor = s.id_sensor
+WHERE t.fk_propriedade = 4
+GROUP BY t.id_talhao
+HAVING AVG(l.valor_umidade) < 60 OR AVG(l.valor_umidade) > 80;
+
+select * from leitura;
+select * from sensor;
+insert into leitura (valor_umidade, fk_sensor) values
+(100, 3),
+(100, 3),
+(100, 3),
+(100, 3),
+(100, 3);
+
+select * from talhao;
