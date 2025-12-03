@@ -128,7 +128,7 @@
     carregarPropriedades();
 
 
-    setInterval(carregarFazendas, 20000);
+    setInterval(carregarFazendas, 2000);
 
     async function carregarFazendas() {
         const fk_empresa = JSON.parse(sessionStorage.getItem("ID_EMPRESA"));
@@ -149,6 +149,7 @@
             fazendas.forEach(f => {
                 const card = document.createElement("section");
                 card.className = "fazenda-card";
+                console.log('Card Postado')
 
                 card.innerHTML = `
                 <img style="width:100px; align-items: center; cursor: pointer;"  src="${definirIcone(f.nivel_alerta)}">
@@ -255,7 +256,7 @@
 setInterval(atualizarKpis, 20000); 
 
 async function atualizarKpis() {
-    const fk_empresa = sessionStorage.ID_EMPRESA;
+    const fk_empresa = sessionStorage.getItem("ID_EMPRESA");
 
     if (!fk_empresa) return;
     console.log('If da fk empresa')

@@ -136,29 +136,30 @@
                 return resposta.json();
             })
             .then(json => {
-                if (!json) return;
+                    if (!json) return;
 
-                sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NOME_USUARIO = json.nome_usuario;
-                sessionStorage.ID_USUARIO = json.id_usuario;
-                sessionStorage.NIVEL_ACESSO = json.nivel_acesso;
-                sessionStorage.ID_EMPRESA = json.fk_empresa;
-                if (sessionStorage.NIVEL_ACESSO == 'Proprietario') {
-                    sessionStorage.PROPRIEDADES = JSON.stringify(json.propriedades);
-                } else if (sessionStorage.NIVEL_ACESSO == 'Funcionario') {
-                    sessionStorage.ID_PROPRIEDADE = json.id_propriedade;   
-                }
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome_usuario;
+                    sessionStorage.ID_USUARIO = json.id_usuario;
+                    sessionStorage.NIVEL_ACESSO = json.nivel_acesso;
+                    sessionStorage.ID_EMPRESA = json.id_empresa;
 
-                console.log("ID_EMPRESA SALVO:", sessionStorage.ID_EMPRESA);
+                    if (json.nivel_acesso === "Proprietario") {
+                        if (json.propriedades) {
+                            sessionStorage.PROPRIEDADES = JSON.stringify(json.propriedades);
+                        }
+                    } else if (json.nivel_acesso === "Funcionario") {
+                        sessionStorage.ID_PROPRIEDADE = json.fk_token_propriedade; 
+                    }
 
-                if (json.nivel_acesso === "Proprietario") {
-                    window.location.href = "dashboard_propriedades.html";
-                } else if (json.nivel_acesso === "Funcionario") {
-                    window.location.href = "dashboard.html";
-                } else {
-                    window.location.href = "bob.html"
-                }
-            })
+                    if (json.nivel_acesso === "Proprietario") {
+                        window.location.href = "dashboard_propriedades.html";
+                    } else if (json.nivel_acesso === "Funcionario") {
+                        window.location.href = "dashboard.html";
+                    } else {
+                        window.location.href = "bob.html";
+                    }
+                })
             .catch(err => console.error(err));
     }
 
