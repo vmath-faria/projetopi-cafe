@@ -290,24 +290,56 @@ INSERT INTO talhao (nome_talhao, variedade_cafe, fk_propriedade) VALUES
 ('Talhão Serra 2', 'Café arábica', 8),
 ('Talhão Serra 3', 'Café arábica', 8);
       
-CREATE OR REPLACE VIEW vw_propriedade1 AS
+CREATE OR REPLACE VIEW vw_propriedade AS
 SELECT 
     p.id_propriedade,
     p.nome_propriedade,
     p.fk_empresa,
-    ROUND(AVG(l.valor_umidade), 2) AS media_umidade,
+    ROUND(AVG(l10.valor_umidade), 2) AS media_umidade,
     CASE
-        WHEN AVG(l.valor_umidade) < 60 THEN 'amarelo'
-        WHEN AVG(l.valor_umidade) BETWEEN 60 AND 75 THEN 'verde'
-        WHEN AVG(l.valor_umidade) BETWEEN 75 AND 80 THEN 'laranja'
-        WHEN AVG(l.valor_umidade) > 80 THEN 'vermelho'
+        WHEN AVG(l10.valor_umidade) < 60 THEN 'amarelo'
+        WHEN AVG(l10.valor_umidade) BETWEEN 60 AND 75 THEN 'verde'
+        WHEN AVG(l10.valor_umidade) BETWEEN 75 AND 80 THEN 'laranja'
+        WHEN AVG(l10.valor_umidade) > 80 THEN 'vermelho'
         ELSE 'verde'
     END AS nivel_alerta
-		FROM propriedade p
-			LEFT JOIN talhao t 
-				ON t.fk_propriedade = p.id_propriedade
-			LEFT JOIN sensor s 
-				ON s.fk_talhao = t.id_talhao
-			LEFT JOIN leitura l 
-				ON l.fk_sensor = s.id_sensor
-			GROUP BY p.id_propriedade;
+FROM propriedade p
+LEFT JOIN talhao t 
+    ON t.fk_propriedade = p.id_propriedade
+LEFT JOIN sensor s 
+    ON s.fk_talhao = t.id_talhao
+LEFT JOIN (
+        SELECT 
+            l.*
+        FROM leitura l
+        WHERE l.id_leitura IN (
+            SELECT id_leitura
+            FROM (
+                SELECT id_leitura
+                FROM leitura
+                WHERE fk_sensor = l.fk_sensor
+                ORDER BY data_hora_leitura DESC
+                LIMIT 10
+            ) AS tmp
+        )
+) AS l10
+    ON l10.fk_sensor = s.id_sensor
+GROUP BY p.id_propriedade;
+
+USE coffech2;
+desc token;
+select * from usuario;	
+
+  
+SELECT COUNT(DISTINCT t.id_talhao) AS talhoes_sem_leitura
+FROM talhao t
+JOIN sensor s ON s.fk_talhao = t.id_talhao
+LEFT JOIN leitura l ON l.fk_sensor = s.id_sensor
+WHERE t.fk_propriedade = 8
+  AND (
+        l.data_hora_leitura IS NULL
+        OR l.data_hora_leitura < NOW() - INTERVAL 24 HOUR
+      );
+
+SELECT * FROM vw_propriedade;
+desc usuario;
