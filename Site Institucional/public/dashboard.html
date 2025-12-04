@@ -85,19 +85,24 @@ var idPropriedade;
         idPropriedade = Number(sessionStorage.id_propriedade);
     }
 
-    var propriedades = [];
-    if (sessionStorage.PROPRIEDADES) {
-        propriedades = JSON.parse(sessionStorage.PROPRIEDADES);
-    }
+    var nomePropriedade = "";
 
-    var nomePropriedade = "Propriedade não encontrada";
+    if (sessionStorage.NIVEL_ACESSO === "Funcionario") {
+        nomePropriedade = sessionStorage.NOME_PROPRIEDADE;
+    } else {
+        var propriedades = sessionStorage.PROPRIEDADES ? JSON.parse(sessionStorage.PROPRIEDADES) : [];
 
-    for (var i = 0; i < propriedades.length; i++) {
-        if (Number(propriedades[i].id_propriedade) === idPropriedade) {
-            nomePropriedade = propriedades[i].nome_propriedade;
-            break;
+        for (var i = 0; i < propriedades.length; i++) {
+            if (Number(propriedades[i].id_propriedade) === idPropriedade) {
+                nomePropriedade = propriedades[i].nome_propriedade;
+                break;
+            }
         }
     }
+
+    if (!nomePropriedade) nomePropriedade = "Propriedade não encontrada";
+
+    b_propriedade.innerHTML = nomePropriedade;
 
 
     b_propriedade.innerHTML = nomePropriedade;

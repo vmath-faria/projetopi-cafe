@@ -136,7 +136,9 @@
                 return resposta.json();
             })
             .then(json => {
+
                     if (!json) return;
+                    console.log("Payload de autenticação:", json);
 
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome_usuario;
