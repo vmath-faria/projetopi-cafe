@@ -143,6 +143,7 @@
                     sessionStorage.ID_USUARIO = json.id_usuario;
                     sessionStorage.NIVEL_ACESSO = json.nivel_acesso;
                     sessionStorage.ID_EMPRESA = json.id_empresa;
+                    
 
                     if (json.nivel_acesso === "Proprietario") {
                         if (json.propriedades) {
@@ -150,6 +151,7 @@
                         }
                     } else if (json.nivel_acesso === "Funcionario") {
                         sessionStorage.ID_PROPRIEDADE = json.id_propriedade;
+                        sessionStorage.NOME_PROPRIEDADE = json.nome_propriedade;
                     }
 
                     if (json.nivel_acesso === "Proprietario") {
